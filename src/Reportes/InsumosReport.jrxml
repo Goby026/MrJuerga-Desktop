@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40722817-0621-4793-8010-5733dab1de48">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="206"/>
+	<property name="ireport.y" value="218"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     insumo.`idinsumo` AS insumo_idinsumo,
+     insumo.`nombre` AS insumo_nombre,
+     insumo.`existencias` AS insumo_existencias,
+     insumo.`fecha` AS insumo_fecha
+FROM
+     `insumo` insumo]]>
+	</queryString>
+	<field name="insumo_idinsumo" class="java.lang.Integer"/>
+	<field name="insumo_nombre" class="java.lang.String"/>
+	<field name="insumo_existencias" class="java.lang.Double"/>
+	<field name="insumo_fecha" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="274" y="18" width="140" height="35" forecolor="#990000" uuid="d15e3da5-760b-435e-a47d-513abad9e947"/>
+				<textElement>
+					<font fontName="Bodoni MT" size="26"/>
+				</textElement>
+				<text><![CDATA[REPORTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="111" height="90" forecolor="#990000" backcolor="#CCCCCC" uuid="50817303-2ca2-424b-868e-e1f2a943c198"/>
+			</rectangle>
+			<ellipse>
+				<reportElement x="10" y="6" width="90" height="78" backcolor="#000000" uuid="ce07a573-539e-4d96-81d4-9ae7e90689e9"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="29" y="23" width="53" height="47" forecolor="#FFFFFF" uuid="bccba02b-3a39-4d95-b569-585ace8b5e00"/>
+				<textElement textAlignment="Left">
+					<font fontName="AR CHRISTY" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    MR.
+ JUERGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="33" y="60" width="43" height="10" backcolor="#FF0000" uuid="6fe672e6-6697-4e23-9bf2-f859bfff835d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="33" y="62" width="43" height="10" forecolor="#FFFFFF" uuid="6a96fb02-d7e9-4669-92c4-209296255bc6"/>
+				<textElement textAlignment="Center">
+					<font fontName="AR CENA" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISCO CLUB]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="0" width="100" height="20" uuid="f439af46-33e4-4ca9-b2d7-3a42e7dd526d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="49" backcolor="#990000" uuid="f786d94a-3c6a-48b6-9a11-ca432c3ff1f9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="168" y="16" width="227" height="23" forecolor="#FFFFFF" uuid="907108fa-3d55-4709-83ae-95bd6cb64112"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA - INSUMOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="ca3c0168-fd14-4ce0-860b-55cc7f66b795"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="226" height="20" uuid="7281fded-17d8-4bb0-a134-0284afd903a1"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="0" width="218" height="20" uuid="aa86dc17-994a-467b-9217-dffa56fadda8"/>
+				<text><![CDATA[EXISTENCIAS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="d132459d-bf06-418c-8085-5e6bd36300a9"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="d113a448-b3dc-45d6-aa0b-01bde0fd601c"/>
+				<textFieldExpression><![CDATA[$F{insumo_idinsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="226" height="20" uuid="ec2a23a9-5e64-4a8e-bab8-91800daa05ec"/>
+				<textFieldExpression><![CDATA[$F{insumo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="0" width="221" height="20" uuid="b2804afc-0f7a-42fe-b8a6-8e9f332bd583"/>
+				<textFieldExpression><![CDATA[$F{insumo_existencias}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="2c7718e7-e3b9-4469-bf5d-c1ec2fc2819e"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="04bf584a-d8b7-4d7b-b703-84ccb0d327dd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="d5931a81-40fd-43af-acbd-5b9aa9a0035c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
