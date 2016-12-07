@@ -20,7 +20,7 @@ public class PagonPersonalControl {
 
     //metodo para establecer los nombres de las columnas de la tabla personal
     public void titulosTabla(JTable tabla) {
-        String titulos[] = {"ID","NOMBRES", "APELLIDOS", "DNI"};
+        String titulos[] = {"ID","NOMBRES", "APELLIDOS"};
         modelo = new DefaultTableModel(null, titulos);
         tabla.setModel(modelo);
     }
@@ -30,16 +30,18 @@ public class PagonPersonalControl {
         try {
             titulosTabla(tabla);
             UsuarioDAO udao = new UsuarioDAO();
-            Object[] columna = new Object[4];
+            Object[] columna = new Object[3];
             for (Usuario u : udao.listar()) {
                 if (u.getDni().equals(dni)) {
                     columna[1] = u.getId();
+                    System.out.println(columna[1]);
                     columna[2] = u.getNombre();
+                    System.out.println(columna[2]);
                     columna[3] = u.getApellido();
-                    columna[4] = u.getDni();
+                    System.out.println(columna[3]);
+//                    columna[4] = u.getDni();
+//                    System.out.println(columna[4]);
                     modelo.addRow(columna);
-                } else {
-                    System.out.println("dni no encontrado");
                 }
             }
             tabla.setModel(modelo);

@@ -86,7 +86,7 @@ public class Gastos extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("REGISTRO DE GASTOS");
+        setTitle("REGISTRO DE EGRESOS");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("FECHA");

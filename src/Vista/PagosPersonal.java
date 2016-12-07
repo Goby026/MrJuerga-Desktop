@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 public class PagosPersonal extends javax.swing.JInternalFrame {
 
     //DefaultTableModel modeloPersonal;
-
     public PagosPersonal() throws Exception {
         initComponents();
         new PagonPersonalControl().titulosTabla(tblPersonal);
@@ -49,6 +48,8 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         cmbConcepto = new javax.swing.JComboBox<>();
 
+        setClosable(true);
+        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("CONCEPTO");
@@ -70,7 +71,7 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 530, 130));
 
         txtPersonal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 180, -1));
+        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 260, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setText("PAGO S/.");
@@ -86,7 +87,7 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 280, -1));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 280, 30));
 
         lblFoto.setText("FOTO");
         getContentPane().add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 140, 110));
@@ -123,18 +124,27 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
 
     private void btnRealizarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPagoActionPerformed
         try {
-            int fila = tblPersonal.getSelectedRow();
-            int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
-            int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
-            double monto = Double.parseDouble(txtPago.getText());
-            UsuarioGastos ug = new UsuarioGastos();
-            ug.setIdUsuario(idUsuario);
-            ug.setIdGastos(idGasto);
-            ug.setMonto(monto);
-            UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
-            if (ugdao.registrar(ug)) {
-                JOptionPane.showMessageDialog(rootPane, "PAGO REGISTRADO");
+            if (!new Validaciones().validarCampoVacio(txtPersonal)) {
+                if (!new Validaciones().validarCampoVacio(txtPago)) {
+                    int fila = tblPersonal.getSelectedRow();
+                    int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
+                    int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
+                    double monto = Double.parseDouble(txtPago.getText());
+                    UsuarioGastos ug = new UsuarioGastos();
+                    ug.setIdUsuario(idUsuario);
+                    ug.setIdGastos(idGasto);
+                    ug.setMonto(monto);
+                    UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
+                    if (ugdao.registrar(ug)) {
+                        JOptionPane.showMessageDialog(rootPane, "PAGO REGISTRADO");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE MONTO DE PAGO");
+                    txtPago.requestFocus();
+                }
             } else {
+                JOptionPane.showMessageDialog(rootPane, "INGRESE DNI DE PERSONAL");
+                txtPersonal.requestFocus();
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
