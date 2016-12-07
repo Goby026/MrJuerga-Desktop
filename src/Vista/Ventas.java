@@ -43,7 +43,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         btnOcho = new javax.swing.JButton();
         btnCinco = new javax.swing.JButton();
         btnDos = new javax.swing.JButton();
-        btnOperar = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
         btnNueve = new javax.swing.JButton();
         btnSeis = new javax.swing.JButton();
         btnTres = new javax.swing.JButton();
@@ -178,16 +178,16 @@ public class Ventas extends javax.swing.JInternalFrame {
         });
         panelVuelto.getContentPane().add(btnDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 70, 60));
 
-        btnOperar.setBackground(new java.awt.Color(255, 51, 51));
-        btnOperar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        btnOperar.setForeground(new java.awt.Color(51, 51, 51));
-        btnOperar.setText("<");
-        btnOperar.addActionListener(new java.awt.event.ActionListener() {
+        btnBorrar.setBackground(new java.awt.Color(255, 51, 51));
+        btnBorrar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        btnBorrar.setForeground(new java.awt.Color(51, 51, 51));
+        btnBorrar.setText("<");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOperarActionPerformed(evt);
+                btnBorrarActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnOperar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 70, 60));
+        panelVuelto.getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 70, 60));
 
         btnNueve.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnNueve.setText("9");
@@ -884,10 +884,10 @@ public class Ventas extends javax.swing.JInternalFrame {
         //metodos para limpiar toda la pantalla
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnOperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOperarActionPerformed
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         txtMontoRecibido.setText("");
         txtVuelto.setText("");
-    }//GEN-LAST:event_btnOperarActionPerformed
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
         try {
@@ -1001,6 +1001,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     public javax.swing.JButton btn8;
     public javax.swing.JButton btn9;
     public javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCero;
     private javax.swing.JButton btnCinco;
     private javax.swing.JButton btnCobrar;
@@ -1009,7 +1010,6 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDos;
     private javax.swing.JButton btnNueve;
     private javax.swing.JButton btnOcho;
-    private javax.swing.JButton btnOperar;
     private javax.swing.JButton btnPendientes;
     private javax.swing.JButton btnPunto;
     private javax.swing.JButton btnQuitar;

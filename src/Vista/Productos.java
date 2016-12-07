@@ -273,7 +273,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            String nombre = txtNombre.getText();
+            String nombre = txtNombre.getText().toUpperCase();
             //int categoria = Integer.parseInt(txtCategoria.getText());
             //int presentacion = Integer.parseInt(txtPresentacion.getText());
             Producto p = new Producto();

@@ -10,6 +10,7 @@ import Modelo.CategoriaDAO;
 import Modelo.ComprobanteDAO;
 import Modelo.PerfilDAO;
 import Modelo.ProductoDAO;
+import Modelo.TipoComprobanteDAO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -104,6 +105,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnPresentaciones = new javax.swing.JButton();
         btnMedidas = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MR. JUERGA SYSTEM");
@@ -812,6 +814,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 240, -1, -1));
 
+        jButton2.setText("PAGOS PERSONAL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, 270, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -858,7 +868,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             CategoriaDAO cdao = new CategoriaDAO();
             if (cdao.Listar().size() > 0) {
                 //VALIDAR QUE EXISTAN TIPOS DE COMPROBANTES REGISTRADOS
-                ComprobanteDAO cedao = new ComprobanteDAO();
+                TipoComprobanteDAO cedao = new TipoComprobanteDAO();
                 if (cedao.Listar().size() > 0) {
                     //VALIDAR QUE EXISTAN PRODUCTOS REGISTRADOS
                     ProductoDAO pdao = new ProductoDAO();
@@ -873,7 +883,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "DEBE REGISTRAR LOS TIPOS DE COMPROBANTE QUE UTILIZARÁ EN LAS VENTAS");
                 }
-
             } else {
                 JOptionPane.showMessageDialog(rootPane, "DEBE REGISTRAR CATEGORIAS PARA PODER REALIZAR VENTAS");
             }
@@ -1362,6 +1371,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            PagosPersonal pp = new PagosPersonal();
+            escritorio.add(pp);
+            pp.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1426,6 +1445,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     public javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

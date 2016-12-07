@@ -146,6 +146,7 @@ public class VentasControl {
         return 0;
     }
 
+    //metodo para obtener el id de usuarui cob su nombre de usuario
     public int getIdUsuarioConNombre(String nombre) throws Exception {
         try {
             UsuarioDAO udao = new UsuarioDAO();
