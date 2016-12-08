@@ -38,9 +38,8 @@ public class GastoControl {
         int numeroRegistros = gdao.Listar().size();
         for (int i = 0; i < numeroRegistros; i++) {
             columna[0] = gdao.Listar().get(i).getIdgastos();
-            columna[1] = gdao.Listar().get(i).getFecha();
-            columna[2] = gdao.Listar().get(i).getConcepto();
-            columna[3] = gdao.Listar().get(i).getMonto();
+            columna[1] = gdao.Listar().get(i).getConcepto();
+            columna[2] = gdao.Listar().get(i).getMonto();
             model.addRow(columna);
         }
     }
@@ -50,9 +49,8 @@ public class GastoControl {
         GastoDAO gdao = new GastoDAO();
         for (Gasto g : gdao.Listar()) {
             if (g.getIdgastos() == cod) {
-                datos[0] = g.getFecha();
-                datos[1] = g.getConcepto();
-                datos[2] = g.getMonto();
+                datos[0] = g.getConcepto();
+                datos[1] = g.getMonto();
             }
         }
 

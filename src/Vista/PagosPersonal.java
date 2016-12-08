@@ -25,7 +25,7 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         initComponents();
         new PagonPersonalControl().titulosTabla(tblPersonal);
         new PagonPersonalControl().cargarComboConcepto(cmbConcepto);
-    }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,16 +44,27 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         txtPago = new javax.swing.JTextField();
         btnRealizarPago = new javax.swing.JButton();
         lblFoto = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         cmbConcepto = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("CONCEPTO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, -1));
 
         tblPersonal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,18 +79,24 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblPersonal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 530, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 530, 130));
 
+        txtPersonal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtPersonal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 260, -1));
+        txtPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPersonalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 260, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setText("PAGO S/.");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
 
         txtPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtPago.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 170, -1));
+        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 170, -1));
 
         btnRealizarPago.setText("REALIZAR PAGO");
         btnRealizarPago.addActionListener(new java.awt.event.ActionListener() {
@@ -87,28 +104,61 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 280, 30));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 280, 30));
 
         lblFoto.setText("FOTO");
-        getContentPane().add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 140, 110));
+        getContentPane().add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 140, 110));
 
-        jButton2.setText("BUSCAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 260, -1));
 
-        jLabel3.setText("DNI PERSONAL");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        getContentPane().add(cmbConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 160, -1));
 
-        getContentPane().add(cmbConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 160, -1));
+        jLabel4.setText("DNI PERSONAL");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jButton1.setText("9");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 80, 70));
+
+        jButton2.setText("7");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 80, 70));
+
+        jButton3.setText("8");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 80, 70));
+
+        jButton4.setText("4");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 80, 70));
+
+        jButton5.setText("5");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 70));
+
+        jButton6.setText("6");
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 80, 70));
+
+        jButton7.setText("1");
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 80, 70));
+
+        jButton8.setText("2");
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 80, 70));
+
+        jButton9.setText("3");
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 80, 70));
+
+        jButton10.setText("0");
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 170, 70));
+
+        jButton11.setText("<");
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 80, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (!new Validaciones().validarCampoVacio(txtPago)) {
             try {
                 String dni = txtPersonal.getText();
@@ -120,12 +170,12 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "INGRESE NOMBRE DE PERSONAL");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRealizarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPagoActionPerformed
         try {
-            if (!new Validaciones().validarCampoVacio(txtPersonal)) {
-                if (!new Validaciones().validarCampoVacio(txtPago)) {
+            if (new Validaciones().validarCampoVacio(txtPersonal)) {
+                if (new Validaciones().validarCampoVacio(txtPago)) {
                     int fila = tblPersonal.getSelectedRow();
                     int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
                     int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
@@ -137,6 +187,7 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
                     UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
                     if (ugdao.registrar(ug)) {
                         JOptionPane.showMessageDialog(rootPane, "PAGO REGISTRADO");
+                        new PagonPersonalControl().limpiarCampos(txtPersonal, txtPago, tblPersonal);
                     }
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "INGRESE MONTO DE PAGO");
@@ -151,14 +202,29 @@ public class PagosPersonal extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRealizarPagoActionPerformed
 
+    private void txtPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonalActionPerformed
+        btnBuscar.doClick();
+    }//GEN-LAST:event_txtPersonalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRealizarPago;
     private javax.swing.JComboBox<String> cmbConcepto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JTable tblPersonal;

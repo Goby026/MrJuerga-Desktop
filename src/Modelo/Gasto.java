@@ -16,7 +16,6 @@ import java.util.Date;
 public class Gasto implements Serializable {
 
     private Integer idgastos;
-    private String fecha;
     private String concepto;
     private double monto;
     
@@ -25,9 +24,8 @@ public class Gasto implements Serializable {
     }
     
     //Constructor con parametros
-    public Gasto(Integer idgastos, String fecha, String concepto, double monto) {
+    public Gasto(Integer idgastos, String concepto, double monto) {
         this.idgastos = idgastos;
-        this.fecha = fecha;
         this.concepto = concepto;
         this.monto = monto;
     }
@@ -40,15 +38,7 @@ public class Gasto implements Serializable {
     public void setIdgastos(Integer idgastos) {
         this.idgastos = idgastos;
     }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
+    
     public String getConcepto() {
         return concepto;
     }

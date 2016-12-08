@@ -180,7 +180,6 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         btnBorrar.setBackground(new java.awt.Color(255, 51, 51));
         btnBorrar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        btnBorrar.setForeground(new java.awt.Color(51, 51, 51));
         btnBorrar.setText("<");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -612,7 +611,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 70, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class Gastos extends javax.swing.JInternalFrame {
 
-    String[] Titulos = {"ID", "FECHA", "CONCEPTO", "MONTO"};
+    String[] Titulos = {"ID", "CONCEPTO", "MONTO"};
     HashMap parametros;
     MyiReportVisor mrv;
 
@@ -54,12 +54,10 @@ public class Gastos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtConcepto = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
-        jdcFecha = new com.toedter.calendar.JDateChooser();
         btnRegistrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -88,9 +86,6 @@ public class Gastos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("REGISTRO DE EGRESOS");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("FECHA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel2.setText("CONCEPTO");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
@@ -121,7 +116,6 @@ public class Gastos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 190, -1));
-        getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 190, -1));
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/disquete.png"))); // NOI18N
         btnRegistrar.setText("GUARDAR");
@@ -193,7 +187,7 @@ public class Gastos extends javax.swing.JInternalFrame {
         getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 80, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 0, 0)), "REGISTROS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(153, 0, 0)), "REGISTROS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel2.setForeground(new java.awt.Color(204, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -212,7 +206,7 @@ public class Gastos extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 630, 400));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 0, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(153, 0, 0))); // NOI18N
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 310, 130));
 
         jPanel8.setBackground(new java.awt.Color(102, 0, 0));
@@ -221,7 +215,7 @@ public class Gastos extends javax.swing.JInternalFrame {
 
         jLabel21.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("GASTOS");
+        jLabel21.setText("PAGOS FIJOS");
         jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 30));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dinero.png"))); // NOI18N
@@ -249,7 +243,7 @@ public class Gastos extends javax.swing.JInternalFrame {
         jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 140, -1));
 
         jLabel24.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel24.setText("GASTOS");
+        jLabel24.setText("PAGOS FIJOS");
         jPanel8.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, -1, 30));
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 70));
@@ -287,19 +281,16 @@ public class Gastos extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (new Validaciones().validarCampoVacio(txtConcepto)) {
             if (new Validaciones().validarCampoVacio(txtMonto)) {
-                String fecha = new FormatoFechas().getFormatoFec(jdcFecha);
                 String concepto = txtConcepto.getText();
                 double monto = Double.parseDouble(txtMonto.getText());
                 try {
                     Gasto g = new Gasto();
                     GastoDAO gdao = new GastoDAO();
-                    g.setFecha(fecha);
                     g.setConcepto(concepto);
                     g.setMonto(monto);
                     if (gdao.Registrar(g) == true) {
                         JOptionPane.showMessageDialog(null, "GASTO REGISTRADO");
                         new GastoControl().RefrescarTablaGasto(tblGastos, Titulos);
-                        jdcFecha.setDate(null);
                         txtConcepto.setText("");
                         txtMonto.setText("");
                         txtConcepto.requestFocus();
@@ -337,7 +328,6 @@ public class Gastos extends javax.swing.JInternalFrame {
                 } else {
                     int id = Integer.parseInt(tblGastos.getValueAt(fila, 0).toString());
                     g.setIdgastos(id);
-                    g.setFecha(new FormatoFechas().getFormatoFec(jdcFecha));
                     g.setConcepto(txtConcepto.getText());
                     g.setMonto(Double.parseDouble(txtMonto.getText()));
                     GastoDAO gdao = new GastoDAO();
@@ -345,7 +335,6 @@ public class Gastos extends javax.swing.JInternalFrame {
                         if (gdao.Modificar(g)) {
                             new GastoControl().RefrescarTablaGasto(tblGastos, Titulos);
                             JOptionPane.showMessageDialog(rootPane, "GASTO ACTUALIZADO");
-                            jdcFecha.setDate(null);
                             txtConcepto.setText("");
                             txtMonto.setText("");
                             txtConcepto.requestFocus();
@@ -353,7 +342,7 @@ public class Gastos extends javax.swing.JInternalFrame {
                         }
                     } catch (Exception e) {
                         Logger.getLogger(Gastos.class.getName()).log(Level.SEVERE, null, e);
-                    } 
+                    }
                 }
 
             } else {
@@ -363,7 +352,7 @@ public class Gastos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "INGRESE CONCEPTO");
 
         }
-                
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
@@ -387,12 +376,8 @@ public class Gastos extends javax.swing.JInternalFrame {
             int id = Integer.parseInt(tblGastos.getValueAt(fila, 0).toString());
 //            pp.setText(fila+"");
             Object[] datos = (Object[]) new GastoControl().CapturarDatosGastos(id);
-            String fecha = (String) datos[0];
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fec = sdf.parse(fecha);
-            jdcFecha.setDate(fec);
-            txtConcepto.setText((String) datos[1]);
-            txtMonto.setText("" + datos[2]);
+            txtConcepto.setText((String) datos[0]);
+            txtMonto.setText("" + datos[1]);
             btnModificar.setEnabled(true);
             btnRegistrar.setEnabled(false);
             btnEliminar.setEnabled(true);
@@ -402,7 +387,6 @@ public class Gastos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblGastosMouseClicked
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        jdcFecha.setDate(null);
         txtConcepto.setText("");
         txtMonto.setText("");
         btnRegistrar.setEnabled(true);
@@ -425,7 +409,6 @@ public class Gastos extends javax.swing.JInternalFrame {
                 if (gdao.Eliminar(g)) {
                     new GastoControl().RefrescarTablaGasto(tblGastos, Titulos);
                     JOptionPane.showMessageDialog(rootPane, "GASTO ELIMINADO");
-                    jdcFecha.setDate(null);
                     txtConcepto.setText("");
                     txtMonto.setText("");
                     tblGastos.clearSelection();
@@ -461,7 +444,6 @@ public class Gastos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnReporte;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -476,7 +458,6 @@ public class Gastos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTable tblGastos;
     private javax.swing.JTextField txtConcepto;
     private javax.swing.JTextField txtFecha;

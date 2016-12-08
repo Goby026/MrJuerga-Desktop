@@ -21,12 +21,11 @@ public class GastoDAO extends Conexion implements GastosCRUD {
     public boolean Registrar(Gasto g) throws Exception {
         boolean b = false;
         try {
-            String sql = "INSERT INTO gastos(fecha,concepto,monto) VALUES (?,?,?)";
+            String sql = "INSERT INTO gastos(concepto,monto) VALUES (?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            pst.setString(1, g.getFecha());
-            pst.setString(2, g.getConcepto());
-            pst.setDouble(3, g.getMonto());
+            pst.setString(1, g.getConcepto());
+            pst.setDouble(2, g.getMonto());
             int res = pst.executeUpdate();
             if (res > 0) {
                 b = true;
@@ -46,13 +45,12 @@ public class GastoDAO extends Conexion implements GastosCRUD {
         boolean b = false;
 
         try {
-            String sql = "UPDATE gastos SET fecha = ?,concepto = ? ,monto = ?  WHERE idgastos = ?";
+            String sql = "UPDATE gastos SET concepto = ? ,monto = ?  WHERE idgastos = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            pst.setString(1, g.getFecha());
-            pst.setString(2, g.getConcepto());
-            pst.setDouble(3, g.getMonto());
-            pst.setInt(4, g.getIdgastos());
+            pst.setString(1, g.getConcepto());
+            pst.setDouble(2, g.getMonto());
+            pst.setInt(3, g.getIdgastos());
             int res = pst.executeUpdate();
             if (res > 0) {
                 b = true;
@@ -96,7 +94,6 @@ public class GastoDAO extends Conexion implements GastosCRUD {
             while (res.next()) {
                 Gasto g = new Gasto();
                 g.setIdgastos(res.getInt("idgastos"));
-                g.setFecha(res.getString("fecha"));
                 g.setConcepto(res.getString("concepto"));
                 g.setMonto(res.getDouble("monto"));
                 li.add(g);

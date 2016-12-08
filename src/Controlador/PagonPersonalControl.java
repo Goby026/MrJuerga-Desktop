@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,7 @@ public class PagonPersonalControl {
 
     //metodo para establecer los nombres de las columnas de la tabla personal
     public void titulosTabla(JTable tabla) {
-        String titulos[] = {"ID","NOMBRES", "APELLIDOS"};
+        String titulos[] = {"ID","NOMBRES", "APELLIDOS","DNI"};
         modelo = new DefaultTableModel(null, titulos);
         tabla.setModel(modelo);
     }
@@ -30,17 +31,18 @@ public class PagonPersonalControl {
         try {
             titulosTabla(tabla);
             UsuarioDAO udao = new UsuarioDAO();
-            Object[] columna = new Object[3];
             for (Usuario u : udao.listar()) {
                 if (u.getDni().equals(dni)) {
-                    columna[1] = u.getId();
+                    Object[] columna = new Object[4];
+                    columna[0] = u.getId();
+                    columna[1] = u.getNombre();
+                    columna[2] = u.getApellido();
+                    columna[3] = u.getDni();
+                    
+                    System.out.println(columna[0]);
                     System.out.println(columna[1]);
-                    columna[2] = u.getNombre();
                     System.out.println(columna[2]);
-                    columna[3] = u.getApellido();
                     System.out.println(columna[3]);
-//                    columna[4] = u.getDni();
-//                    System.out.println(columna[4]);
                     modelo.addRow(columna);
                 }
             }
@@ -53,7 +55,6 @@ public class PagonPersonalControl {
     public boolean registrarPago(String fecha, String concepto, double monto) throws Exception {
         try {
             Gasto g = new Gasto();
-            g.setFecha(fecha);
             g.setConcepto(concepto);
             g.setMonto(monto);
             GastoDAO gdao = new GastoDAO();
@@ -89,6 +90,17 @@ public class PagonPersonalControl {
             throw e;
         }
         return -1;
+    }
+    
+    public void limpiarCampos(JTextField txtPersonal, JTextField txtPago, JTable tblPersonal) {
+        titulosTabla(tblPersonal);
+        txtPersonal.setText("");
+        txtPago.setText("");
+        tblPersonal.setModel(modelo);
+        for (int i = 0; i < tblPersonal.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
     }
 
 }

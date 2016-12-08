@@ -5,7 +5,10 @@
  */
 package Vista;
 
+import Controlador.VentasPendientesControl;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,9 +20,14 @@ public class VentasPendientes extends javax.swing.JFrame {
      * Creates new form VentasPendientes
      */
     public VentasPendientes() {
-        initComponents();
-        setLocationRelativeTo(null);
-        logo();
+        try {
+            initComponents();
+            setLocationRelativeTo(null);
+            logo();
+            new VentasPendientesControl().cargarTablaVentas(tblPedidos);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     public static void main(String[] args){
@@ -47,10 +55,7 @@ public class VentasPendientes extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -67,10 +72,12 @@ public class VentasPendientes extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
 
         setTitle("VENTAS TABLET");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblPedidos.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -82,10 +89,17 @@ public class VentasPendientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPedidos.setRowHeight(40);
+        tblPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPedidos);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 137, -1, 400));
 
+        tblDetalles.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         tblDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -97,6 +111,7 @@ public class VentasPendientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblDetalles.setRowHeight(40);
         jScrollPane2.setViewportView(tblDetalles);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 137, -1, 400));
@@ -110,17 +125,8 @@ public class VentasPendientes extends javax.swing.JFrame {
         jButton3.setText("X");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 540, -1, -1));
 
-        jLabel5.setText("VUELTO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 400, -1, -1));
-
         jLabel6.setText("SUBTOTAL");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, -1, -1));
-
-        jLabel7.setText("MONTO RECIBIDO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 270, -1, -1));
-
-        jLabel8.setText("TOTAL A PAGAR");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 380, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -206,8 +212,26 @@ public class VentasPendientes extends javax.swing.JFrame {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 1190, 40));
 
+        lblSubtotal.setText("jLabel1");
+        getContentPane().add(lblSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 380, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidosMouseClicked
+        try {
+            double monto = 0;
+            int fila = tblPedidos.getSelectedRow();
+            int idVenta = Integer.parseInt(tblPedidos.getValueAt(fila, 0).toString());
+            new VentasPendientesControl().cargarTablaDetalles(tblDetalles, idVenta);
+            for (int i = 0; i < tblDetalles.getRowCount(); i++) {
+                monto += Double.parseDouble(tblDetalles.getValueAt(i, 3).toString());
+            }
+            lblSubtotal.setText(monto+"");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_tblPedidosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,10 +246,7 @@ public class VentasPendientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -233,6 +254,7 @@ public class VentasPendientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblSubtotal;
     private javax.swing.JTable tblDetalles;
     private javax.swing.JTable tblPedidos;
     private javax.swing.JTextField txtFecha;
