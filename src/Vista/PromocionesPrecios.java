@@ -6,6 +6,9 @@
 package Vista;
 
 import Controlador.PromocionesPreciosControl;
+import Controlador.Validaciones;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,9 +16,8 @@ import Controlador.PromocionesPreciosControl;
  */
 public class PromocionesPrecios extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Promociones
-     */
+    DefaultTableModel model;
+
     public PromocionesPrecios() {
         initComponents();
     }
@@ -53,7 +55,10 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("PROMOCIONES");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,9 +80,6 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
 
         txtProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtProducto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtProductoKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductoKeyTyped(evt);
             }
@@ -88,6 +90,11 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
 
         txtComplemento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtComplemento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComplementoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 110, -1));
 
         jScrollPane2.setViewportView(listaComplemento);
@@ -118,6 +125,11 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
         getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 140, -1));
 
         btnCrearPromocion.setText("CREAR PROMOCION");
+        btnCrearPromocion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearPromocionActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCrearPromocion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 140, 90));
 
         tblPromociones.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,23 +152,58 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
 
         jButton2.setText("ELIMINAR");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, 90, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 90, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 90, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyTyped
-        
-    }//GEN-LAST:event_txtProductoKeyTyped
-
-    private void txtProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyReleased
         try {
-            String prod = txtProducto.getText();
+            String prod = txtProducto.getText().trim().toUpperCase();
             new PromocionesPreciosControl().buscarProducto(prod, listaProductos);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_txtProductoKeyReleased
+    }//GEN-LAST:event_txtProductoKeyTyped
+
+    private void txtComplementoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComplementoKeyTyped
+        try {
+            String prod = txtComplemento.getText().trim().toUpperCase();
+            new PromocionesPreciosControl().buscarProducto(prod, listaComplemento);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_txtComplementoKeyTyped
+
+    private void btnCrearPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPromocionActionPerformed
+        if (listaProductos.getSelectedIndex() >= 0) {
+            if (listaComplemento.getSelectedIndex() >= 0) {
+                if (new Validaciones().validarCampoVacio(txtPrecio)) {
+                    String producto = listaProductos.getSelectedValue();
+                    int cantProducto = Integer.parseInt(txtCantidadProducto.getText());
+                    int cantComplemento = Integer.parseInt(txtCantidadComplemento.getText());
+                    String complemento = listaComplemento.getSelectedValue();
+                    double precio = Double.parseDouble(txtPrecio.getText());
+                    Object[] datos = new Object[5];
+                    datos[0] = cantProducto;
+                    datos[1] = producto;
+                    datos[2] = cantComplemento;
+                    datos[3] = complemento;
+                    datos[4] = precio;                    
+                    model.addRow(datos);
+                    tblPromociones.setModel(model);
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane(), "INDIQUE UN PRECIO");
+                }
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UN COMPLEMENTO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UN PRODUCTO");
+        }
+
+    }//GEN-LAST:event_btnCrearPromocionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,6 +223,7 @@ public class PromocionesPrecios extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JList<String> listaComplemento;
     private javax.swing.JList<String> listaProductos;
     private javax.swing.JTable tblPromociones;
