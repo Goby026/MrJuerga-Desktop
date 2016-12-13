@@ -283,6 +283,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
             if (new ProductoDAO().registrar(p)) {
                 JOptionPane.showMessageDialog(rootPane, "SE REGISTRÓ EL PRODUCTO");
+                new ProductosControl().RefrescarTablaProductos(tblProductos);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "ERROR DE REGISTRO");
             }

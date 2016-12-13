@@ -5,13 +5,18 @@ import Controlador.ManejadorFechas;
 import Controlador.VentasControl;
 import Modelo.Comprobante;
 import Modelo.ComprobanteDAO;
+import Modelo.Conexion;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Ventas extends javax.swing.JInternalFrame {
 
     DefaultTableModel table1;
+    DefaultTableModel modeloMasVendidos;
 
     public Ventas(String usuario) throws Exception {
         initComponents();
@@ -20,14 +25,16 @@ public class Ventas extends javax.swing.JInternalFrame {
     }
 
     public void cargarDatos(String usuario) throws Exception {
+        panelVuelto.getRootPane().setBackground(Color.DARK_GRAY);
         new VentasControl().llenarListaCategorias(listaCategorias);
         new VentasControl().cargarTipoDocumento(cmbDocumento);
+        txtCaja.setText(new VentasControl().getCajaDeUsuario(usuario));
         new Cronometro().iniciarCronometro(txtHora);
         txtUsuario.setText(usuario);
         txtFecha.setText(new ManejadorFechas().getFechaActual());
         cargarTitulosTablaPedidos();
         bloquearBotones();
-        new VentasControl().cargarTablaProductosMasVendidos(tblProductos, 50, 100, 200);
+        tablaProductosMasVendidos();
     }
 
     @SuppressWarnings("unchecked")
@@ -51,8 +58,9 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btnRealizarVenta = new javax.swing.JButton();
         txtMontoRecibido = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCategorias = new javax.swing.JList();
@@ -101,9 +109,15 @@ public class Ventas extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cboxMasVendidos = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
 
+        panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        panelVuelto.setTitle("MONTOS");
         panelVuelto.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCero.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -113,7 +127,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnCeroActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 70, 60));
+        panelVuelto.getContentPane().add(btnCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 70, 60));
 
         btnSiete.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnSiete.setText("7");
@@ -122,7 +136,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnSieteActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 70, 60));
+        panelVuelto.getContentPane().add(btnSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 60));
 
         btnCuatro.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnCuatro.setText("4");
@@ -131,7 +145,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnCuatroActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 70, 60));
+        panelVuelto.getContentPane().add(btnCuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 60));
 
         btnUno.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnUno.setText("1");
@@ -140,7 +154,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnUnoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 70, 60));
+        panelVuelto.getContentPane().add(btnUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 70, 60));
 
         btnPunto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnPunto.setText(".");
@@ -149,7 +163,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnPuntoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 70, 60));
+        panelVuelto.getContentPane().add(btnPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 70, 60));
 
         btnOcho.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnOcho.setText("8");
@@ -158,7 +172,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnOchoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 70, 60));
+        panelVuelto.getContentPane().add(btnOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 60));
 
         btnCinco.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnCinco.setText("5");
@@ -167,7 +181,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnCincoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 70, 60));
+        panelVuelto.getContentPane().add(btnCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 70, 60));
 
         btnDos.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnDos.setText("2");
@@ -176,7 +190,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnDosActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 70, 60));
+        panelVuelto.getContentPane().add(btnDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 60));
 
         btnBorrar.setBackground(new java.awt.Color(255, 51, 51));
         btnBorrar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -186,7 +200,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnBorrarActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 70, 60));
+        panelVuelto.getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 70, 60));
 
         btnNueve.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnNueve.setText("9");
@@ -195,7 +209,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnNueveActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 70, 60));
+        panelVuelto.getContentPane().add(btnNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 70, 60));
 
         btnSeis.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnSeis.setText("6");
@@ -204,7 +218,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnSeisActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 70, 60));
+        panelVuelto.getContentPane().add(btnSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 70, 60));
 
         btnTres.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnTres.setText("3");
@@ -213,17 +227,17 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnTresActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 70, 60));
+        panelVuelto.getContentPane().add(btnTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 70, 60));
 
         txtVuelto.setEditable(false);
         txtVuelto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtVuelto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelVuelto.getContentPane().add(txtVuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 230, 60));
+        panelVuelto.getContentPane().add(txtVuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 230, 60));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VUELTO");
-        panelVuelto.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, -1));
+        panelVuelto.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, -1));
 
         btnRealizarVenta.setBackground(new java.awt.Color(0, 153, 0));
         btnRealizarVenta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -234,17 +248,12 @@ public class Ventas extends javax.swing.JInternalFrame {
                 btnRealizarVentaActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 230, 60));
+        panelVuelto.getContentPane().add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 230, 60));
 
         txtMontoRecibido.setEditable(false);
         txtMontoRecibido.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtMontoRecibido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelVuelto.getContentPane().add(txtMontoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 230, 80));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("MONTO RECIBIDO");
-        panelVuelto.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 250, -1));
+        panelVuelto.getContentPane().add(txtMontoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 230, 80));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -255,7 +264,18 @@ public class Ventas extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 230, 50));
+        panelVuelto.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 230, 50));
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("MONTO RECIBIDO");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, -1));
+
+        panelVuelto.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 50));
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -265,7 +285,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("DOCUMENTO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         listaCategorias.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         listaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -275,7 +295,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(listaCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 200, 310));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 280, 310));
 
         tblPedidos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -420,7 +440,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
 
         cmbDocumento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(cmbDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 160, -1));
+        getContentPane().add(cmbDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 160, -1));
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -467,10 +487,10 @@ public class Ventas extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tblProductos);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 720, 310));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 650, 310));
 
         jLabel10.setText("PRODUCTOS");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
 
         btnQuitar.setBackground(new java.awt.Color(255, 0, 0));
         btnQuitar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -484,7 +504,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 840, 70, -1));
 
         btnCobrar.setBackground(new java.awt.Color(0, 153, 51));
-        btnCobrar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnCobrar.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         btnCobrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCobrar.setText("OPERACION");
         btnCobrar.addActionListener(new java.awt.event.ActionListener() {
@@ -509,10 +529,10 @@ public class Ventas extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 850, -1, -1));
-        getContentPane().add(lblComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 160, 20));
+        getContentPane().add(lblComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, 20));
 
         lblUltimoComprobante1.setText("N° COMPROBANTE");
-        getContentPane().add(lblUltimoComprobante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
+        getContentPane().add(lblUltimoComprobante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jPanel8.setBackground(new java.awt.Color(51, 153, 255));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -596,14 +616,14 @@ public class Ventas extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 570, -1, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 170, 220, 10));
 
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jCheckBox1.setText("LOS MAS VENDIDOS");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        cboxMasVendidos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cboxMasVendidos.setText("LOS MAS VENDIDOS");
+        cboxMasVendidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cboxMasVendidosActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, -1, -1));
+        getContentPane().add(cboxMasVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, -1, -1));
 
         jButton2.setText("NUEVO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -611,7 +631,21 @@ public class Ventas extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 80, 60));
+
+        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel3.setText("RUC");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
+
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("RAZON SOCIAL");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+
+        jTextField1.setEditable(false);
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 330, -1));
+
+        jTextField2.setEditable(false);
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 330, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -629,8 +663,8 @@ public class Ventas extends javax.swing.JInternalFrame {
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
         try {
             panelVuelto.setVisible(true);
-            panelVuelto.setModal(closable);
-            panelVuelto.setBounds(750, 300, 265, 690);
+            //panelVuelto.setModal(closable);
+            panelVuelto.setBounds(780, 300, 265, 690);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -740,23 +774,31 @@ public class Ventas extends javax.swing.JInternalFrame {
         try {
             int fila = tblPedidos.getSelectedRow();
             table1.removeRow(fila);
-            System.out.println(new VentasControl().getIdDeUltimaVentaRegistrada());
+            lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void cboxMasVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMasVendidosActionPerformed
         //invocar metodo para ordenar los productos segun las ventas realizadas (los mas vendidos)
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        try {
+            if (cboxMasVendidos.isSelected()) {
+                tablaProductosMasVendidos();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_cboxMasVendidosActionPerformed
 
     private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 0);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {            
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
-        } else {            
+        } else {
             txtVuelto.setForeground(Color.red);
         }
         txtVuelto.setText("" + (monto - total));
@@ -766,9 +808,9 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 1);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {            
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
-        } else {            
+        } else {
             txtVuelto.setForeground(Color.red);
         }
         txtVuelto.setText("" + (monto - total));
@@ -778,7 +820,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 2);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -790,7 +832,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 3);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -802,7 +844,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 4);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -814,7 +856,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 5);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -826,7 +868,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 6);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -838,7 +880,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 7);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -850,7 +892,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 8);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -862,7 +904,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtMontoRecibido.setText(txtMontoRecibido.getText() + 9);
         double monto = Double.parseDouble(txtMontoRecibido.getText());
         double total = Double.parseDouble(lblPago.getText());
-        if ((monto - total)>0) {
+        if ((monto - total) > 0) {
             txtVuelto.setForeground(Color.green);
         } else {
             txtVuelto.setForeground(Color.red);
@@ -931,19 +973,23 @@ public class Ventas extends javax.swing.JInternalFrame {
             datos[3] = 1;
             datos[4] = 1;//capturar el ultimo comprobante registrado
             datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
-            datos[6] = 1;// capturar la caja que realiza la operacion
+            datos[6] = 1;//capturar la caja que realiza la operacion
             VentasControl vc = new VentasControl();
-            if (vc.registrarVenta(datos)) {
-                JOptionPane.showMessageDialog(rootPane, "VENTA REGISTRADA");
-                //reiniciar todo el formulario
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "ERROR");
-            }
-
+            vc.registrarVenta(datos);
+            System.out.println("venta registrada");
             //TERCERO REGISTRO LOS DETALLES DE LA VENTA            
             //obtengo la ultima venta registrada
             int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
-            vc.registrarDetalleDeVenta(tblPedidos, idventa);
+            System.out.println("ultima venta: " + idventa);
+            int flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
+            System.out.println("flag: " + flag);
+            if (flag > 0) {
+                JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
+                panelVuelto.dispose();
+                cargarDatos(usuario);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR EN REGISTRO DE LAS VENTAS");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -1017,10 +1063,10 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSiete;
     private javax.swing.JButton btnTres;
     private javax.swing.JButton btnUno;
+    private javax.swing.JCheckBox cboxMasVendidos;
     private javax.swing.JComboBox cmbDocumento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1034,9 +1080,12 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1044,6 +1093,8 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblComprobante;
     private javax.swing.JLabel lblPago;
     private javax.swing.JLabel lblUltimoComprobante1;
@@ -1098,4 +1149,50 @@ public class Ventas extends javax.swing.JInternalFrame {
         txtCantidad.setEnabled(true);
     }
 
+    public void borrarCampos() {
+        txtMontoRecibido.setText("");
+        txtVuelto.setText("");
+        txtCantidad.setText("");
+        lblPago.setText("");
+    }
+
+    public void titulosMasVendidos() {
+        String columnas[] = {"PRODUCTO", "PRESENTACION", "STOCK", "PRECIO", "VENTAS"};
+        modeloMasVendidos = new DefaultTableModel(null, columnas);
+        tblProductos.setModel(modeloMasVendidos);
+    }
+
+    //metodo para cargar los productos mas vendidos
+    public void tablaProductosMasVendidos() throws Exception {
+        titulosMasVendidos();
+        Conexion con = new Conexion();
+        Object[] lista = new Object[5];
+        try {
+            con.conectar();
+            Connection cc = con.getConexion();
+            PreparedStatement pst = cc.prepareStatement("select producto.nombre,presentacion.descripcion,productopresentacion.stock,productopresentacion.precio, sum(ventaproducto.cantidad) from ventaproducto \n"
+                    + "        inner join producto on ventaproducto.idproducto = producto.idproducto \n"
+                    + "        inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                    + "        inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "        group by producto.nombre\n"
+                    + "        order by sum(ventaproducto.cantidad) desc");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                lista[0] = rs.getString("producto.nombre");
+                lista[1] = rs.getString("presentacion.descripcion");
+                lista[2] = rs.getString("productopresentacion.stock");
+                lista[3] = rs.getString("productopresentacion.precio");
+                lista[4] = rs.getString("sum(ventaproducto.cantidad)");
+                modeloMasVendidos.addRow(lista);
+            }
+            tblProductos.setModel(modeloMasVendidos);
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            con.cerrar();
+        }
+        //CODIGO PARA VER LOS PRODUCTOS MAS VENDIDOS
+    }
 }

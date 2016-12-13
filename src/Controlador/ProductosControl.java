@@ -25,7 +25,7 @@ public class ProductosControl {
         modelo.addColumn("NOMBRE");
         //modelo.addColumn("CATEGORIA");
 
-        Object[] columna = new Object[3];
+        Object[] columna = new Object[2];
 
         int numeroRegistros = ved.listar().size();
 
@@ -105,7 +105,7 @@ public class ProductosControl {
     }
     
     //METODO PARA ACTUALIZAR LA TABLA CUANDO SE REGISTRE, ELIMINE O MODIFIQUE UN PRODUCTO
-    public void RefrescarTablaArea(JTable tabla) throws Exception {
+    public void RefrescarTablaProductos(JTable tabla) throws Exception {
         tabla.setModel(modelo);
         for (int i = 0; i < tabla.getRowCount(); i++) {
             modelo.removeRow(i);

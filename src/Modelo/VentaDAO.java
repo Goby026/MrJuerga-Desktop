@@ -119,38 +119,4 @@ public class VentaDAO extends Conexion implements VentaCRUD {
         }
         return lista;
     }
-
-    //metodo para cargar los productos mas vendidos
-    public List<Object> tablaProductosMasVendidos() throws Exception {
-        List<Object> lista = null;
-        try {
-            this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select producto.nombre,presentacion.descripcion,productopresentacion.stock,productopresentacion.precio, sum(ventaproducto.cantidad) from ventaproducto \n"
-                    + "        inner join producto on ventaproducto.idproducto = producto.idproducto \n"
-                    + "        inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
-                    + "        inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                    + "        group by producto.nombre\n"
-                    + "        order by sum(ventaproducto.cantidad) desc");
-            lista = new ArrayList();
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                Object[] o = new Object[5];
-                o[0] = rs.getString("producto.nombre");
-                o[1] = rs.getString("presentacion.descripcion");
-                o[2] = rs.getString("productopresentacion.stock");
-                o[3] = rs.getString("productopresentacion.precio");
-                o[4] = rs.getString("sum(ventaproducto.cantidad)");
-                lista.add(o);
-            }
-            rs.close();
-            pst.close();
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            this.cerrar();
-        }
-        return lista;
-        //CODIGO PARA VER LOS PRODUCTOS MAS VENDIDOS
-    }
-
 }

@@ -258,8 +258,8 @@ public class Categorias extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (new Validaciones().validarCampoVacio(txtDescripcion)) {
             if (new Validaciones().validarCampoVacio(txtCodCategoria)) {
-                String Descripcion = txtDescripcion.getText();
-                String CodCategoria = txtCodCategoria.getText();
+                String Descripcion = txtDescripcion.getText().toUpperCase();
+                String CodCategoria = txtCodCategoria.getText().toUpperCase();
                 try {
                     Categoria ca = new Categoria();
                     ca.setDescripcion(Descripcion);
@@ -292,8 +292,8 @@ public class Categorias extends javax.swing.JInternalFrame {
                 } else {
                     int id = Integer.parseInt(tblCategorias.getValueAt(fila, 0).toString());
                     c.setIdcategoria(id);
-                    c.setDescripcion(txtDescripcion.getText());
-                    c.setCodcategoria(txtCodCategoria.getText());
+                    c.setDescripcion(txtDescripcion.getText().toUpperCase());
+                    c.setCodcategoria(txtCodCategoria.getText().toUpperCase());
                     CategoriaDAO dc = new CategoriaDAO();
                     try {
                         if (dc.Modificar(c)) {

@@ -1,5 +1,7 @@
 package Controlador;
 
+import Modelo.Caja;
+import Modelo.CajaDAO;
 import Modelo.Categoria;
 import Modelo.CategoriaDAO;
 import Modelo.Presentacion;
@@ -11,13 +13,19 @@ import Modelo.ProductoPresentacionDAO;
 import Modelo.TipoComprobante;
 import Modelo.TipoComprobanteDAO;
 import Modelo.Usuario;
+import Modelo.UsuarioCaja;
+import Modelo.UsuarioCajaDAO;
 import Modelo.UsuarioDAO;
 import Modelo.Venta;
 import Modelo.VentaDAO;
 import Modelo.VentaProducto;
 import Modelo.VentaProductoDAO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -146,7 +154,7 @@ public class VentasControl {
         return 0;
     }
 
-    //metodo para obtener el id de usuarui cob su nombre de usuario
+    //metodo para obtener el id de usuario cob su nombre de usuario
     public int getIdUsuarioConNombre(String nombre) throws Exception {
         try {
             UsuarioDAO udao = new UsuarioDAO();
@@ -271,8 +279,9 @@ public class VentasControl {
         return false;
     }
 
-    public void registrarDetalleDeVenta(JTable tabla, int numVenta) throws Exception {
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta) throws Exception {
         try {
+            int flag = 0;
             int numFilas = tabla.getRowCount();
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
@@ -283,47 +292,54 @@ public class VentasControl {
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                 VentaProductoDAO vpdao = new VentaProductoDAO();
                 if (vpdao.registrar(vp)) {
-                    System.out.println("detalle de venta: " + numVenta + " registrado");
-                } else {
-                    System.out.println("error revisa la venta");
+                    flag++;
                 }
             }
+            return flag;
         } catch (Exception e) {
             throw e;
         }
     }
-
-    public void cargarTablaProductosMasVendidos(JTable tabla,int small, int large, int xl) throws Exception {
-        modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        VentaDAO vdao = new VentaDAO();
-
-        modelo.addColumn("PRODUCTO");
-        modelo.addColumn("PRESENTACIÓN");
-        modelo.addColumn("STOCK");
-        modelo.addColumn("PRECIO");
-
-        Object[] columna = new Object[4];
-
-        //int numeroRegistros = ved.listar().size();
-        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (int i = 0; i < vdao.tablaProductosMasVendidos().size(); i++) {
-            columna[0] = vdao.tablaProductosMasVendidos().get(i).toString();
-            columna[1] = vdao.tablaProductosMasVendidos().get(i).toString();
-            columna[2] = vdao.tablaProductosMasVendidos().get(i).toString();
-            columna[3] = vdao.tablaProductosMasVendidos().get(i).toString();
-            modelo.addRow(columna);
-//            if (pp.getIdcategoria() == idCategoria) {
-//                columna[0] = getProductoConId(pp.getIdProducto());
-//                columna[1] = getPresentacionConId(pp.getIdPresentacion());
-//                columna[2] = pp.getStock();
-//                columna[3] = pp.getPrecio();
-//                modelo.addRow(columna);
-//            }
+    
+    /*METODO PARA OBTENER EL NOMBRE DE CAJA CON SU ID*/
+    public String getCajaConId(int idCaja) throws Exception {
+        try {
+            CajaDAO cdao = new CajaDAO();
+            for (Caja c : cdao.Listar()) {
+                if (c.getIdCaja() == idCaja) {
+                    return c.getNomCaja();
+                }
+            }
+            return "NULL de getCajaConId";
+        } catch (Exception e) {
+            throw e;
         }
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(xl);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(large);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
+    }
+    
+    
+    //METODO PARA OBTENER EL NOMBRE DE CAJA DEL USUARIO LOGEADO
+    public String getCajaDeUsuario(String usuario) throws Exception {
+        try {
+            int idUsuario = getIdUsuarioConNombre(usuario);
+            UsuarioCajaDAO udao = new UsuarioCajaDAO();
+            for (UsuarioCaja uc : udao.Listar()) {
+                if (uc.getIdusuario() == idUsuario) {
+                    return getCajaConId(uc.getIdcaja());
+                }
+            }
+            return "NULL de getCajaDeUsuario";
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    //METODO PARA SUMAR LA CANTIDAD DE UN PRODUCTO QUE SE AÑADE A LA TABLA DE AÑADIDOS, SI ESTE PRODUCTO YA ESTUVIESE EN LA TABLA
+    public void sumarCantidad(String prod, JTable tabla, int cantidad){
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            if (tabla.getValueAt(i, 1).toString().equals(prod)) {
+                int cant = Integer.parseInt(tabla.getValueAt(i, 3).toString())+cantidad;
+                tabla.setValueAt(cant, i, 3);
+            }
+        }
     }
 }
