@@ -30,6 +30,7 @@ public class ProductoPresentacion extends javax.swing.JFrame {
         new ProductoPresentacionControl().cargarComboAlmacen(cmbAlmacen);
         new ProductoPresentacionControl().cargarComboCategoria(cmbCategoria);
         tablaProductoPresentacion();
+        new ProductoPresentacionControl().LlenarTabla(tblProductoPresentacion, 50, 100, 200);
     }
 
     public void tablaProductoPresentacion() {

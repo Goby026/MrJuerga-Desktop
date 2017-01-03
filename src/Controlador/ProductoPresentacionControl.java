@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class ProductoPresentacionControl {
 
     DefaultListModel modeloProductos = new DefaultListModel();
+    DefaultTableModel modeloTabla;
 
     public void llenarProductos(JList lista) throws Exception {
         try {
@@ -36,6 +37,40 @@ public class ProductoPresentacionControl {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public void LlenarTabla(JTable tabla, int small, int large, int xl) throws Exception {
+        modeloTabla = new DefaultTableModel();
+        tabla.setModel(modeloTabla);
+        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+
+        modeloTabla.addColumn("PRODUCTO");
+        modeloTabla.addColumn("CATEGORIA");
+        modeloTabla.addColumn("PRESENTACION");
+        modeloTabla.addColumn("ALMACEN");
+        modeloTabla.addColumn("STOCK");
+        modeloTabla.addColumn("PRECIO");
+
+        Object[] columna = new Object[6];
+
+        int numeroRegistros = ppdao.listar().size();
+        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
+        for (int i = 0; i < numeroRegistros; i++) {
+            columna[0] = getProductoConId(ppdao.listar().get(i).getIdProducto());
+            columna[1] = getCategoriaConId(ppdao.listar().get(i).getIdcategoria());
+            columna[2] = getPresentacionConId(ppdao.listar().get(i).getIdPresentacion());
+            columna[3] = getAlmacenConId(ppdao.listar().get(i).getIdalmacen());
+            columna[4] = ppdao.listar().get(i).getStock();
+            columna[5] = ppdao.listar().get(i).getPrecio();
+            modeloTabla.addRow(columna);
+        }
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(xl);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(large);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(large);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
+
     }
 
     public void cargarComboPresentacion(JComboBox cmb) throws Exception {
@@ -132,7 +167,7 @@ public class ProductoPresentacionControl {
     public int guardarGestionProducto(String producto, String categoria, String presentacion, String almacen, int stock, double precio) throws Exception {
         int flag = 0;
         try {
-            ProductoPresentacion pp = new ProductoPresentacion();            
+            ProductoPresentacion pp = new ProductoPresentacion();
             pp.setIdProducto(getIdProductoConNombre(producto));
             pp.setIdcategoria(getIdCategoriaConNombre(categoria));
             pp.setIdPresentacion(getIdPresentacionConNombre(presentacion));
@@ -140,7 +175,7 @@ public class ProductoPresentacionControl {
             pp.setStock(stock);
             pp.setPrecio(precio);
             int opc = comprobarGestionProducto(getIdProductoConNombre(producto), getIdPresentacionConNombre(presentacion), getIdAlmacenConNombre(almacen));
-            if (opc>0) {
+            if (opc > 0) {
                 //modificar
                 pp.setIdProductoPresentacion(opc);
                 ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
@@ -156,5 +191,65 @@ public class ProductoPresentacionControl {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    //obtener el nombre de producto con el id
+    public String getProductoConId(int idProducto) throws Exception {
+        try {
+            ProductoDAO pdao = new ProductoDAO();
+            for (Producto p : pdao.listar()) {
+                if (p.getIdProducto() == idProducto) {
+                    return p.getNombre();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return "";
+    }
+
+    //metodo para obtener el nombre de categoria con el id
+    public String getCategoriaConId(int idCategoria) throws Exception {
+        try {
+            CategoriaDAO cdao = new CategoriaDAO();
+            for (Categoria c : cdao.Listar()) {
+                if (c.getIdcategoria() == idCategoria) {
+                    return c.getDescripcion();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
+
+    //metodo para obtener el nombre de presentacion con id
+    public String getPresentacionConId(int idPresentacion) throws Exception {
+        try {
+            PresentacionDAO pdao = new PresentacionDAO();
+            for (Presentacion p : pdao.Listar()) {
+                if (p.getIdPresentacion() == idPresentacion) {
+                    return p.getDescripcion();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
+
+    //metodo para obtener el nombre de almacen con id
+    public String getAlmacenConId(int idAlmacen) throws Exception {
+        try {
+            AlmacenDAO adao = new AlmacenDAO();
+            for (Almacen a : adao.listar()) {
+                if (a.getId() == idAlmacen) {
+                    return a.getNombre();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 }
