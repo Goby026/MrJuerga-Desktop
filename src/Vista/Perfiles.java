@@ -74,6 +74,7 @@ public class Perfiles extends javax.swing.JInternalFrame {
         setTitle("GESTION DE PERFILES");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("DESCRIPCION");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
@@ -82,7 +83,7 @@ public class Perfiles extends javax.swing.JInternalFrame {
                 txtDescripcionKeyTyped(evt);
             }
         });
-        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 230, 20));
+        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 230, 30));
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnRegistrar.setBorder(null);
