@@ -94,14 +94,18 @@ public class Usuarios extends javax.swing.JInternalFrame {
         lblPath = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listaPerfiles = new javax.swing.JList<>();
+        listaPerfiles = new javax.swing.JList<String>();
         btnAddPerfil = new javax.swing.JButton();
         btnDelPerfil = new javax.swing.JButton();
-        cmbPerfiles = new javax.swing.JComboBox<>();
+        cmbPerfiles = new javax.swing.JComboBox<String>();
         cmbEmail = new javax.swing.JCheckBox();
         cmbRuc = new javax.swing.JCheckBox();
         cmbTelefono = new javax.swing.JCheckBox();
         cmbDireccion = new javax.swing.JCheckBox();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtSueldo = new javax.swing.JTextField();
+        cbPlanilla = new javax.swing.JCheckBox();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -112,7 +116,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("PERFILES");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
         jLabel4.setText("NOMBRES *");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
@@ -217,7 +221,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 630, 120, -1));
+        getContentPane().add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 120, -1));
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnGuardar.setBorder(null);
@@ -229,7 +233,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, -1, 40));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 690, -1, 40));
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/actualizar.png"))); // NOI18N
         btnModificar.setBorder(null);
@@ -241,7 +245,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 120, 40));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 690, 120, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         btnEliminar.setBorder(null);
@@ -253,7 +257,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 630, 120, 40));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 690, 120, 40));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
         btnNuevo.setBorder(null);
@@ -265,7 +269,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, -1, 40));
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 690, -1, 40));
 
         jLabel16.setText("RUC");
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
@@ -275,8 +279,8 @@ public class Usuarios extends javax.swing.JInternalFrame {
         txtRuc.setEnabled(false);
         getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 140, -1));
 
-        jLabel17.setText("E-MAIL");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
+        jLabel17.setText("PLANILLA");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
 
         txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -347,7 +351,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         jLabel8.setText("MISTER JUERGA");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 0, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 1080, 40));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 1080, 40));
         getContentPane().add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 160, 140));
 
         jLabel14.setText("APELLIDOS *");
@@ -373,7 +377,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
         jScrollPane3.setViewportView(listaPerfiles);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 130, 100));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 130, 100));
 
         btnAddPerfil.setBackground(new java.awt.Color(51, 153, 0));
         btnAddPerfil.setText("+");
@@ -382,7 +386,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnAddPerfilActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
+        getContentPane().add(btnAddPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 670, -1, -1));
 
         btnDelPerfil.setBackground(new java.awt.Color(255, 102, 102));
         btnDelPerfil.setText("-");
@@ -391,9 +395,9 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnDelPerfilActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+        getContentPane().add(btnDelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, -1, -1));
 
-        getContentPane().add(cmbPerfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 130, -1));
+        getContentPane().add(cmbPerfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 130, -1));
 
         cmbEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,6 +426,18 @@ public class Usuarios extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(cmbDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, -1));
+
+        jLabel18.setText("E-MAIL");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
+
+        jLabel22.setText("SUELDO");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
+
+        txtSueldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSueldo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtSueldo.setEnabled(false);
+        getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 140, -1));
+        getContentPane().add(cbPlanilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -477,6 +493,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //VALIDACIONES
+        int opc = 0;
         Validaciones v = new Validaciones();
         if (v.validarCampoVacio(txtNombre)) {
             if (v.validarCampoVacio(txtApellido)) {
@@ -495,6 +512,11 @@ public class Usuarios extends javax.swing.JInternalFrame {
                                 u.setImagen(txtDireccion.getText().toUpperCase());
                                 u.setUsuario(txtUsuario.getText().toUpperCase());
                                 u.setPass(txtPass.getText().toUpperCase());
+                                u.setSueldo(Double.parseDouble(txtSueldo.getText()));
+                                if (cbPlanilla.isSelected()) {
+                                    opc = 1;
+                                }
+                                u.setPlanilla(opc);
                                 if (!new UsuariosControl().verificarUsuario(u)) {
                                     UsuarioDAO udao = new UsuarioDAO();
                                     if (udao.registrar(u)) {
@@ -724,6 +746,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JCheckBox cbPlanilla;
     private javax.swing.JCheckBox cmbDireccion;
     private javax.swing.JCheckBox cmbEmail;
     private javax.swing.JComboBox<String> cmbPerfiles;
@@ -737,9 +760,11 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -765,6 +790,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtRuc;
+    private javax.swing.JTextField txtSueldo;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtUsuario1;
