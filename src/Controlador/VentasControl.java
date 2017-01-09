@@ -101,6 +101,7 @@ public class VentasControl {
             if (c.getDescripcion().equals(nomCate)) {
                 int id = c.getIdcategoria();
                 new VentasControl().LlenarTablaProductosConId(id, tabla, 50, 100, 200);
+                //break;
             }
         }
     }

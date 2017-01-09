@@ -42,8 +42,6 @@ public class Configuracion extends javax.swing.JInternalFrame {
         txtCoverVip = new javax.swing.JTextField();
         btnGuardarAdministrador = new javax.swing.JButton();
         btnNuevoAdministrador = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        txtBox = new javax.swing.JTextField();
         Empresa = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -87,6 +85,13 @@ public class Configuracion extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtDctoPlanilla = new javax.swing.JTextField();
+        txtDctoFamilia = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,14 +123,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
         btnNuevoAdministrador.setText("NUEVO");
         Administrador.add(btnNuevoAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 140, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel8.setText("BOX");
-        Administrador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
-
-        txtBox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Administrador.add(txtBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 120, -1));
-
-        getContentPane().add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 890, 90));
+        getContentPane().add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 890, 90));
 
         Empresa.setBackground(new java.awt.Color(255, 255, 255));
         Empresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EMPRESA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
@@ -301,7 +299,24 @@ public class Configuracion extends javax.swing.JInternalFrame {
         jLabel28.setText("MISTER JUERGA");
         jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 0, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 930, 40));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 920, 930, 40));
+
+        jLabel1.setText("DESCUENTO FAMILIA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 810, -1, -1));
+
+        jLabel2.setText("DCTO PLANILLA");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, -1, -1));
+        getContentPane().add(txtDctoPlanilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 780, 90, -1));
+        getContentPane().add(txtDctoFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 810, 90, -1));
+
+        jButton5.setText("GUARDAR");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 800, -1, -1));
+
+        jLabel3.setText("S/.");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 780, -1, -1));
+
+        jLabel4.setText("S/.");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 810, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -320,11 +335,13 @@ public class Configuracion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -333,6 +350,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -342,15 +360,17 @@ public class Configuracion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField txtBox;
     private javax.swing.JTextField txtCoverGeneral;
     private javax.swing.JTextField txtCoverVip;
+    private javax.swing.JTextField txtDctoFamilia;
+    private javax.swing.JTextField txtDctoPlanilla;
     private javax.swing.JTextField txtDireccionEmpresa;
     private javax.swing.JTextField txtEmailEmpresa;
     private javax.swing.JTextField txtFecha;
