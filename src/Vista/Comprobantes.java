@@ -2,24 +2,17 @@ package Vista;
 
 import Controlador.ComprobantesControl;
 import Controlador.LlenarTabla;
-import Controlador.Validaciones;
-import Modelo.Comprobante;
-import Modelo.ComprobanteDAO;
 import java.awt.Color;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 public class Comprobantes extends javax.swing.JInternalFrame {
 
     public Comprobantes(String usuario) throws Exception {
         initComponents();
         getContentPane().setBackground(Color.white);
-        LlenarTabla lt = new LlenarTabla();
-        lt.LlenarTablaComprobante(tblComprobantes);
-        new ComprobantesControl().llenarComboTipoComprobante(cmbTipoComprobante);
+//        LlenarTabla lt = new LlenarTabla();
+//        lt.LlenarTablaComprobante(tblComprobantes);
+//        new ComprobantesControl().llenarComboTipoComprobante(cmbTipoComprobante);
         txtUsuario1.setText(usuario);
     }
 
@@ -32,32 +25,33 @@ public class Comprobantes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCliente = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btnRegistrar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        txtSubTotal = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtRuc = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtTipoDePago = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        cmbTipoComprobante = new javax.swing.JComboBox();
-        txtUsuario = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblComprobantes = new javax.swing.JTable();
-        jdcFecha = new com.toedter.calendar.JDateChooser();
-        btnNuevo = new javax.swing.JButton();
+        panelBoleta = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        txtNumBoleta = new javax.swing.JTextField();
+        txtFechaBoleta = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        txtHoraBoleta = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        txtSerie = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        txtCajero = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDetallePedido = new javax.swing.JTable();
+        jLabel39 = new javax.swing.JLabel();
+        txtTotalBoleta = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -70,89 +64,82 @@ public class Comprobantes extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
-        setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
-        setTitle("GESTION DE COMPROBANTES");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 150, -1));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel1.setText("FECHA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 150, -1));
+        jLabel26.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel26.setText("HORA");
+        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 40, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel2.setText("USUARIO");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jLabel27.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel27.setText("GRACIAS POR SU PREFERENCIA");
+        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 310, -1));
 
-        btnRegistrar.setText("REGISTRAR");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 250, -1));
+        jLabel28.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("DISCO CLUB");
+        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 310, -1));
 
-        btnModificar.setText("MODIFICAR");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 250, -1));
+        jLabel29.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("DISCOTECA AREA E.I.R.L");
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, -1));
 
-        btnEliminar.setText("ANULAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 250, -1));
-        getContentPane().add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 150, -1));
+        jLabel30.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("JR. AYACUCHO 773");
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 310, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel3.setText("CLIENTE");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-        getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 150, -1));
+        jLabel31.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("HUANCAYO - HUANCAYO");
+        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 310, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel4.setText("CANTIDAD");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 150, -1));
+        jLabel32.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("N° TICKETERA FFCF277393");
+        jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel5.setText("SUB TOTAL");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
-        getContentPane().add(txtTipoDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 150, -1));
+        jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("N° AUTORIZACION 0133845114563");
+        jPanel2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 310, -1));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel6.setText("RUC");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 150, -1));
+        jLabel34.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("BOLETA DE VENTA");
+        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 310, -1));
+        jPanel2.add(txtNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 50, -1));
+        jPanel2.add(txtFechaBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 80, -1));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel7.setText("DIRECCION");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("-");
+        jPanel2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 20, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel8.setText("TIPO DE PAGO");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        jLabel36.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("N° BOLETA");
+        jPanel2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 80, -1));
+        jPanel2.add(txtHoraBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 50, -1));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel10.setText("TIPO COMPROBANTE");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        jLabel37.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel37.setText("FECHA");
+        jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 50, -1));
+        jPanel2.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 50, -1));
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel9.setText("TOTAL");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jLabel38.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel38.setText("CAJERO");
+        jPanel2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 50, -1));
+        jPanel2.add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 80, -1));
 
-        getContentPane().add(cmbTipoComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 250, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, -1));
-
-        tblComprobantes.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetallePedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -163,23 +150,37 @@ public class Comprobantes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblComprobantes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblComprobantesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblComprobantes);
+        jScrollPane2.setViewportView(tblDetallePedido);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 115, 850, 560));
-        getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 150, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 240, 110));
 
-        btnNuevo.setText("NUEVO");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 250, -1));
+        jLabel39.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel39.setText("TOTAL");
+        jPanel2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 40, -1));
+        jPanel2.add(txtTotalBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 50, -1));
+
+        jLabel40.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("MRJUERGA");
+        jPanel2.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 310, -1));
+
+        jLabel41.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("********MRJUERGA********");
+        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 310, -1));
+
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jButton2.setText("IMPRIMIR");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 270, 40));
+
+        panelBoleta.getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("GESTION DE COMPROBANTES");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel8.setBackground(new java.awt.Color(0, 51, 51));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,165 +248,33 @@ public class Comprobantes extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 700, 1150, 40));
 
+        jLabel12.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel12.setText("N° COMPROBANTE");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 40));
+
+        jLabel14.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel14.setText("REIMPRESION DE COMPROBANTE");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
+
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 170, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
-//        if (new Validaciones().validarCampoVacio(txtUsuario)) {
-//            if (new Validaciones().validarCampoVacio(txtCliente)) {
-//                if (new Validaciones().validarCampoVacio(txtCantidad)) {
-//                    if (new Validaciones().validarCampoVacio(txtSubTotal)) {
-//                        if (new Validaciones().validarCampoVacio(txtRuc)) {
-//                            if (new Validaciones().validarCampoVacio(txtDireccion)) {
-//                                if (new Validaciones().validarCampoVacio(txtTipoDePago)) {
-//                                    if (new Validaciones().validarCampoVacio(txtTotal)) {
-//                                        Date fecha = jdcFecha.getDate();
-//                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                                        String f = sdf.format(fecha);
-//                                        String Usuario = txtUsuario.getText();
-//                                        String Cliente = txtCliente.getText();
-//                                        int Cantidad = Integer.parseInt(txtCantidad.getText());
-//                                        double SubTotal = Double.parseDouble(txtSubTotal.getText());
-//                                        String Ruc = txtRuc.getText();
-//                                        String Direccion = txtDireccion.getText();
-//                                        String TipodePago = txtTipoDePago.getText();
-//                                        double Total = Double.parseDouble(txtTotal.getText());
-//                                        int TipoComprobante = Integer.parseInt(cmbTipoComprobante.getSelectedItem().toString());
-//                                        try {
-//                                            Comprobante c = new Comprobante(f, Usuario, Cliente, Cantidad, SubTotal, Ruc, Direccion, TipodePago, Total, TipoComprobante);
-//                                            ComprobanteDAO dc = new ComprobanteDAO();
-//                                            dc.Registrar(c);
-//                                            new LlenarTabla().RefrescarTablaComprobante(tblComprobantes);
-//                                        } catch (Exception e) {
-//                                        }
-//                                    } else {
-//                                        JOptionPane.showMessageDialog(null, "INGRESE TOTAL");
-//                                    }
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "INGRESE TIPO DE PAGO");
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "INGRESE DIRECCION");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "INGRESE RUC");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "INGRESE SUBTOTAL");
-//                    }
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "INGRESE CANTIDAD");
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "INGRESE CLIENTE");
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(null, "INGRESE USUARIO");
-//        }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        Comprobante c = new Comprobante();
-        int fila = tblComprobantes.getSelectedRow();
-        if (fila < 0) {
-            JOptionPane.showMessageDialog(rootPane, "SELECCIONE UN COMPROBANTE");
-        } else {
-            int id = Integer.parseInt(tblComprobantes.getValueAt(fila, 0).toString());
-            c.setIdcomprobante(id);
-            c.setFecha(jdcFecha.toString());
-            c.setUsuario(txtUsuario.getText());
-            c.setCliente(txtCliente.getText());
-
-            ComprobanteDAO dc = new ComprobanteDAO();
-            try {
-                if (dc.Modificar(c)) {
-                    new LlenarTabla().RefrescarTablaComprobante(tblComprobantes);
-
-                    JOptionPane.showMessageDialog(rootPane, "SE ACTUALIZO EL REGISTRO");
-
-                }
-
-            } catch (Exception ex) {
-                Logger.getLogger(Comprobante.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        ComprobanteDAO dc = new ComprobanteDAO();
-        Comprobante c = new Comprobante();
-        int fila = tblComprobantes.getSelectedRow();
-        int id = Integer.parseInt(tblComprobantes.getValueAt(fila, 0).toString());
-        c.setIdcomprobante(id);
-        try {
-            dc.Anular(c);
-            new LlenarTabla().RefrescarTablaComprobante(tblComprobantes);
-        } catch (Exception ex) {
-            Logger.getLogger(Comprobantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void tblComprobantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblComprobantesMouseClicked
-        try {
-            int fila = tblComprobantes.getSelectedRow();
-            int id = Integer.parseInt(tblComprobantes.getValueAt(fila, 0).toString());
-            Object[] datos = (Object[]) new ComprobantesControl().getCamposConClic(id);
-            String fecha = (String) datos[1];
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fec = sdf.parse(fecha);
-            jdcFecha.setDate(fec);
-            txtUsuario.setText((String) datos[2]);
-            txtCliente.setText((String) datos[3]);
-            txtCantidad.setText("" + datos[4]);
-            txtSubTotal.setText("" + datos[5]);
-            txtRuc.setText((String) datos[6]);
-            txtDireccion.setText((String) datos[7]);
-            txtTipoDePago.setText((String) datos[8]);
-            txtTotal.setText("" + datos[9]);
-            int idTipoComprobante = Integer.parseInt(tblComprobantes.getValueAt(fila, 10).toString());
-            new ComprobantesControl().capturarDescripcionDeComboTipoComprobante(idTipoComprobante, cmbTipoComprobante);
-
-//        try {
-//            int fila = tblComprobantes.getSelectedRow();
-//            String Fecha = tblComprobantes.getValueAt(fila, 1).toString();
-//            String Usuario = tblComprobantes.getValueAt(fila, 2).toString();
-//            String Cliente = tblComprobantes.getValueAt(fila, 3).toString();
-//            String Cantidad = tblComprobantes.getValueAt(fila, 4).toString();
-//            String Sub_Total = tblComprobantes.getValueAt(fila, 5).toString();
-//            String Ruc = tblComprobantes.getValueAt(fila, 6).toString();
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            Date dato = null;
-//            dato = sdf.parse(Fecha);
-//            jdcFecha.setDate(dato);
-//            txtUsuario.setText(Usuario);
-//            txtCliente.setText(Cliente);
-//            txtCantidad.setText(Cantidad);
-//            txtSubTotal.setText(Sub_Total);
-//            txtDireccion.setText(Ruc);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Comprobantes.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        } catch (Exception ex) {
-            Logger.getLogger(Comprobantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_tblComprobantesMouseClicked
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        jdcFecha.setDate(null);
-        txtUsuario.setText("");
-        txtCliente.setText("");
-        txtCantidad.setText("");
-        txtSubTotal.setText("");
-        txtRuc.setText("");
-        txtDireccion.setText("");
-        txtTipoDePago.setText("");
-        txtTotal.setText("");
-        tblComprobantes.clearSelection();
-    }//GEN-LAST:event_btnNuevoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        panelBoleta.setVisible(true);
+        panelBoleta.setBounds(500,500,310,590);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -448,43 +317,48 @@ public class Comprobantes extends javax.swing.JInternalFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox cmbTipoComprobante;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jdcFecha;
-    private javax.swing.JTable tblComprobantes;
-    private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JDialog panelBoleta;
+    private javax.swing.JTable tblDetallePedido;
+    private javax.swing.JTextField txtCajero;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFechaBoleta;
     private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtRuc;
-    private javax.swing.JTextField txtSubTotal;
-    private javax.swing.JTextField txtTipoDePago;
-    private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtHoraBoleta;
+    private javax.swing.JTextField txtNumBoleta;
+    private javax.swing.JTextField txtSerie;
+    private javax.swing.JTextField txtTotalBoleta;
     private javax.swing.JTextField txtUsuario1;
     // End of variables declaration//GEN-END:variables
 }
