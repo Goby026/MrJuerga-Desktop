@@ -6,13 +6,13 @@ package Modelo;
  */
 public class ProductoPresentacion {
 
-    int idProductoPresentacion, idProducto, idPresentacion, idalmacen, stock,idcategoria;
-    double precio;
+    int idProductoPresentacion, idProducto, idPresentacion, idalmacen, idcategoria;
+    double precio,stock;
 
     public ProductoPresentacion() {
     }
 
-    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, int stock, int idcategoria, double precio) {
+    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, int idcategoria, double precio) {
         this.idProductoPresentacion = idProductoPresentacion;
         this.idProducto = idProducto;
         this.idPresentacion = idPresentacion;
@@ -62,11 +62,11 @@ public class ProductoPresentacion {
         this.idalmacen = idalmacen;
     }
 
-    public int getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 
@@ -76,7 +76,5 @@ public class ProductoPresentacion {
 
     public void setIdcategoria(int idcategoria) {
         this.idcategoria = idcategoria;
-    }
-
-    
+    }    
 }

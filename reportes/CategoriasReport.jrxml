@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c3be766-7b29-493b-8fd8-01b7d1b47f3a">
+	<property name="ireport.zoom" value="1.464100000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     categoria.`idCategoria` AS categoria_idCategoria,
+     categoria.`descripcion` AS categoria_descripcion,
+     categoria.`codCategoria` AS categoria_codCategoria
+FROM
+     `categoria` categoria]]>
+	</queryString>
+	<field name="categoria_idCategoria" class="java.lang.Integer"/>
+	<field name="categoria_descripcion" class="java.lang.String"/>
+	<field name="categoria_codCategoria" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="143" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="98" width="555" height="45" backcolor="#990000" uuid="ffee3613-739a-4f02-b5b7-2e73d16f9bfc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="129" y="102" width="308" height="34" forecolor="#FFFFFF" uuid="9e502699-48a6-4453-8111-671cab8bbda8"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR JUERGA - CATEGORIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="35" width="211" height="45" forecolor="#990000" uuid="6fb11c6d-881b-4b7e-bb15-9cf90c6aa04e"/>
+				<textElement textAlignment="Center">
+					<font size="28" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[REPORTES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="15" y="5" width="114" height="86" forecolor="#990000" backcolor="#CCCCCC" uuid="9b651c54-870b-4dc2-ac13-5e1836bd6695"/>
+			</rectangle>
+			<ellipse>
+				<reportElement x="22" y="12" width="98" height="74" forecolor="#999999" backcolor="#000000" uuid="f0357d35-9b96-4594-958b-8a725b5a2b78"/>
+			</ellipse>
+			<staticText>
+				<reportElement mode="Transparent" x="37" y="12" width="66" height="57" forecolor="#FFFFFF" backcolor="#000000" uuid="3959c6c0-a421-4fb6-a8c2-d881de5c613c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="39" y="52" width="62" height="17" backcolor="#990000" uuid="b619d3a7-f4cf-4d36-b7b2-cd5f9911c6d5"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="39" y="52" width="62" height="17" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="bde720d0-48f3-4b96-b0e0-d4c967e14e98"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DISKO-CLUB]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="-1" width="100" height="20" uuid="ed71d318-08b1-4002-9ecd-854f0d69c593"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="185" height="20" uuid="06043361-f059-4eaf-b9e6-23a31d2c5bcb"/>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="0" width="185" height="20" uuid="575f0dc8-f0ff-4876-8204-14ec34817069"/>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="185" height="20" uuid="a0d808ab-3ce9-4663-bd9b-c2b7d0871481"/>
+				<text><![CDATA[CODIGO CATEGORIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="20" uuid="20fe74ab-0839-4e58-a622-6ae0f54dafef"/>
+				<textFieldExpression><![CDATA[$F{categoria_idCategoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="20" uuid="0f9bc2e0-e56e-4aa9-b13d-dfa3ab81ed02"/>
+				<textFieldExpression><![CDATA[$F{categoria_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="20" uuid="010900bf-5999-48c6-946d-e921499054fd"/>
+				<textFieldExpression><![CDATA[$F{categoria_codCategoria}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="dbc64b98-08ca-41d5-bbbe-7ee3fc8929ee"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="411" y="20" width="80" height="20" uuid="30508b9a-0d2d-4410-a9bf-facb76df78e6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="502" y="20" width="40" height="20" uuid="b5266d26-449f-44b5-a750-8ee4ddb07ad5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

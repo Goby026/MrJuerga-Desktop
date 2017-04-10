@@ -15,7 +15,7 @@ public class FormatoFechas {
         Date f = jdc.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = sdf.format(f);
-        return fecha; 
+        return fecha;
     }
     public String setFormatoFec(JDateChooser jdc){
         Date f = jdc.getDate();

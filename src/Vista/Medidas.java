@@ -12,9 +12,9 @@ import Controlador.MyiReportVisor;
 import Controlador.PresentacionControl;
 import Controlador.Validaciones;
 import Modelo.Medida;
-import Modelo.MedidaDAO;
+import Modelo.MySQLDAO.MedidaDAO;
 import Modelo.Presentacion;
-import Modelo.PresentacionDAO;
+import Modelo.MySQLDAO.PresentacionDAO;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -55,9 +55,6 @@ public class Medidas extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMedida = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtDescripcion = new javax.swing.JTextField();
         btnNuevo = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -75,6 +72,8 @@ public class Medidas extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,23 +99,7 @@ public class Medidas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblMedida);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 430, 310));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 0, 0))); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("DESCRIPCION");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 39, -1, -1));
-
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 158, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 300, 90));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 490, 310));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo-archivo.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
@@ -126,7 +109,7 @@ public class Medidas extends javax.swing.JInternalFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 110, 40));
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 150, 40));
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/disquete.png"))); // NOI18N
         btnRegistrar.setText("GUARDAR");
@@ -136,7 +119,7 @@ public class Medidas extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 120, 40));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/girar.png"))); // NOI18N
         btnModificar.setText("ACTUALIZAR");
@@ -146,7 +129,7 @@ public class Medidas extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 130, 40));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 150, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boton-eliminar.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
@@ -156,7 +139,7 @@ public class Medidas extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 130, 40));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 40));
 
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/impresora.png"))); // NOI18N
         btnReporte.setText("IMPRIMIR");
@@ -166,7 +149,7 @@ public class Medidas extends javax.swing.JInternalFrame {
                 btnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 120, 40));
+        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 150, 40));
 
         jPanel8.setBackground(new java.awt.Color(204, 102, 0));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,20 +167,20 @@ public class Medidas extends javax.swing.JInternalFrame {
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 90, -1));
+        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 90, -1));
 
         txtHora.setEditable(false);
         txtHora.setBackground(new java.awt.Color(204, 102, 0));
         txtHora.setForeground(new java.awt.Color(255, 255, 255));
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 90, -1));
+        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 90, -1));
 
         txtUsuario1.setBackground(new java.awt.Color(204, 102, 0));
         txtUsuario1.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 140, -1));
+        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 140, -1));
 
         jLabel24.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
         jLabel24.setText("MEDIDAS");
@@ -231,6 +214,16 @@ public class Medidas extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 0, -1, -1));
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 780, 40));
+
+        jLabel1.setText("DESCRIPCION");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
+
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 400, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -398,7 +391,6 @@ public class Medidas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;

@@ -7,7 +7,7 @@ package Vista;
 
 import Controlador.CajaControl;
 import Controlador.Validaciones;
-import Modelo.CajaDAO;
+import Modelo.MySQLDAO.CajaDAO;
 import Modelo.Caja;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,16 +22,17 @@ public class Cajas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloUsuarioCaja;
 
-    public Cajas() {
+    public Cajas(String usuario) {
         initComponents();
-        datosIniciales();
+        datosIniciales(usuario);
     }
 
-    public void datosIniciales() {
+    public void datosIniciales(String usuario) {
         try {
             String[] titulos = {"USUARIO", "CAJA"};
             modeloUsuarioCaja = new DefaultTableModel(null, titulos);
             tblPersonalAsignado.setModel(modeloUsuarioCaja);
+            txtUsuario.setText(usuario);
             new CajaControl().cargarTablaUsuarios(tblUsuarios);
             new CajaControl().cargarTablaCajas(tblCajas);
             new CajaControl().cargarComboCajas(cmbCajas);
@@ -154,6 +155,11 @@ public class Cajas extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 710, 820, 40));
 
         btnReporte.setText("CREAR REPORTE");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 150, 40));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("NUEVA CAJA"));
@@ -380,6 +386,10 @@ public class Cajas extends javax.swing.JInternalFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReporteActionPerformed
 
     /**
      * @param args the command line arguments

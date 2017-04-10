@@ -1,9 +1,9 @@
 package Controlador;
 
 import Modelo.Venta;
-import Modelo.VentaDAO;
+import Modelo.MySQLDAO.VentaDAO;
 import Modelo.VentaProducto;
-import Modelo.VentaProductoDAO;
+import Modelo.MySQLDAO.VentaProductoDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="523" leftMargin="36" rightMargin="36" topMargin="20" bottomMargin="20" uuid="122e07a2-60db-4df4-b7c2-8d1ae4b322c5">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select idProducto, nombre, precio, stock, fec_vencimiento, fec_ingreso from producto]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stock" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fec_vencimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fec_ingreso" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="188" height="52" backcolor="#006666" uuid="243d2fdf-a25f-4c41-9e25-d6cce24e7c4d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="0" width="162" height="32" forecolor="#FFFFFF" uuid="9b4186fd-ec84-473e-904d-8b16fbf2e293"/>
+				<textElement>
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="32" width="100" height="20" forecolor="#FFFFFF" uuid="603f4a13-3a67-4e94-bd80-60e0ca9c0b7b"/>
+				<text><![CDATA[DISCOTECK]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="27" width="552" height="1" uuid="42a8330b-f261-4344-a47f-39a8f5afc8c0"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="421" height="26" uuid="3f9590ee-aad3-435a-a74d-c730547468b7"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE PRODUCTOS REGISTRADOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="52" height="13" uuid="43fb1f95-ab74-4f6a-91c2-3f530c52bcd6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="0" width="132" height="13" uuid="0ba20315-4cb1-46df-9af9-8daf55869ef0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="0" width="92" height="13" uuid="4cfc99f4-e7b2-46ad-9849-719c511dca6a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="92" height="13" uuid="8ee0a3e1-2f70-4ee1-93e8-7d0a6b6f57ac"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[STOCK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="0" width="92" height="13" uuid="bc4f3ad5-a54b-4305-a3a8-c32989b29658"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENCIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="92" height="13" uuid="09427c06-63a5-4442-a94b-434cb9abbf1b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="52" height="13" uuid="ff3b2d53-966b-4e34-a0f4-efb05258b557"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="132" height="13" uuid="293b64af-3ac7-4611-ad6d-e51b8b149995"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="92" height="13" uuid="aa01cfb5-b5f9-441a-aaef-643772f22f68"/>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="92" height="13" uuid="02341fa3-5edd-4036-bf0b-854e8798f251"/>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="92" height="13" uuid="7668830a-d03c-4815-8eb6-4bb83e7fff77"/>
+				<textFieldExpression><![CDATA[$F{fec_vencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="13" uuid="81b9357d-7645-40d8-b362-ed1fe3bb8add"/>
+				<textFieldExpression><![CDATA[$F{fec_ingreso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

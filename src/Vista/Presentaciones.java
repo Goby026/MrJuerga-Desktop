@@ -11,9 +11,9 @@ import Controlador.PresentacionControl;
 import Controlador.ProveedorControl;
 import Controlador.Validaciones;
 import Modelo.Insumo;
-import Modelo.InsumoDAO;
+import Modelo.MySQLDAO.InsumoDAO;
 import Modelo.Presentacion;
-import Modelo.PresentacionDAO;
+import Modelo.MySQLDAO.PresentacionDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,9 +27,10 @@ public class Presentaciones extends javax.swing.JInternalFrame {
     String[] Titulos = {"ID", "DESCRIPCION", "CODIGO"};
     MyiReportVisor mrv;
 
-    public Presentaciones() throws Exception {
+    public Presentaciones(String usuario) throws Exception {
         initComponents();
         txtDescripcion.requestFocus();
+        txtUsuario1.setText(usuario);
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);

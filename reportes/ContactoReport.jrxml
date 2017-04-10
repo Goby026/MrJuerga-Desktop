@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4922f2c8-0ee0-498e-af6d-969a068bc64e">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="170"/>
+	<property name="ireport.y" value="200"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     contacto.`idContacto` AS contacto_idContacto,
+     contacto.`nombres` AS contacto_nombres,
+     contacto.`apellidos` AS contacto_apellidos,
+     contacto.`direccion` AS contacto_direccion,
+     contacto.`correo` AS contacto_correo,
+     contacto.`codContacto` AS contacto_codContacto,
+     contacto.`fecha` AS contacto_fecha
+FROM
+     `contacto` contacto]]>
+	</queryString>
+	<field name="contacto_idContacto" class="java.lang.Integer"/>
+	<field name="contacto_nombres" class="java.lang.String"/>
+	<field name="contacto_apellidos" class="java.lang.String"/>
+	<field name="contacto_direccion" class="java.lang.String"/>
+	<field name="contacto_correo" class="java.lang.String"/>
+	<field name="contacto_codContacto" class="java.lang.String"/>
+	<field name="contacto_fecha" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="54" width="43" height="10" forecolor="#FFFFFF" uuid="f6d2d480-8c02-487e-b0e8-5ca8f85a9a02"/>
+				<textElement textAlignment="Center">
+					<font fontName="AR CENA" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISCO CLUB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="15" width="145" height="31" forecolor="#CC0000" uuid="ac32c7c0-062e-474b-af42-a4a1068ce52e"/>
+				<textElement>
+					<font fontName="Bell MT" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="2" width="111" height="90" forecolor="#990000" backcolor="#CCCCCC" uuid="e536d47c-6117-4bfa-adfc-a003cec5d062"/>
+			</rectangle>
+			<ellipse>
+				<reportElement x="10" y="8" width="90" height="78" backcolor="#000000" uuid="ec094244-2e5f-43f1-ab32-e02c85d8ec51"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="29" y="25" width="53" height="47" forecolor="#FFFFFF" uuid="b61078a2-5a64-4e40-8ecb-1d0efd447e11"/>
+				<textElement textAlignment="Left">
+					<font fontName="AR CHRISTY" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    MR.
+ JUERGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="33" y="62" width="43" height="10" backcolor="#FF0000" uuid="8f0e4e54-59f7-43a3-b873-ecb05b9a143e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="33" y="64" width="43" height="10" forecolor="#FFFFFF" uuid="b95e293e-8336-4e97-830c-7a12629c38d8"/>
+				<textElement textAlignment="Center">
+					<font fontName="AR CENA" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISCO CLUB]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="2" width="100" height="20" uuid="b968f96c-b6e3-4192-a39a-8f32aabc3496"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="35" backcolor="#990000" uuid="40260b83-ff7f-4cfb-b8a7-da061edafa6d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="183" y="0" width="209" height="35" forecolor="#FFFFFF" uuid="d7ab0b4d-6086-47b6-9416-f842f15e9af3"/>
+				<textElement>
+					<font fontName="Serif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA - CONTACTO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="33" height="20" forecolor="#FF6600" uuid="bebac9f4-eb97-4a24-9eed-ba89a60cab91"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="0" width="99" height="20" forecolor="#FF6600" uuid="324923cf-ce0c-4b1b-8a81-6386f9631e3c"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="123" height="20" forecolor="#FF6600" uuid="7822dba8-3a7a-4ad3-ad7c-0524cde3e32b"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="0" width="137" height="20" forecolor="#FF6600" uuid="54196d7f-03c8-490e-b6f1-4f0bf92715c5"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[DIRECCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="0" width="100" height="20" forecolor="#FF6600" uuid="7e501e3e-0ed9-4575-ba91-7f649eb0d4f8"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[CORREO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="492" y="0" width="63" height="20" forecolor="#FF6600" uuid="0215d596-aa74-438c-a079-859d6243c2a2"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[CONTACTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="482a3484-8043-4880-b0b6-f8ac5f596ec3"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="33" height="20" uuid="5acb0546-89a9-4d0c-8be5-b64d9fb8e4d5"/>
+				<textFieldExpression><![CDATA[$F{contacto_idContacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="0" width="99" height="20" uuid="4744230e-8a09-4234-9bb0-86aebe376770"/>
+				<textFieldExpression><![CDATA[$F{contacto_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="123" height="20" uuid="f4bfbb9c-49fe-46e4-b5c8-e1ebc905014e"/>
+				<textFieldExpression><![CDATA[$F{contacto_apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="137" height="20" uuid="775276d5-3d1a-40c1-835e-09c3b7797deb"/>
+				<textFieldExpression><![CDATA[$F{contacto_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="100" height="20" uuid="34295440-c5f8-4f32-8697-c2eb06432cd7"/>
+				<textFieldExpression><![CDATA[$F{contacto_correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="492" y="0" width="63" height="20" uuid="45f4c340-9cf3-4da2-9784-6ec2e43170c6"/>
+				<textFieldExpression><![CDATA[$F{contacto_codContacto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="dd659865-3880-4fd1-b00d-ae0405147e85"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="32" width="80" height="20" uuid="6c962f32-68aa-4a2f-b890-1ab5ad18a8d4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="32" width="40" height="20" uuid="cb7c401d-1617-4858-97e9-e8bf77d6142f"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -3,7 +3,7 @@ package Vista;
 import Controlador.ComprobantesControl;
 import Controlador.LlenarTabla;
 import java.awt.Color;
-
+import javax.swing.JOptionPane;
 
 public class Comprobantes extends javax.swing.JInternalFrame {
 
@@ -29,7 +29,6 @@ public class Comprobantes extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -66,8 +65,10 @@ public class Comprobantes extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtComprobante = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -75,69 +76,64 @@ public class Comprobantes extends javax.swing.JInternalFrame {
 
         jLabel26.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel26.setText("HORA");
-        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 40, -1));
+        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 40, -1));
 
         jLabel27.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("GRACIAS POR SU PREFERENCIA");
-        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 310, -1));
-
-        jLabel28.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("DISCO CLUB");
-        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 310, -1));
+        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 310, -1));
 
         jLabel29.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("DISCOTECA AREA E.I.R.L");
-        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, -1));
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 310, -1));
 
         jLabel30.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("JR. AYACUCHO 773");
-        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 310, -1));
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, -1));
 
         jLabel31.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("HUANCAYO - HUANCAYO");
-        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 310, -1));
+        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 310, -1));
 
         jLabel32.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("N° TICKETERA FFCF277393");
-        jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, -1));
+        jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 310, -1));
 
         jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("N° AUTORIZACION 0133845114563");
-        jPanel2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 310, -1));
+        jPanel2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, -1));
 
         jLabel34.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("BOLETA DE VENTA");
-        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 310, -1));
-        jPanel2.add(txtNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 50, -1));
-        jPanel2.add(txtFechaBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 80, -1));
+        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 310, -1));
+        jPanel2.add(txtNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 50, -1));
+        jPanel2.add(txtFechaBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 80, -1));
 
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("-");
-        jPanel2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 20, -1));
+        jPanel2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 20, -1));
 
         jLabel36.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setText("N° BOLETA");
-        jPanel2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 80, -1));
-        jPanel2.add(txtHoraBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 50, -1));
+        jPanel2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 80, -1));
+        jPanel2.add(txtHoraBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 50, -1));
 
         jLabel37.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel37.setText("FECHA");
-        jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 50, -1));
-        jPanel2.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 50, -1));
+        jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 50, -1));
+        jPanel2.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 50, -1));
 
         jLabel38.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel38.setText("CAJERO");
-        jPanel2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 50, -1));
-        jPanel2.add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 80, -1));
+        jPanel2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 50, -1));
+        jPanel2.add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 80, -1));
 
         tblDetallePedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,26 +148,26 @@ public class Comprobantes extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tblDetallePedido);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 240, 110));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 270, 110));
 
         jLabel39.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel39.setText("TOTAL");
-        jPanel2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 40, -1));
-        jPanel2.add(txtTotalBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 50, -1));
+        jPanel2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 40, -1));
+        jPanel2.add(txtTotalBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, -1));
 
         jLabel40.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("MRJUERGA");
-        jPanel2.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 310, -1));
+        jPanel2.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 7, 310, 20));
 
         jLabel41.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("********MRJUERGA********");
-        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 310, -1));
+        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 310, -1));
 
         jButton2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jButton2.setText("IMPRIMIR");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 270, 40));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 240, 40));
 
         panelBoleta.getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -248,32 +244,45 @@ public class Comprobantes extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 700, 1150, 40));
 
-        jLabel12.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
         jLabel12.setText("N° COMPROBANTE");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 40));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, 40));
 
         jLabel14.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel14.setText("REIMPRESION DE COMPROBANTE");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
+        txtComprobante.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        getContentPane().add(txtComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 280, -1));
 
-        jButton1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 170, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 170, -1));
+
+        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        jLabel19.setText("CAJA");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, 40));
+
+        jComboBox1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 280, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        panelBoleta.setVisible(true);
-        panelBoleta.setBounds(500,500,310,590);
+        if (!txtComprobante.getText().trim().isEmpty()) {
+            panelBoleta.setVisible(true);
+            panelBoleta.setBounds(500, 500, 310, 590);
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "INGRESE NUMERO DE BOLETA");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -319,6 +328,7 @@ public class Comprobantes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -327,10 +337,10 @@ public class Comprobantes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -348,10 +358,10 @@ public class Comprobantes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JDialog panelBoleta;
     private javax.swing.JTable tblDetallePedido;
     private javax.swing.JTextField txtCajero;
+    private javax.swing.JTextField txtComprobante;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFechaBoleta;
     private javax.swing.JTextField txtHora;

@@ -35,16 +35,8 @@ public class Configuracion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Administrador = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtCoverGeneral = new javax.swing.JTextField();
-        txtCoverVip = new javax.swing.JTextField();
-        btnGuardarAdministrador = new javax.swing.JButton();
-        btnNuevoAdministrador = new javax.swing.JButton();
         Empresa = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtDireccionEmpresa = new javax.swing.JTextField();
         txtNombreEmpresa = new javax.swing.JTextField();
@@ -55,43 +47,29 @@ public class Configuracion extends javax.swing.JInternalFrame {
         txtEmailEmpresa = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         txtWebEmpresa = new javax.swing.JTextField();
-        btnNuevoEmpresa = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        btnGuardarEmpresa = new javax.swing.JButton();
-        Representante = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        btnGuardarRepresentante = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
         txtUsuario1 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtDctoPlanilla = new javax.swing.JTextField();
-        txtDctoFamilia = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        txtWebEmpresa1 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -99,180 +77,111 @@ public class Configuracion extends javax.swing.JInternalFrame {
         setTitle("CONFIGURACION");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Administrador.setBackground(new java.awt.Color(255, 255, 255));
-        Administrador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PRECIOS ENTRADA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
-        Administrador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel6.setText("COVER GENERAL");
-        Administrador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel7.setText("COVER VIP");
-        Administrador.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        txtCoverGeneral.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Administrador.add(txtCoverGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 120, -1));
-
-        txtCoverVip.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Administrador.add(txtCoverVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 120, -1));
-
-        btnGuardarAdministrador.setText("GUARDAR");
-        Administrador.add(btnGuardarAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 140, -1));
-
-        btnNuevoAdministrador.setText("NUEVO");
-        Administrador.add(btnNuevoAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 140, -1));
-
-        getContentPane().add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 890, 90));
-
         Empresa.setBackground(new java.awt.Color(255, 255, 255));
-        Empresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EMPRESA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
+        Empresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
         Empresa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("DIRECCION");
-        Empresa.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        Empresa.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 190, -1));
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel16.setText("ALMACEN PRINCIPAL");
-        Empresa.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel17.setText("RUC");
-        Empresa.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        Empresa.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 190, -1));
 
+        txtDireccionEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtDireccionEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtDireccionEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 340, -1));
+        txtDireccionEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtDireccionEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 290, -1));
 
+        txtNombreEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtNombreEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 340, -1));
+        txtNombreEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 290, -1));
 
+        txtRucEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtRucEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtRucEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 340, -1));
+        txtRucEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtRucEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 290, -1));
 
-        jLabel18.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("TELEFONO");
-        Empresa.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        Empresa.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 190, -1));
 
+        txtTelefonoEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtTelefonoEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtTelefonoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 340, -1));
+        txtTelefonoEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtTelefonoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 290, -1));
 
-        jLabel19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("E-MAIL");
-        Empresa.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        Empresa.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 190, -1));
 
+        txtEmailEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtEmailEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtEmailEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 340, -1));
+        txtEmailEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtEmailEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 290, -1));
 
-        jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText("WEB");
-        Empresa.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        Empresa.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 190, -1));
 
+        txtWebEmpresa.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtWebEmpresa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Empresa.add(txtWebEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 340, -1));
+        txtWebEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Empresa.add(txtWebEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 290, -1));
 
-        btnNuevoEmpresa.setText("NUEVO");
-        Empresa.add(btnNuevoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 230, -1));
-
-        jLabel25.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("NOMBRE DE LA EMPRESA");
-        Empresa.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        Empresa.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Empresa.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 230, -1));
-
-        jButton1.setText("CONFIGURAR USUARIOS");
-        Empresa.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 230, -1));
-
-        jButton2.setText("CONFIGURAR DOCUMENTOS");
-        Empresa.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 230, -1));
-
-        jButton3.setText("CONFIGURAR CATEGORIAS");
-        Empresa.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 230, -1));
-
-        jButton4.setText("CONFIGURAR PRESENTACIONES");
-        Empresa.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 230, -1));
-
-        btnGuardarEmpresa.setText("GUARDAR");
-        Empresa.add(btnGuardarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, 230, -1));
-
-        getContentPane().add(Empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 910, 250));
-
-        Representante.setBackground(new java.awt.Color(255, 255, 255));
-        Representante.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "REPRESENTANTES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
-        Representante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel22.setText("TITULAR");
-        Representante.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        btnGuardarRepresentante.setText("GUARDAR");
-        Representante.add(btnGuardarRepresentante, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 140, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Representante.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 220, -1));
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel9.setText("SEGURIDAD");
-        Representante.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel11.setText("ADMINISTRADOR");
-        Representante.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
-
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel14.setText("CONTABILIDAD");
-        Representante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Representante.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 220, -1));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Representante.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 220, -1));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Representante.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 220, -1));
-
-        getContentPane().add(Representante, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 890, 150));
+        getContentPane().add(Empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 600, 220));
 
         jPanel8.setBackground(new java.awt.Color(0, 102, 0));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel21.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("CONFIGURACION");
-        jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 30));
+        jLabel21.setText("empresa");
+        jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, 40));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/comprobar2.png"))); // NOI18N
-        jPanel8.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
+        jPanel8.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, -1, 70));
 
         txtFecha.setEditable(false);
         txtFecha.setBackground(new java.awt.Color(0, 102, 0));
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 90, -1));
+        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 140, -1));
 
         txtHora.setEditable(false);
         txtHora.setBackground(new java.awt.Color(0, 102, 0));
         txtHora.setForeground(new java.awt.Color(255, 255, 255));
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 90, -1));
+        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 140, -1));
 
         txtUsuario1.setEditable(false);
         txtUsuario1.setBackground(new java.awt.Color(0, 102, 0));
         txtUsuario1.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 140, -1));
+        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 140, -1));
 
-        jLabel24.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel24.setText("CONFIGURACION");
-        jPanel8.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, -1, 30));
+        jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("CONFIGURACION");
+        jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 30));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 70));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 100));
 
         jPanel6.setBackground(new java.awt.Color(0, 102, 0));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -299,78 +208,86 @@ public class Configuracion extends javax.swing.JInternalFrame {
         jLabel28.setText("MISTER JUERGA");
         jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 0, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 920, 930, 40));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 930, 930, 40));
 
-        jLabel1.setText("DESCUENTO FAMILIA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 810, -1, -1));
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 180, 170));
 
-        jLabel2.setText("DCTO PLANILLA");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, -1, -1));
-        getContentPane().add(txtDctoPlanilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 780, 90, -1));
-        getContentPane().add(txtDctoFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 810, 90, -1));
+        jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel8.setText("ROL");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
 
-        jButton5.setText("GUARDAR");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 800, -1, -1));
+        jButton1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jButton1.setText("generar reporte");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 880, -1, -1));
 
-        jLabel3.setText("S/.");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 780, -1, -1));
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel9.setText("PERSONA");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
 
-        jLabel4.setText("S/.");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 810, -1, -1));
+        jComboBox1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 190, -1));
+
+        jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jButton2.setText("AGREGAR");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 750, 410));
+
+        jButton3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jButton3.setText("buscar");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+
+        txtWebEmpresa1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        txtWebEmpresa1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtWebEmpresa1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        getContentPane().add(txtWebEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 260, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Administrador;
     private javax.swing.JPanel Empresa;
-    private javax.swing.JPanel Representante;
-    private javax.swing.JButton btnGuardarAdministrador;
-    private javax.swing.JButton btnGuardarEmpresa;
-    private javax.swing.JButton btnGuardarRepresentante;
-    private javax.swing.JButton btnNuevoAdministrador;
-    private javax.swing.JButton btnNuevoEmpresa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField txtCoverGeneral;
-    private javax.swing.JTextField txtCoverVip;
-    private javax.swing.JTextField txtDctoFamilia;
-    private javax.swing.JTextField txtDctoPlanilla;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtDireccionEmpresa;
     private javax.swing.JTextField txtEmailEmpresa;
     private javax.swing.JTextField txtFecha;
@@ -380,5 +297,6 @@ public class Configuracion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTelefonoEmpresa;
     private javax.swing.JTextField txtUsuario1;
     private javax.swing.JTextField txtWebEmpresa;
+    private javax.swing.JTextField txtWebEmpresa1;
     // End of variables declaration//GEN-END:variables
 }

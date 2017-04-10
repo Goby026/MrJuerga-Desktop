@@ -4,7 +4,7 @@ import Controlador.AlmacenControl;
 import Controlador.Cronometro;
 import Controlador.ManejadorFechas;
 import Modelo.Almacen;
-import Modelo.AlmacenDAO;
+import Modelo.MySQLDAO.AlmacenDAO;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;

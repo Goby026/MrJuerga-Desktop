@@ -7,7 +7,7 @@ package Controlador;
 
 import Modelo.Conexion;
 import Modelo.Insumo;
-import Modelo.InsumoDAO;
+import Modelo.MySQLDAO.InsumoDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Adolfo
  */
-public class InsumoControl extends Conexion {
+public class InsumoControl{
 
     DefaultTableModel model;
 
@@ -39,7 +39,6 @@ public class InsumoControl extends Conexion {
         for (int i = 0; i < numeroRegistros; i++) {
             columna[0] = idao.Listar().get(i).getIdinsumo();
             columna[1] = idao.Listar().get(i).getNombre();
-            columna[2] = idao.Listar().get(i).getExistencias();
             model.addRow(columna);
         }
     }
@@ -60,7 +59,6 @@ public class InsumoControl extends Conexion {
         InsumoDAO idao = new InsumoDAO();
         Insumo i = idao.Listar().get(cod-1);
         datos[0] = i.getNombre();
-        datos[1] = i.getExistencias();
        
         return datos;
     }

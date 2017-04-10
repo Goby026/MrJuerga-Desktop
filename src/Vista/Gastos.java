@@ -4,7 +4,7 @@ import Controlador.ContactoControl;
 import Controlador.Cronometro;
 import Modelo.Conexion;
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import Controlador.FormatoFechas;
 import Controlador.GastoControl;
 import Controlador.ManejadorFechas;

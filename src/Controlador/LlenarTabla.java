@@ -5,11 +5,11 @@
  */
 package Controlador;
 
-import Modelo.CategoriaDAO;
-import Modelo.ClienteDAO;
-import Modelo.ComprobanteDAO;
-import Modelo.PerfilDAO;
-import Modelo.TipoComprobanteDAO;
+import Modelo.MySQLDAO.CategoriaDAO;
+import Modelo.MySQLDAO.ClienteDAO;
+import Modelo.MySQLDAO.ComprobanteDAO;
+import Modelo.MySQLDAO.PerfilDAO;
+import Modelo.MySQLDAO.TipoComprobanteDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

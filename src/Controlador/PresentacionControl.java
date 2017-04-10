@@ -6,11 +6,11 @@
 package Controlador;
 
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import Modelo.Insumo;
-import Modelo.InsumoDAO;
+import Modelo.MySQLDAO.InsumoDAO;
 import Modelo.Presentacion;
-import Modelo.PresentacionDAO;
+import Modelo.MySQLDAO.PresentacionDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

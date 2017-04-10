@@ -6,7 +6,7 @@
 package Controlador;
 
 import Modelo.Producto;
-import Modelo.ProductoDAO;
+import Modelo.MySQLDAO.ProductoDAO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 

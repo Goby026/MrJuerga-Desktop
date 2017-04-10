@@ -4,9 +4,9 @@ import Controlador.UsuariosControl;
 import Controlador.Validaciones;
 import Modelo.Perfil;
 import Modelo.Usuario;
-import Modelo.UsuarioDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
 import Modelo.UsuarioPerfil;
-import Modelo.UsuarioPerfilDAO;
+import Modelo.MySQLDAO.UsuarioPerfilDAO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -94,10 +94,10 @@ public class Usuarios extends javax.swing.JInternalFrame {
         lblPath = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listaPerfiles = new javax.swing.JList<String>();
+        listaPerfiles = new javax.swing.JList<>();
         btnAddPerfil = new javax.swing.JButton();
         btnDelPerfil = new javax.swing.JButton();
-        cmbPerfiles = new javax.swing.JComboBox<String>();
+        cmbPerfiles = new javax.swing.JComboBox<>();
         cmbEmail = new javax.swing.JCheckBox();
         cmbRuc = new javax.swing.JCheckBox();
         cmbTelefono = new javax.swing.JCheckBox();
@@ -279,7 +279,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         txtRuc.setEnabled(false);
         getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 140, -1));
 
-        jLabel17.setText("PLANILLA");
+        jLabel17.setText("¿PLANILLA?");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
 
         txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);

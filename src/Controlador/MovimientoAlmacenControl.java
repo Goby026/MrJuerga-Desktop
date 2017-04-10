@@ -1,8 +1,8 @@
 package Controlador;
 
 import Modelo.Almacen;
-import Modelo.AlmacenDAO;
-import Modelo.ProductoDAO;
+import Modelo.MySQLDAO.AlmacenDAO;
+import Modelo.MySQLDAO.ProductoDAO;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

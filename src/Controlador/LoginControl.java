@@ -2,7 +2,7 @@
 package Controlador;
 
 import Modelo.Usuario;
-import Modelo.UsuarioDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 

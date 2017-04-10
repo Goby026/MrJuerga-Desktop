@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  * @author Marce
  */
 public class CustomPanel extends JPanel {
-    private URL url = getClass().getResource("/img/fondo.png");
+    private URL url = getClass().getResource("/img/club9.png");
     Image imagen = new ImageIcon(url).getImage();
     
     @Override

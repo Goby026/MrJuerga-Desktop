@@ -1,9 +1,9 @@
 package Controlador;
 
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import Modelo.Usuario;
-import Modelo.UsuarioDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;

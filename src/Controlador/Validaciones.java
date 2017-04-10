@@ -56,4 +56,8 @@ public class Validaciones {
     public void desbloquear(JButton jb) {
         jb.setEnabled(false);
     }
+    
+    public double Redondear(double numero) {
+        return Math.rint(numero * 100) / 100;
+    }
 }

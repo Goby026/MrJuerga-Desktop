@@ -5,24 +5,24 @@ package Modelo;
  */
 public class Insumo {
 
-    private Integer Idinsumo;
+    private int Idinsumo;
     private String nombre;
-    private double existencias;
+    private double stock;
 
     public Insumo() {
     }
 
-    public Insumo(Integer Idinsumo, String nombre, double existencias) {
+    public Insumo(int Idinsumo, String nombre, double stock) {
         this.Idinsumo = Idinsumo;
         this.nombre = nombre;
-        this.existencias = existencias;
+        this.stock = stock;
     }
 
-    public Integer getIdinsumo() {
+    public int getIdinsumo() {
         return Idinsumo;
     }
 
-    public void setIdinsumo(Integer Idinsumo) {
+    public void setIdinsumo(int Idinsumo) {
         this.Idinsumo = Idinsumo;
     }
 
@@ -34,12 +34,17 @@ public class Insumo {
         this.nombre = nombre;
     }
 
-    public double getExistencias() {
-        return existencias;
+    public double getStock() {
+        return stock;
     }
 
-    public void setExistencias(double existencias) {
-        this.existencias = existencias;
+    public void setStock(double stock) {
+        this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "Insumo{" + "Idinsumo=" + Idinsumo + ", nombre=" + nombre + ", stock=" + stock + '}';
     }
 
 }

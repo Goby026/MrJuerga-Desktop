@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0ce39d4f-9e7b-4f3e-b312-8b45c408b81f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="31"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     gastos.`idgastos` AS gastos_idgastos,
+     gastos.`fecha` AS gastos_fecha,
+     gastos.`concepto` AS gastos_concepto,
+     gastos.`monto` AS gastos_monto
+FROM
+     `gastos` gastos]]>
+	</queryString>
+	<field name="gastos_idgastos" class="java.lang.Integer"/>
+	<field name="gastos_fecha" class="java.lang.String"/>
+	<field name="gastos_concepto" class="java.lang.String"/>
+	<field name="gastos_monto" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="234" y="16" width="145" height="31" forecolor="#CC0000" uuid="89e43ffb-e2b7-4f38-b612-449d768932d9"/>
+				<textElement>
+					<font fontName="Bell MT" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="3" width="111" height="90" forecolor="#990000" backcolor="#CCCCCC" uuid="bda48a4a-d28e-4533-9fd2-4dad23cef05f"/>
+			</rectangle>
+			<ellipse>
+				<reportElement x="10" y="9" width="90" height="78" backcolor="#000000" uuid="e49ffcde-58ae-4f76-8e75-4849975b42b4"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="29" y="26" width="53" height="47" forecolor="#FFFFFF" uuid="8d315b4b-176a-49b2-b540-c1853675ee42"/>
+				<textElement textAlignment="Left">
+					<font fontName="AR CHRISTY" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    MR.
+ JUERGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="33" y="63" width="43" height="10" backcolor="#FF0000" uuid="1f23c3da-a36b-4fd1-8261-206635374c8b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="33" y="65" width="43" height="10" forecolor="#FFFFFF" uuid="ae4523b3-a236-4d67-90b3-9da6bf2bea12"/>
+				<textElement textAlignment="Center">
+					<font fontName="AR CENA" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISCO CLUB]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="3" width="100" height="20" uuid="c0516a9b-0b68-4e44-9178-207a6eb9de23"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="35" backcolor="#CC0000" uuid="91533289-785c-4a55-a6bb-3ec6e38bc2a7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="160" y="0" width="189" height="35" forecolor="#FFFFFF" uuid="34f9fa8d-cf6c-4579-ba8c-f0082a19e44e"/>
+				<textElement>
+					<font fontName="Serif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA - GASTOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#FF6600" uuid="e3073af4-c143-4e8e-800e-42d11dff8085"/>
+				<textElement textAlignment="Center">
+					<font fontName="Eras Bold ITC" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="147" height="20" forecolor="#FF6600" uuid="6a168547-74a0-4f4e-acd8-be208dc009f7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Eras Bold ITC" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="247" y="0" width="167" height="20" forecolor="#FF6600" uuid="db11fe30-be96-4430-b74c-b5b75f86a99b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Eras Bold ITC" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="138" height="20" forecolor="#FF6600" uuid="b8b39277-c5c0-4f3b-ba1c-8718bdfd6672"/>
+				<textElement textAlignment="Center">
+					<font fontName="Eras Bold ITC" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="8a0680c2-5f35-4cf4-a4d4-8394c066f873"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{gastos_idgastos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="147" height="20" uuid="db744a7e-e3fe-4ea0-aa9a-8a13389d5cb1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{gastos_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="247" y="0" width="167" height="20" uuid="9f9afddf-5be4-4b77-9010-5445174cb119"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{gastos_concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="138" height="20" uuid="4bbf5497-d246-4e53-ae40-1079e8055602"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{gastos_monto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="a7519d93-8cd0-4198-8781-cdb00a9090c6"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="432" y="34" width="80" height="20" uuid="819ebd64-05a7-453a-8da8-f08001834803"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="34" width="43" height="20" uuid="989fe0e8-3cd5-4505-9df2-400810e7676d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

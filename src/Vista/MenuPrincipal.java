@@ -6,11 +6,11 @@
 package Vista;
 
 import Controlador.ImagenFondo;
-import Modelo.CategoriaDAO;
-import Modelo.ComprobanteDAO;
-import Modelo.PerfilDAO;
-import Modelo.ProductoDAO;
-import Modelo.TipoComprobanteDAO;
+import Modelo.MySQLDAO.CategoriaDAO;
+import Modelo.MySQLDAO.ComprobanteDAO;
+import Modelo.MySQLDAO.PerfilDAO;
+import Modelo.MySQLDAO.ProductoDAO;
+import Modelo.MySQLDAO.TipoComprobanteDAO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -71,7 +71,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnClientes = new javax.swing.JButton();
-        btnPuntoVenta = new javax.swing.JButton();
         btnMantenimientoVentas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -107,6 +106,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MR. JUERGA SYSTEM");
@@ -299,27 +299,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 340, 220, -1));
-
-        btnPuntoVenta.setBackground(new java.awt.Color(255, 255, 255));
-        btnPuntoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto-de-venta.png"))); // NOI18N
-        btnPuntoVenta.setText("      PUNTO DE VENTA");
-        btnPuntoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPuntoVenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnPuntoVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPuntoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPuntoVentaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPuntoVentaMouseExited(evt);
-            }
-        });
-        btnPuntoVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPuntoVentaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPuntoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 375, 220, -1));
 
         btnMantenimientoVentas.setBackground(new java.awt.Color(255, 255, 255));
         btnMantenimientoVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/llave.png"))); // NOI18N
@@ -831,6 +810,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, -1, -1));
 
+        jButton4.setText("reportes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -863,42 +850,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenCompraActionPerformed
         try {
             String usuario = lblUsuario.getText();
-            OrdenDeCompra oc = new OrdenDeCompra(usuario);
+            RegistroCompras oc = new RegistroCompras(usuario);
             escritorio.add(oc);
             oc.setVisible(true);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnOrdenCompraActionPerformed
-
-    private void btnPuntoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntoVentaActionPerformed
-        try {
-            //VALIDAR QUE EXISTAN CATEGORIAS REGISTRADAS
-            CategoriaDAO cdao = new CategoriaDAO();
-            if (cdao.Listar().size() > 0) {
-                //VALIDAR QUE EXISTAN TIPOS DE COMPROBANTES REGISTRADOS
-                TipoComprobanteDAO cedao = new TipoComprobanteDAO();
-                if (cedao.Listar().size() > 0) {
-                    //VALIDAR QUE EXISTAN PRODUCTOS REGISTRADOS
-                    ProductoDAO pdao = new ProductoDAO();
-                    if (pdao.listar().size() > 0) {
-                        String usuario = lblUsuario.getText();
-                        Ventas v = new Ventas(usuario);
-                        escritorio.add(v);
-                        v.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "DEBE REGISTRAR PRODUCTOS PARA PODER REALIZAR VENTAS");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "DEBE REGISTRAR LOS TIPOS DE COMPROBANTE QUE UTILIZARÁ EN LAS VENTAS");
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "DEBE REGISTRAR CATEGORIAS PARA PODER REALIZAR VENTAS");
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_btnPuntoVentaActionPerformed
 
     private void btnComprobantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprobantesActionPerformed
         try {
@@ -972,7 +930,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         try {
-            Categorias c = new Categorias();
+            Categorias c = new Categorias(lblUsuario.getText());
             escritorio.add(c);
             c.setVisible(true);
         } catch (Exception ex) {
@@ -982,7 +940,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         try {
-            Proveedores p = new Proveedores();
+            Proveedores p = new Proveedores(lblUsuario.getText());
             escritorio.add(p);
             p.setVisible(true);
         } catch (Exception ex) {
@@ -1095,18 +1053,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Animacion.Animacion.mover_izquierda(0, -50, 1, 2, btnClientes);
         }
     }//GEN-LAST:event_btnClientesMouseExited
-
-    private void btnPuntoVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPuntoVentaMouseEntered
-        if (!puntoVenta) {
-            Animacion.Animacion.mover_derecha(-50, 0, 1, 2, btnPuntoVenta);
-        }
-    }//GEN-LAST:event_btnPuntoVentaMouseEntered
-
-    private void btnPuntoVentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPuntoVentaMouseExited
-        if (!puntoVenta) {
-            Animacion.Animacion.mover_izquierda(0, -50, 1, 2, btnPuntoVenta);
-        }
-    }//GEN-LAST:event_btnPuntoVentaMouseExited
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
         if (!reportes) {
@@ -1332,7 +1278,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnPresentacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPresentacionesActionPerformed
         try {
-            Presentaciones p = new Presentaciones();
+            Presentaciones p = new Presentaciones(lblUsuario.getText());
             escritorio.add(p);
             p.setVisible(true);
         } catch (Exception ex) {
@@ -1342,7 +1288,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         try {
-            Productos p = new Productos();
+            Productos p = new Productos(lblUsuario.getText());
             escritorio.add(p);
             p.setVisible(true);
         } catch (Exception e) {
@@ -1375,9 +1321,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCierreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Cajas c = new Cajas();
-        escritorio.add(c);
-        c.setVisible(true);
+//        Cajas c = new Cajas();
+//        escritorio.add(c);
+//        c.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1395,6 +1341,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(pp);
         pp.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ReporteContadora r = new ReporteContadora();
+        escritorio.add(r);                
+        r.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1454,7 +1406,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPresentaciones;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
-    private javax.swing.JButton btnPuntoVenta;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnTipoComprobantes;
     private javax.swing.JButton btnUsuarios;
@@ -1462,6 +1413,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

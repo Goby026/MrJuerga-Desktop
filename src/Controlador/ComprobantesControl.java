@@ -1,9 +1,9 @@
 package Controlador;
 
 import Modelo.Comprobante;
-import Modelo.ComprobanteDAO;
+import Modelo.MySQLDAO.ComprobanteDAO;
 import Modelo.TipoComprobante;
-import Modelo.TipoComprobanteDAO;
+import Modelo.MySQLDAO.TipoComprobanteDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;

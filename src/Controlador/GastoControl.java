@@ -6,7 +6,7 @@
 package Controlador;
 
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

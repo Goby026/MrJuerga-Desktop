@@ -1,7 +1,7 @@
 package Controlador;
 
 import Modelo.Categoria;
-import Modelo.CategoriaDAO;
+import Modelo.MySQLDAO.CategoriaDAO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTable;

@@ -11,9 +11,9 @@ import Controlador.MyiReportVisor;
 import Controlador.ProveedorControl;
 import Controlador.Validaciones;
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import Modelo.Proveedor;
-import Modelo.ProveedorDAO;
+import Modelo.MySQLDAO.ProveedorDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -28,11 +28,14 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
     String[] Titulos = {"ID", "RAZON", "RUC", "DIRECCION", "CIUDAD", "TELF", "EMAIL", "COD.PROV."};
     MyiReportVisor mrv;
-    public Proveedores() throws Exception {
+    
+    
+    public Proveedores(String usuario) throws Exception {
         initComponents();
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
+        txtUsuario1.setText(usuario);
         new ProveedorControl().LlenarTablaProveedor(tblProveedores, Titulos);
 
     }

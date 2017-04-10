@@ -6,9 +6,9 @@
 package Controlador;
 
 import Modelo.Gasto;
-import Modelo.GastoDAO;
+import Modelo.MySQLDAO.GastoDAO;
 import Modelo.Proveedor;
-import Modelo.ProveedorDAO;
+import Modelo.MySQLDAO.ProveedorDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

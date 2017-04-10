@@ -11,7 +11,7 @@ import Controlador.ManejadorFechas;
 import Controlador.MyiReportVisor;
 import Controlador.Validaciones;
 import Modelo.Cliente;
-import Modelo.ClienteDAO;
+import Modelo.MySQLDAO.ClienteDAO;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.logging.Level;

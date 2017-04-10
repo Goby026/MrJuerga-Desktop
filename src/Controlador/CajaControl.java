@@ -1,11 +1,11 @@
 package Controlador;
 
 import Modelo.Caja;
-import Modelo.CajaDAO;
+import Modelo.MySQLDAO.CajaDAO;
 import Modelo.Usuario;
 import Modelo.UsuarioCaja;
-import Modelo.UsuarioCajaDAO;
-import Modelo.UsuarioDAO;
+import Modelo.MySQLDAO.UsuarioCajaDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;

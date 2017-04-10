@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Modelo.TipoComprobanteDAO;
+import Modelo.MySQLDAO.TipoComprobanteDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

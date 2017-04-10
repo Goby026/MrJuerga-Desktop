@@ -1,11 +1,11 @@
 package Controlador;
 
 import Modelo.Perfil;
-import Modelo.PerfilDAO;
+import Modelo.MySQLDAO.PerfilDAO;
 import Modelo.Usuario;
-import Modelo.UsuarioDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
 import Modelo.UsuarioPerfil;
-import Modelo.UsuarioPerfilDAO;
+import Modelo.MySQLDAO.UsuarioPerfilDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

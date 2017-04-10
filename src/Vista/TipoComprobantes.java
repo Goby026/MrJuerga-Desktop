@@ -11,7 +11,7 @@ import Controlador.MyiReportVisor;
 import Controlador.TipoComprobanteControl;
 import Controlador.Validaciones;
 import Modelo.TipoComprobante;
-import Modelo.TipoComprobanteDAO;
+import Modelo.MySQLDAO.TipoComprobanteDAO;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.logging.Level;

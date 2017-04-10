@@ -3,7 +3,7 @@ package Vista;
 import Controlador.MyiReportVisor;
 import Controlador.ProductosControl;
 import Modelo.Producto;
-import Modelo.ProductoDAO;
+import Modelo.MySQLDAO.ProductoDAO;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -21,10 +21,11 @@ public class Productos extends javax.swing.JInternalFrame {
     HashMap parametros = new HashMap();
     DefaultListModel presentacionModel = new DefaultListModel();
 
-    public Productos() throws Exception {
+    public Productos(String usuario) throws Exception {
         //setUndecorated(true);
         initComponents();
         //setLocationRelativeTo(null);
+        txtUsuario.setText(usuario);
         this.getContentPane().setBackground(Color.WHITE);
         new ProductosControl().LlenarTablaProductos(tblProductos, 40, 100, 200);
         //new ProductosControl().cargarComboCategoria(cmbCategoria);

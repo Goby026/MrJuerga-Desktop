@@ -6,9 +6,9 @@
 package Controlador;
 
 import Modelo.Contacto;
-import Modelo.ContactoDAO;
+import Modelo.MySQLDAO.ContactoDAO;
 import Modelo.Medida;
-import Modelo.MedidaDAO;
+import Modelo.MySQLDAO.MedidaDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

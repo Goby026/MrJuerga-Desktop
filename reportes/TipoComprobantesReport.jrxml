@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c1d82ec3-9492-46e1-9524-8879e6d94c9e">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tipocomprobante.`idtipocomprobante` AS tipocomprobante_idtipocomprobante,
+     tipocomprobante.`descripcion` AS tipocomprobante_descripcion
+FROM
+     `tipocomprobante` tipocomprobante]]>
+	</queryString>
+	<field name="tipocomprobante_idtipocomprobante" class="java.lang.Integer"/>
+	<field name="tipocomprobante_descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="159" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-1" y="114" width="555" height="45" backcolor="#990000" uuid="a3b0ff8d-462b-4603-a34f-405c37171726"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="99" y="119" width="382" height="34" forecolor="#FFFFFF" uuid="2ebd5398-5daf-4301-8125-b5fd6f130e1b"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR JUERGA - TIPO COMPROBANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="38" width="211" height="45" forecolor="#990000" uuid="4e2f78c5-160c-40db-91eb-f530ff5f7932"/>
+				<textElement textAlignment="Center">
+					<font size="28" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[REPORTES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="17" width="114" height="86" forecolor="#990000" backcolor="#CCCCCC" uuid="aec1011c-9bd7-49b8-b05b-5044ece19af5"/>
+			</rectangle>
+			<ellipse>
+				<reportElement x="32" y="24" width="98" height="74" forecolor="#999999" backcolor="#000000" uuid="be26b9c8-e61b-47cf-b775-7cfde017b1ae"/>
+			</ellipse>
+			<staticText>
+				<reportElement mode="Transparent" x="50" y="27" width="66" height="57" forecolor="#FFFFFF" backcolor="#000000" uuid="126a1021-1d2e-45d8-a0bb-98e638023a24"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="52" y="64" width="62" height="17" backcolor="#990000" uuid="f3db0b04-6f67-4db1-84c1-e66db9263950"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="53" y="65" width="62" height="17" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="61f43558-a5c5-4c2e-a4bd-1b930aad14aa"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DISKO-CLUB]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="454" y="0" width="100" height="20" uuid="c3864016-5afa-482e-a79f-e01e581e0192"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="277" height="20" uuid="2e16c3cf-6794-4fb6-9a2b-19317ea80119"/>
+				<text><![CDATA[ID TIPO COMPROBANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="0" width="277" height="20" uuid="9b732f8e-e5ca-482f-9518-fb22ab0b6d28"/>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="277" height="20" uuid="867da162-ce6e-43e9-b4ea-27f5ac854cc1"/>
+				<textFieldExpression><![CDATA[$F{tipocomprobante_idtipocomprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="277" height="20" uuid="15b8748e-48ef-42bc-b5c4-d75c50efeda5"/>
+				<textFieldExpression><![CDATA[$F{tipocomprobante_descripcion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="18" width="554" height="1" uuid="f1eaa843-1296-4b3f-bcb1-9b16910f7398"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="433" y="0" width="80" height="20" uuid="6bd786c5-1d6f-44ea-ae99-514f85d94bb2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="0" width="40" height="20" uuid="e4f90984-d989-4136-8fc9-d8f8f8572bf7"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

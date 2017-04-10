@@ -8,7 +8,7 @@ package Vista;
 import Controlador.PagonPersonalControl;
 import Controlador.Validaciones;
 import Modelo.UsuarioGastos;
-import Modelo.UsuarioGastosDAO;
+import Modelo.MySQLDAO.UsuarioGastosDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

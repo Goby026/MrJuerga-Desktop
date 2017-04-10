@@ -21,6 +21,15 @@ public class ImagenFondo implements Border{
             throw ex;
         }
     }
+    
+    public ImagenFondo(String file) throws Exception{
+        try {
+            URL imagePath = new URL(getClass().getResource("../img/"+file+"").toString());
+            back = ImageIO.read(imagePath);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
 
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {

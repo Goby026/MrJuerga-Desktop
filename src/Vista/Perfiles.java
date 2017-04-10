@@ -11,7 +11,7 @@ import Controlador.MyiReportVisor;
 import Controlador.PerfilControl;
 import Controlador.Validaciones;
 import Modelo.Perfil;
-import Modelo.PerfilDAO;
+import Modelo.MySQLDAO.PerfilDAO;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.logging.Level;

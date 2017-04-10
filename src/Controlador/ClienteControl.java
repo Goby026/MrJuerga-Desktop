@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Modelo.ClienteDAO;
+import Modelo.MySQLDAO.ClienteDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

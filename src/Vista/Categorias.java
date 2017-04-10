@@ -11,7 +11,7 @@ import Controlador.ManejadorFechas;
 import Controlador.MyiReportVisor;
 import Controlador.Validaciones;
 import Modelo.Categoria;
-import Modelo.CategoriaDAO;
+import Modelo.MySQLDAO.CategoriaDAO;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -27,13 +27,14 @@ public class Categorias extends javax.swing.JInternalFrame {
     MyiReportVisor mrv;
     HashMap parametros;
 
-    public Categorias() throws Exception {
+    public Categorias(String usuario) throws Exception {
         initComponents();
         getContentPane().setBackground(Color.white);
         CategoriaControl cc = new CategoriaControl();
         cc.LlenarTablaCategoria(tblCategorias);
         new Cronometro().iniciarCronometro(txtHora);
         txtFecha.setText(new ManejadorFechas().getFechaActual());
+        txtUsuario.setText(usuario);
     }
 
     /**

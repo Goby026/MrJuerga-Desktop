@@ -6,10 +6,10 @@
 package Controlador;
 
 import Modelo.Conexion;
-import Modelo.ContactoDAO;
+import Modelo.MySQLDAO.ContactoDAO;
 import Modelo.Contacto;
 import Modelo.Telefono_Contacto;
-import Modelo.Telefono_ContactoDAO;
+import Modelo.MySQLDAO.Telefono_ContactoDAO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Adolfo
  */
-public class ContactoControl extends Conexion {
+public class ContactoControl{
 
     DefaultTableModel model;
 

@@ -12,7 +12,7 @@ import Controlador.MyiReportVisor;
 import Controlador.Validaciones;
 import Modelo.Conexion;
 import Modelo.Contacto;
-import Modelo.ContactoDAO;
+import Modelo.MySQLDAO.ContactoDAO;
 import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,13 +1,13 @@
 package Controlador;
 
 import Modelo.Almacen;
-import Modelo.AlmacenDAO;
+import Modelo.MySQLDAO.AlmacenDAO;
 import Modelo.Categoria;
-import Modelo.CategoriaDAO;
+import Modelo.MySQLDAO.CategoriaDAO;
 import Modelo.Presentacion;
-import Modelo.PresentacionDAO;
+import Modelo.MySQLDAO.PresentacionDAO;
 import Modelo.Producto;
-import Modelo.ProductoDAO;
+import Modelo.MySQLDAO.ProductoDAO;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
