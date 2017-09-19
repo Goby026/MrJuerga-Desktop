@@ -4,19 +4,14 @@ import Modelo.Perfil;
 import Modelo.MySQLDAO.PerfilDAO;
 import Modelo.Usuario;
 import Modelo.MySQLDAO.UsuarioDAO;
-import Modelo.UsuarioPerfil;
-import Modelo.MySQLDAO.UsuarioPerfilDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class UsuariosControl {
+public class UsuariosControl{
 
     DefaultTableModel modelo= new DefaultTableModel();;
     FileInputStream entrada;
@@ -59,16 +54,16 @@ public class UsuariosControl {
     }
 
 
-    public void llenarComboPerfil(JComboBox cmb) throws Exception {
-        try {
-            PerfilDAO pdao = new PerfilDAO();
-            for (Perfil p : pdao.Listar()) {
-                cmb.addItem(p.getDescripcion());
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    public void llenarComboPerfil(JComboBox cmb) throws Exception {
+//        try {
+//            PerfilDAO pdao = new PerfilDAO();
+//            for (Perfil p : pdao.Listar()) {
+//                cmb.addItem(p.getDescripcion());
+//            }
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     public Object[] capturarDatosDeTabla(JTable tabla, int id) throws Exception {
         Object datos[] = new Object[9];
@@ -93,10 +88,16 @@ public class UsuariosControl {
         return null;
     }
     
-    public void llenarListaPerfiles(JList lista){
-        UsuarioPerfil up = new UsuarioPerfil();
-        UsuarioPerfilDAO updao = new UsuarioPerfilDAO();
-        
+    public void cargarComboPerfiles(JComboBox perfiles){
+        try {
+            PerfilDAO pdao = new PerfilDAO();
+                    
+            for (Perfil p : pdao.Listar()) {
+                perfiles.addItem(p);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
 
@@ -166,12 +167,12 @@ public class UsuariosControl {
         LlenarTablaUsuarios(tabla,50, 100, 150);
     }
     
-    //METODO PARA VERIFICAR SI YA EXISTE UN USUARIO REGISTRADO CON EL MISMO NOMBRE
+    //METODO PARA VERIFICAR SI YA EXISTE UN USUARIO REGISTRADO CON EL MISMO NOMBRE O DNI
     public boolean verificarUsuario(Usuario user) throws Exception{
         try {
             UsuarioDAO udao = new UsuarioDAO();
             for (Usuario u : udao.listar()) {
-                if (u.getUsuario().equals(user.getUsuario())) {
+                if (u.getUsuario().equals(user.getUsuario()) || u.getDni().equals(user.getDni())) {
                     return true;
                 }
             }

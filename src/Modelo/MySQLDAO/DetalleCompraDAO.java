@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DetalleCompraDAO extends Conexion implements DetalleCompraCRUD {
 
-    String REGISTRAR_DETALLE = "INSERT INTO `detallecompra`(`idProducto`, `idinsumo`, `idmedida`, `idcompra`, `cantidad`, `precio`, `dcto`, `subtotal`) VALUES (?,?,?,?,?,?,?,?)";
+    String REGISTRAR_DETALLE = "INSERT INTO `detallecompra`(`idProductoPresentacion`, `idmedida`, `idcompra`, `cantidad`, `precio`, `dcto`, `subtotal`) VALUES (?,?,?,?,?,?,?)";        
 
     @Override
     public boolean registrar(DetalleCompra dc) throws Exception {
@@ -16,14 +16,13 @@ public class DetalleCompraDAO extends Conexion implements DetalleCompraCRUD {
             this.conectar();
 //            this.getConexion().setAutoCommit(false);
             PreparedStatement pst = this.conexion.prepareStatement(REGISTRAR_DETALLE);
-            pst.setInt(1, dc.getIdProducto());
-            pst.setInt(2, dc.getIdInsumo());
-            pst.setInt(3, dc.getIdMedida());
-            pst.setInt(4, dc.getIdCompra());
-            pst.setInt(5, dc.getCantidad());
-            pst.setDouble(6, dc.getPrecio());
-            pst.setDouble(7, dc.getDcto());
-            pst.setDouble(8, dc.getSubtotal());
+            pst.setInt(1, dc.getIdProductoPresentacion());
+            pst.setInt(2, dc.getIdMedida());
+            pst.setInt(3, dc.getIdCompra());
+            pst.setDouble(4, dc.getCantidad());
+            pst.setDouble(5, dc.getPrecio());
+            pst.setDouble(6, dc.getDcto());
+            pst.setDouble(7, dc.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -41,7 +40,30 @@ public class DetalleCompraDAO extends Conexion implements DetalleCompraCRUD {
 
     @Override
     public boolean modificar(DetalleCompra dc) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            this.conectar();
+//            this.getConexion().setAutoCommit(false);
+            PreparedStatement pst = this.conexion.prepareStatement("UPDATE detallecompra SET idProductoPresentacion = ?, idmedida = ?, cantidad = ?, precio = ?, dcto = ?, subtotal = ? WHERE idcompra = ?");
+            pst.setInt(1, dc.getIdProductoPresentacion());
+            pst.setInt(2, dc.getIdMedida());
+            pst.setDouble(3, dc.getCantidad());
+            pst.setDouble(4, dc.getPrecio());
+            pst.setDouble(5, dc.getDcto());
+            pst.setDouble(6, dc.getSubtotal());
+            pst.setInt(7, dc.getIdCompra());
+            int res = pst.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+            pst.close();
+//            this.getConexion().commit();
+        } catch (Exception e) {
+//            this.getConexion().rollback();
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return false;
     }
 
     @Override
@@ -52,6 +74,15 @@ public class DetalleCompraDAO extends Conexion implements DetalleCompraCRUD {
     @Override
     public List<DetalleCompra> listar() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean updateStock(int idProductoPresentacion, int stock){
+        try {
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
     }
 
 }

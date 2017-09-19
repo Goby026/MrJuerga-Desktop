@@ -6,20 +6,33 @@ package Modelo;
  */
 public class ProductoPresentacion {
 
-    int idProductoPresentacion, idProducto, idPresentacion, idalmacen, idcategoria;
-    double precio,stock;
+    int idProductoPresentacion;
+    private int idProducto;
+    private int idPresentacion;
+    private int idalmacen;
+    private double stock;
+    private double stock2;
+    private double stock3;
+    private double precio;
+    private double precio2;
+    private int idcategoria;
+    
+    
 
     public ProductoPresentacion() {
     }
 
-    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, int idcategoria, double precio) {
+    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, int idcategoria) {
         this.idProductoPresentacion = idProductoPresentacion;
         this.idProducto = idProducto;
         this.idPresentacion = idPresentacion;
         this.idalmacen = idalmacen;
         this.stock = stock;
-        this.idcategoria = idcategoria;
+        this.stock2 = stock2;
+        this.stock3 = stock3;
         this.precio = precio;
+        this.precio2 = precio2;
+        this.idcategoria = idcategoria;
     }
 
     public int getIdProductoPresentacion() {
@@ -46,14 +59,6 @@ public class ProductoPresentacion {
         this.idPresentacion = idPresentacion;
     }
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
     public int getIdalmacen() {
         return idalmacen;
     }
@@ -70,11 +75,45 @@ public class ProductoPresentacion {
         this.stock = stock;
     }
 
+    public double getStock2() {
+        return stock2;
+    }
+
+    public void setStock2(double stock2) {
+        this.stock2 = stock2;
+    }
+
+    public double getStock3() {
+        return stock3;
+    }
+
+    public void setStock3(double stock3) {
+        this.stock3 = stock3;
+    }
+    
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getPrecio2() {
+        return precio2;
+    }
+
+    public void setPrecio2(double precio2) {
+        this.precio2 = precio2;
+    }
+
     public int getIdcategoria() {
         return idcategoria;
     }
 
     public void setIdcategoria(int idcategoria) {
         this.idcategoria = idcategoria;
-    }    
+    }
+    
+
 }

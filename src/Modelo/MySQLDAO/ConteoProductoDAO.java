@@ -3,6 +3,7 @@ package Modelo.MySQLDAO;
 import Interfaces.ConteoProductoCRUD;
 import Modelo.Conexion;
 import Modelo.ConteoProducto;
+import Modelo.Presentacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,21 +11,22 @@ import java.util.List;
 
 public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
 
-    String REGISTRAR = "INSERT INTO `conteoproducto`(`idusuario`, `idproducto`, `idpresentacion`, `stock`) VALUES (?,?,?,?)";
-    String MODIFICAR = "UPDATE `conteoproducto` SET `idusuario`=?,`idproducto`=?,`idpresentacion`=?,`stock`=?,`fecha`=? WHERE `idconteoproducto`=?";
+    String REGISTRAR = "INSERT INTO `conteoproducto`(idconteo, idproducto, idpresentacion, idmedida, stock) VALUES (?,?,?,?,?)";
+    String MODIFICAR = "UPDATE `conteoproducto` SET idconteo = ? ,`idproducto`=?,`idpresentacion`=?, idmedida=?,`stock`=? WHERE `idconteoproducto`=?";
     String ELIMINAR = "DELETE FROM `conteoproducto` WHERE `idconteoproducto` = ?";
-    String LISTAR_TODOS = "SELECT `idconteoproducto`, `idusuario`, `idproducto`, `idpresentacion`, `stock`, `fecha` FROM `conteoproducto`";
-    String LISTAR_POR_FECHA = "SELECT `idconteoproducto`, `idusuario`, `idproducto`, `idpresentacion`, `stock`, `fecha` FROM `conteoproducto` WHERE `fecha` = ?";
+    String LISTAR_TODOS = "SELECT idconteoproducto, idconteo, idproducto, idpresentacion, idmedida, stock FROM `conteoproducto`";
+    String OBTENER = "SELECT idconteoproducto, idconteo, idproducto, idpresentacion, idmedida, stock FROM `conteoproducto` WHERE `idconteoproducto` = ?";
 
     @Override
     public boolean Registrar(ConteoProducto cp) throws Exception {
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(REGISTRAR);
-            pst.setInt(1, cp.getIdUsuario());
+            pst.setInt(1, cp.getIdconteo());
             pst.setInt(2, cp.getIdProducto());
             pst.setInt(3, cp.getIdPresentacion());
-            pst.setInt(4, cp.getStock());
+            pst.setInt(4, cp.getMedida().getIdmedida());
+            pst.setInt(5, cp.getStock());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -43,11 +45,12 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(MODIFICAR);
-            pst.setInt(1, cp.getIdUsuario());
+            pst.setInt(1, cp.getIdconteo());
             pst.setInt(2, cp.getIdProducto());
             pst.setInt(3, cp.getIdPresentacion());
-            pst.setInt(4, cp.getStock());
-            pst.setInt(5, cp.getIdConteoProducto());
+            pst.setInt(4, cp.getMedida().getIdmedida());
+            pst.setInt(5, cp.getStock());
+            pst.setInt(6, cp.getIdConteoProducto());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -89,12 +92,12 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 ConteoProducto cp = new ConteoProducto();
-                cp.setIdConteoProducto(res.getInt("idconteoproducto"));
-                cp.setIdUsuario(res.getInt("idusuario"));
-                cp.setIdProducto(res.getInt("idproducto"));
-                cp.setIdPresentacion(res.getInt("idpresentacion"));
-                cp.setStock(res.getInt("stock"));
-                cp.setFecha(res.getDate("fecha"));
+                cp.setIdConteoProducto(res.getInt(1));
+                cp.setIdconteo(res.getInt(2));
+                cp.setIdProducto(res.getInt(3));
+                cp.setIdPresentacion(res.getInt(4));
+                cp.setMedida(new MedidaDAO().Obtener(res.getInt(5)));
+                cp.setStock(res.getInt(6));
                 lista.add(cp);
             }
             pst.close();
@@ -108,21 +111,21 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
     }
 
     @Override
-    public ConteoProducto obtener(String fecha) throws Exception {
+    public ConteoProducto obtener(int ID) throws Exception {
         ConteoProducto cp = null;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement(LISTAR_POR_FECHA);
-            pst.setString(1, ELIMINAR);
+            PreparedStatement pst = this.conexion.prepareStatement(OBTENER);
+            pst.setInt(1, ID);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 cp = new ConteoProducto();
-                cp.setIdConteoProducto(res.getInt("idconteoproducto"));
-                cp.setIdUsuario(res.getInt("idusuario"));
-                cp.setIdProducto(res.getInt("idproducto"));
-                cp.setIdPresentacion(res.getInt("idpresentacion"));
-                cp.setStock(res.getInt("stock"));
-                cp.setFecha(res.getDate("fecha"));
+                cp.setIdConteoProducto(res.getInt(1));
+                cp.setIdconteo(res.getInt(2));
+                cp.setIdProducto(res.getInt(3));
+                cp.setIdPresentacion(res.getInt(4));
+                cp.setMedida(new MedidaDAO().Obtener(res.getInt(5)));
+                cp.setStock(res.getInt(6));
             }
             pst.close();
             res.close();

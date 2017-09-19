@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import java.sql.Connection;
@@ -6,17 +5,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
+
     protected Connection conexion;
     //JDBC driver nombre y base de datos
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost/mrjuerga";
-    //Credenciales de bd
-    private final String USER ="root";
-    private final String PASS ="";
-    
-    public void conectar()throws Exception{
+    //CONEXION LOCAL
+    private final String DB_URL = "jdbc:mysql://localhost/mrjuerga_barras";
+    private final String USER = "root";
+    private final String PASS = "";
+//    
+    //CONEXION SERVIDOR
+//    private final String DB_URL ="jdbc:mysql://192.168.1.57:3306/mrjuerga";
+//    private final String USER = "mrjuerga";
+//    private final String PASS = "mrjuerga";
+
+    public void conectar() throws Exception {
         try {
             conexion = DriverManager.getConnection(DB_URL, USER, PASS);
+            Class.forName(JDBC_DRIVER);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    //metodo sobrecargado para pasar el servidor y nombre de base de datos
+    public void conectar(String SERVER , String BD) throws Exception {
+        try {
+            conexion = DriverManager.getConnection("jdbc:mysql://"+SERVER+"/"+BD+"", USER, PASS);
             Class.forName(JDBC_DRIVER);
         } catch (Exception e) {
             throw e;
@@ -26,15 +41,13 @@ public class Conexion {
     public Connection getConexion() {
         return conexion;
     }
-    
-    
-    
-    public void cerrar()throws SQLException{
-        if (conexion!= null) {
+
+    public void cerrar() throws SQLException {
+        if (conexion != null) {
             if (!conexion.isClosed()) {
                 conexion.close();
             }
         }
     }
-    
+
 }

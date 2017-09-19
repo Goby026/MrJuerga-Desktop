@@ -24,11 +24,11 @@ public class PresentacionDAO extends Conexion implements PresentacionesCRUD {
     public boolean Registrar(Presentacion p) throws Exception {
         boolean b = false;
         try {
-            String sql = "INSERT INTO presentacion(descripcion,codPresentacion) VALUES (?,?)";
+            String sql = "INSERT INTO presentacion(descripcion,valorml) VALUES (?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, p.getDescripcion());
-            pst.setString(2, p.getCodPresentacion());
+            pst.setDouble(2, p.getValorMl());
             int res = pst.executeUpdate();
             if (res > 0) {
                 b = true;
@@ -47,11 +47,11 @@ public class PresentacionDAO extends Conexion implements PresentacionesCRUD {
         boolean b = false;
 
         try {
-            String sql = "UPDATE presentacion SET descripcion = ?,codPresentacion = ? WHERE idPresentacion = ?";
+            String sql = "UPDATE presentacion SET descripcion = ?,valorml = ? WHERE idPresentacion = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, p.getDescripcion());
-            pst.setString(2, p.getCodPresentacion());
+            pst.setDouble(2, p.getValorMl());
             pst.setInt(3, p.getIdPresentacion());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -86,58 +86,59 @@ public class PresentacionDAO extends Conexion implements PresentacionesCRUD {
             this.cerrar();
         }
         return b;
-        
+
     }
 
     @Override
     public List<Presentacion> Listar() throws Exception {
-         List<Presentacion> li = new ArrayList<>();
+        List<Presentacion> li = new ArrayList<>();
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement("SELECT * FROM presentacion");
             ResultSet res = pst.executeQuery();
             while (res.next()) {
-                 Presentacion p = new Presentacion();
-                p.setIdPresentacion(res.getInt("idPresentacion"));
-                p.setDescripcion(res.getString("descripcion"));
-                p.setCodPresentacion(res.getString("codPresentacion"));
+                Presentacion p = new Presentacion();
+                p.setIdPresentacion(res.getInt(1));
+                p.setDescripcion(res.getString(2));
+                p.setValorMl(res.getDouble(3));
                 li.add(p);
             }
             pst.close();
             res.close();
         } catch (Exception error) {
             System.out.println(error.getMessage());
-        }finally{
+        } finally {
             this.cerrar();
         }
-        return li;       
+        return li;
     }
-    
-    public Presentacion obtenerPresentacion(int idPresentacion) throws SQLException, Exception{        
+
+    public Presentacion obtenerPresentacion(int idPresentacion) throws SQLException, Exception {
         Presentacion p = new Presentacion();
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT descripcion, codPresentacion FROM presentacion WHERE idpresentacion = "+idPresentacion);
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT idpresentacion, descripcion, valorml FROM presentacion WHERE idpresentacion = " + idPresentacion);
             ResultSet res = pst.executeQuery();
             if (res.next()) {
-                p.setDescripcion("descripcion");
-                p.setCodPresentacion("codPresentacion");                
-            }            
+                p.setIdPresentacion(res.getInt(1));
+                p.setDescripcion(res.getString(2));
+                p.setValorMl(res.getDouble(3));
+            }
             pst.close();
-            res.close();            
+            res.close();
         } catch (Exception error) {
             throw error;
-        }finally{
+        } finally {
             this.cerrar();
         }
         return p;
     }
-    
-    public int getIdPresentacion(String presentacion) throws SQLException, Exception{
+
+    public int getIdPresentacion(String presentacion) throws SQLException, Exception {
         int idPresentacion = 0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT idpresentacion FROM presentacion WHERE descripcion = '"+presentacion+"'");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT idpresentacion FROM presentacion WHERE descripcion = '" + presentacion + "'");
             ResultSet res = pst.executeQuery();
             if (res.next()) {
                 idPresentacion = res.getInt("idpresentacion");
@@ -146,7 +147,7 @@ public class PresentacionDAO extends Conexion implements PresentacionesCRUD {
             res.close();
         } catch (Exception error) {
             throw error;
-        }finally{
+        } finally {
             this.cerrar();
         }
         return idPresentacion;

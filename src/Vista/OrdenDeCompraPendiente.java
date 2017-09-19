@@ -5,26 +5,77 @@
  */
 package Vista;
 
-import Controlador.Cronometro;
+import Controlador.FormatoFechas;
 import Controlador.ManejadorFechas;
+import Modelo.Conexion;
+import Modelo.DetalleCompra;
+import Modelo.MySQLDAO.DetalleCompraDAO;
+import Modelo.MySQLDAO.OrdenCompraDAO;
+import Modelo.MySQLDAO.ProveedorDAO;
+import Modelo.MySQLDAO.UsuarioDAO;
+import Modelo.OrdenCompra;
+import Modelo.Proveedor;
+import ModelosTablas.TablaOrdenCompra;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Gaby
  */
-public class OrdenDeCompraPendiente extends javax.swing.JFrame {
+public class OrdenDeCompraPendiente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form OrdenDeCompraPendiente
-     */
-    public OrdenDeCompraPendiente() {
+    DefaultTableModel modelo;
+    DefaultTableModel modeloBuscarProductos;
+    Object datos[];
+    Map parametro = new HashMap();
+
+    public OrdenDeCompraPendiente(String usuario) throws Exception {
         initComponents();
         getContentPane().setBackground(Color.white);
-        setLocationRelativeTo(null);
+        txtUsuario.setText(usuario);
+        cargarComboProveedor();
+        titulosTabla();
+        titulosBuscarProductos();
     }
 
-   
+    private void titulosTabla() {
+        String titulos[] = {"ID", "PRODUCTO", "PRESENTACION", "CANTIDAD"};
+        modelo = new DefaultTableModel(null, titulos);
+        tblProductos.setModel(modelo);
+    }
+
+    public void titulosBuscarProductos() {
+        String titulos[] = {"ID", "PRODUCTO", "PRESENTACION"};
+        modeloBuscarProductos = new DefaultTableModel(null, titulos);
+        tblBuscarProductos.setModel(modeloBuscarProductos);
+    }
+
+    private void cargarComboProveedor() throws Exception {
+        ProveedorDAO pdao = new ProveedorDAO();
+        for (Proveedor p : pdao.Listar()) {
+            cmbProveedor.addItem(p);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,50 +85,52 @@ public class OrdenDeCompraPendiente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panelProductos = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBuscarProductos = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        txtBuscarProducto = new javax.swing.JTextField();
+        btnSeleccionarProducto = new javax.swing.JButton();
+        subMenuEliminar = new javax.swing.JPopupMenu();
+        Eliminar = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
+        cmbProveedor = new javax.swing.JComboBox<>();
+        txtTelefono = new javax.swing.JTextField();
+        txtRuc = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        btnVisualizar = new javax.swing.JButton();
+        jdcFechaEntrega = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblNumOrden = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("COMPRAS PENDIENTES");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ORDEN DE COMPRA PENDIENTE");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
-
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1030, 40));
-
-        jLabel2.setText("USUARIO");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 210, -1));
-
-        jLabel4.setText("FECHA");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, -1));
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, 90, -1));
-
-        jLabel5.setText("HORA");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 90, -1));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LISTA DE COMPRAS PENDIENTES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBuscarProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblBuscarProductos.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        tblBuscarProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,69 +141,530 @@ public class OrdenDeCompraPendiente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblBuscarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscarProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblBuscarProductos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 18, 980, -1));
+        panelProductos.getContentPane().add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 1010, 460));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("CONFIRMAR COMPRA");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel8.setText("PRODUCTO");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 140, 30));
 
-        jButton2.setText("VISUALIZAR");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
+        txtBuscarProducto.setBackground(new java.awt.Color(204, 204, 204));
+        txtBuscarProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        txtBuscarProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarProductoKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 250, -1));
+
+        panelProductos.getContentPane().add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        btnSeleccionarProducto.setBackground(new java.awt.Color(153, 255, 153));
+        btnSeleccionarProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnSeleccionarProducto.setText("seleccionar");
+        btnSeleccionarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarProductoActionPerformed(evt);
+            }
+        });
+        panelProductos.getContentPane().add(btnSeleccionarProducto, java.awt.BorderLayout.PAGE_END);
+
+        Eliminar.setText("QUITAR PRODUCTO");
+        Eliminar.setToolTipText("");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+        subMenuEliminar.add(Eliminar);
+
+        setClosable(true);
+        setTitle("COMPRAS PENDIENTES");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("USUARIO");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, -1, 20));
+
+        txtUsuario.setBackground(new java.awt.Color(102, 102, 102));
+        txtUsuario.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 610, 210, -1));
+
+        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("FECHA");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 610, -1, 20));
+
+        txtFecha.setBackground(new java.awt.Color(102, 102, 102));
+        txtFecha.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 90, -1));
+
+        tblProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblProductos.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        tblProductos.setForeground(new java.awt.Color(51, 51, 51));
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblProductos.setComponentPopupMenu(subMenuEliminar);
+        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblProductos);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 570, 260));
+
+        cmbProveedor.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        cmbProveedor.setForeground(new java.awt.Color(51, 51, 51));
+        cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProveedorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, -1));
+
+        txtTelefono.setEditable(false);
+        txtTelefono.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
+        txtTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 140, -1));
+
+        txtRuc.setEditable(false);
+        txtRuc.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        txtRuc.setForeground(new java.awt.Color(51, 51, 51));
+        txtRuc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 140, -1));
+
+        txtDireccion.setEditable(false);
+        txtDireccion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(51, 51, 51));
+        txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 270, -1));
+
+        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("PROVEEDOR");
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 140, 20));
+
+        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("TELEFONO");
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 140, 20));
+
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("RUC");
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 20));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("PRODUCTOS");
+        jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 140, 20));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("ENTREGA");
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 140, 20));
+
+        btnAdd.setBackground(new java.awt.Color(102, 102, 102));
+        btnAdd.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("ADD");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 70, -1));
+
+        jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("DIRECCION");
+        jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 140, 20));
+
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 160, 560));
+
+        btnRegistrar.setBackground(new java.awt.Color(102, 102, 102));
+        btnRegistrar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setText("REGISTRAR ORDEN");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 550, -1, -1));
+
+        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("HORA");
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, 20));
+
+        txtHora.setBackground(new java.awt.Color(102, 102, 102));
+        txtHora.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtHora.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel6.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 90, 20));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 750, 40));
+
+        jPanel8.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("ORDEN DE COMPRA");
+        jPanel8.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 20));
+
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 40));
+
+        btnVisualizar.setBackground(new java.awt.Color(102, 102, 102));
+        btnVisualizar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        btnVisualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizar.setText("VISUALIZAR");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, 140, -1));
+
+        jdcFechaEntrega.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        getContentPane().add(jdcFechaEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 270, -1));
+
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 1, true));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNumOrden.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 48)); // NOI18N
+        lblNumOrden.setForeground(new java.awt.Color(51, 51, 51));
+        lblNumOrden.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumOrden.setText("-");
+        jPanel1.add(lblNumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 130, 70));
+
+        jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("ORDEN N°");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 150, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void cmbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorActionPerformed
+        Proveedor p = (Proveedor) cmbProveedor.getSelectedItem();
+        txtDireccion.setText(p.getDireccion());
+        txtRuc.setText(p.getRuc());
+        txtTelefono.setText(p.getTelf_prov());
+    }//GEN-LAST:event_cmbProveedorActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OrdenDeCompraPendiente().setVisible(true);
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        if (evt.getClickCount() == 2) {
+
+        }
+    }//GEN-LAST:event_tblProductosMouseClicked
+
+    private void btnSeleccionarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarProductoActionPerformed
+        int fila = tblBuscarProductos.getSelectedRow();
+        if (fila >= 0) {
+
+//            idProducto = Integer.parseInt(tblBuscarProductos.getValueAt(tblBuscarProductos.getSelectedRow(), 0).toString());
+//            String nomProd = tblBuscarProductos.getValueAt(tblBuscarProductos.getSelectedRow(), 1).toString();
+//            txtProducto.setText(nomProd);
+//
+//            panelProductos.dispose();
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECIONE UN PRODUCTO");
+        }
+    }//GEN-LAST:event_btnSeleccionarProductoActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try {
+            panelProductos.setBounds(100, 200, 590, 600);
+            panelProductos.setVisible(true);
+            panelProductos.setTitle("SELECCIONAR PRODUCTO");
+
+            //LlenarTablaBuscarProductos();
+            //txtCantidad.requestFocus();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tblBuscarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscarProductosMouseClicked
+        int fila = tblBuscarProductos.getSelectedRow();
+        if (evt.getClickCount() == 2) {
+            if (fila >= 0) {
+                //indicar la cantidad
+                String cantidad = JOptionPane.showInputDialog("INDIQUE CANTIDAD A SOLICITAR");
+                datos = new Object[4];
+                datos[0] = tblBuscarProductos.getValueAt(fila, 0).toString();
+                datos[1] = tblBuscarProductos.getValueAt(fila, 1).toString();
+                datos[2] = tblBuscarProductos.getValueAt(fila, 2).toString();
+                datos[3] = cantidad;
+
+                modelo.addRow(datos);
+
+                panelProductos.setVisible(false);
+//            idProducto = Integer.parseInt(tblBuscarProductos.getValueAt(tblBuscarProductos.getSelectedRow(), 0).toString());
+//            String nomProd = tblBuscarProductos.getValueAt(tblBuscarProductos.getSelectedRow(), 1).toString();
+//            txtProducto.setText(nomProd);
+//
+//            panelProductos.dispose();
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "SELECIONE UN PRODUCTO");
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_tblBuscarProductosMouseClicked
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        int fila = tblProductos.getSelectedRow();
+
+        modelo.removeRow(fila);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        int numFilas = tblProductos.getRowCount();
+        if (numFilas >= 0) {
+            try {
+                OrdenCompra oc = new OrdenCompra();
+
+                oc.setFecha(new ManejadorFechas().getFechaActualMySQL());
+                oc.setHora(new ManejadorFechas().getHoraActual());
+                oc.setEstado(2);//0=anulado, 1= activo, 2=orden de compra
+                oc.setMoneda("soles");
+                oc.setSerie("");
+                oc.setNroComprobante("");
+                oc.setFechaEntrega(new FormatoFechas().setFormatoFec(jdcFechaEntrega));
+                oc.setIdUsuario(new UsuarioDAO().getIdUsuario(txtUsuario.getText()));
+                Proveedor p = (Proveedor)cmbProveedor.getSelectedItem();
+                oc.setIdProveedor(p.getIdProveedor());
+                oc.setIdTipoComprobante(2);
+                System.out.println("compra creada");
+                if (new OrdenCompraDAO().registrar(oc)) {//si registro bien la compra se procede a registrar el detalle de compra
+                    System.out.println("compra registrada");
+                    int idUltimaCompra = new OrdenCompraDAO().getUltimaCompra();
+                    System.out.println(idUltimaCompra);
+                    int count = 0;
+                    for (int i = 0; i < tblProductos.getRowCount(); i++) {
+                        System.out.println(i);
+                        try {
+                            DetalleCompra dc = new DetalleCompra();
+                            dc.setIdProductoPresentacion(Integer.parseInt(tblProductos.getValueAt(i, 0).toString()));
+                            dc.setIdMedida(1);
+                            dc.setIdCompra(idUltimaCompra);
+                            dc.setCantidad(Integer.parseInt(tblProductos.getValueAt(i, 3).toString()));
+                            dc.setPrecio(0.0);
+                            dc.setDcto(0.0);
+                            dc.setSubtotal(0.0);
+                            if (new DetalleCompraDAO().registrar(dc)) {
+                                count++;
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    if (count > 0) {
+                        JOptionPane.showMessageDialog(getRootPane(), "SE REGISTRO LA ORDEN DE COMPRA");
+                        System.out.println("detalles registrados");
+                        //crear reporte de orden de compra
+                        
+                        
+                    }
+                } else {
+                    System.out.println("no se registro la compra");
+                }
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "DEBE AGREGAR PRODUCTOS A LA COMPRA");
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
+        try {
+            buscarProductoIngreso();
+        } catch (Exception ex) {
+            Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtBuscarProductoKeyReleased
+
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+        if (tblProductos.getRowCount() >= 0) {
+            TablaOrdenCompra toc = new TablaOrdenCompra();
+            List<TablaOrdenCompra> lista = new ArrayList<>();
+            for (int i = 0; i < tblProductos.getRowCount(); i++) {
+                toc.setIdProducto(Integer.parseInt(tblProductos.getValueAt(i, 0).toString()));
+                toc.setNomProd(tblProductos.getValueAt(i, 1).toString());
+                toc.setPresentacion(tblProductos.getValueAt(i, 2).toString());
+                toc.setCantidad(Integer.parseInt(tblProductos.getValueAt(i, 3).toString()));
+
+                lista.add(toc);
+            }
+
+            try {
+                JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(System.getProperty("user.dir") + "\\reportes\\OrdenCompra.jasper");
+                parametro.put("proveedor", cmbProveedor.getSelectedItem().toString());
+                parametro.put("usuario", txtUsuario.getText());
+                parametro.put("fechaPedido", "14-09-17");
+                parametro.put("fechaEntrega", "17-09-17");
+                
+                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, new JRBeanCollectionDataSource(lista));                
+                
+                //JasperPrint jprint = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream(System.getProperty("user.dir") + "\\reportes\\OrdenCompra.jasper"), parametro, new JRBeanCollectionDataSource(lista));
+                
+                JasperViewer jviewer = new JasperViewer(jprint, false);
+                
+                jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                jviewer.setVisible(true);
+                
+                
+//                JDialog reporte = new JDialog();
+//                reporte.setSize(900, 700);
+//                reporte.setLocationRelativeTo(null);
+//                reporte.setTitle("PREVISUALIZACION DE ORDEN DE COMPRA");
+//                JRViewer jv = new JRViewer(jprint);
+//                reporte.getContentPane().add(jv);
+//                reporte.setVisible(true);
+                
+            } catch (JRException ex) {
+                //Logger.getLogger(OrdenDeCompraPendiente.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "NO HAY ELEMENTOS PARA MOSTRAR");
+        }
+
+    }//GEN-LAST:event_btnVisualizarActionPerformed
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnSeleccionarProducto;
+    private javax.swing.JButton btnVisualizar;
+    private javax.swing.JComboBox<Proveedor> cmbProveedor;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private com.toedter.calendar.JDateChooser jdcFechaEntrega;
+    private javax.swing.JLabel lblNumOrden;
+    private javax.swing.JDialog panelProductos;
+    private javax.swing.JPopupMenu subMenuEliminar;
+    private javax.swing.JTable tblBuscarProductos;
+    private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtBuscarProducto;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
+    private javax.swing.JTextField txtRuc;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public void buscarProductoIngreso() throws Exception {
+        Conexion c = new Conexion();
+        c.conectar();
+        Connection con = c.getConexion();
+        limpiarTablaBuscarProductos();
+        String art = txtBuscarProducto.getText();
+        String datos[] = new String[5];
+        String sql = "SELECT productopresentacion.idproducto, producto.nombre, presentacion.descripcion\n"
+                + "FROM producto\n"
+                + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                + "where (producto.nombre like '" + art + "%' or producto.nombre like '%" + art + "') AND productopresentacion.idalmacen = 1 \n"
+                + "order by idproductopresentacion";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = String.valueOf(rs.getInt("productopresentacion.idproducto"));
+                datos[1] = rs.getString("producto.nombre");
+                datos[2] = rs.getString("presentacion.descripcion");
+                modeloBuscarProductos.addRow(datos);
+            }
+            tblBuscarProductos.setModel(modeloBuscarProductos);
+            //tbl_productos.setModel(new DefaultTableModel());
+            st.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(getRootPane(), e.getMessage());
+        } finally {
+            con.close();
+            c.cerrar();
+        }
+    }
+
+    public void limpiarTablaBuscarProductos() {
+        for (int i = 0; i < tblBuscarProductos.getRowCount(); i++) {
+            modeloBuscarProductos.removeRow(i);
+            i -= 1;
+        }
+    }
+    
+    private void limpiarFormulario(){
+        
+    }
+
 }

@@ -5,10 +5,6 @@
  */
 package Controlador;
 
-import Modelo.Gasto;
-import Modelo.MySQLDAO.GastoDAO;
-import Modelo.Insumo;
-import Modelo.MySQLDAO.InsumoDAO;
 import Modelo.Presentacion;
 import Modelo.MySQLDAO.PresentacionDAO;
 import javax.swing.JTable;
@@ -16,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Adolfo
+ * @author Adolfo --updated by Grover
  */
 public class PresentacionControl {
 
@@ -42,7 +38,7 @@ public class PresentacionControl {
         for (int i = 0; i < numeroRegistros; i++) {
             columna[0] = pdao.Listar().get(i).getIdPresentacion();
             columna[1] = pdao.Listar().get(i).getDescripcion();
-            columna[2] = pdao.Listar().get(i).getCodPresentacion();
+            columna[2] = pdao.Listar().get(i).getValorMl();
             model.addRow(columna);
         }
     }
@@ -53,7 +49,7 @@ public class PresentacionControl {
             if (p.getIdPresentacion()== cod) {
                 datos[0] = p.getIdPresentacion();
                 datos[1] = p.getDescripcion();
-                datos[2] = p.getCodPresentacion();
+                datos[2] = p.getValorMl();
             }
         }
 

@@ -1,11 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-import Controlador.InventarioValorizadoControl;
+import Controlador.ColumnasTablas;
+import Modelo.Almacen;
+import Modelo.Conexion;
+import Modelo.MySQLDAO.AlmacenDAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,9 +15,9 @@ import Controlador.InventarioValorizadoControl;
  */
 public class InventarioValorizado extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form InventarioValorizado
-     */
+    DefaultTableModel modeloAlmacenPrincipal;
+    int tipoStock = 0;
+
     public InventarioValorizado() throws Exception {
         initComponents();
         datosIniciales();
@@ -23,13 +25,10 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 
     public void datosIniciales() throws Exception {
         try {
-            new InventarioValorizadoControl().cabecera(tblInventario);
-            new InventarioValorizadoControl().llenarTabla(tblInventario);
-            txtValorizacion.setText(""+calcularValorizacionTotal());
-            grupoRadio.add(rbStock);
-            grupoRadio.add(rbCodigo);
-            grupoRadio.add(rbProducto);
-            grupoRadio.add(rbCategoria);
+            cabecera();
+            //llenarTabla();
+            cargarComboAlmacen();
+            txtValorizacion.setText("" + calcularValorizacionTotal());
         } catch (Exception e) {
             e.getMessage();
         }
@@ -54,6 +53,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         grupoRadio = new javax.swing.ButtonGroup();
+        grupoCheckBoxTipoStock = new javax.swing.ButtonGroup();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         rbStock = new javax.swing.JRadioButton();
@@ -70,73 +70,87 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInventario = new javax.swing.JTable();
+        cmbAlmacen = new javax.swing.JComboBox<>();
+        btnMostrar = new javax.swing.JButton();
+        cbTotal = new javax.swing.JCheckBox();
+        jSeparator1 = new javax.swing.JSeparator();
+        cbNotaPedido = new javax.swing.JCheckBox();
+        cbFactura = new javax.swing.JCheckBox();
+        btnMostrar1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("INVENTARIO VALORIZADO (SOLES)");
         setPreferredSize(new java.awt.Dimension(1553, 973));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         footer.setBackground(new java.awt.Color(204, 204, 204));
         footer.setPreferredSize(new java.awt.Dimension(894, 80));
         footer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel1.setText("Buscar");
-        footer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel1.setText("buscar producto");
+        footer.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
 
         rbStock.setBackground(new java.awt.Color(204, 204, 204));
-        rbStock.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        grupoRadio.add(rbStock);
+        rbStock.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         rbStock.setText("stock");
-        footer.add(rbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
+        footer.add(rbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         rbCodigo.setBackground(new java.awt.Color(204, 204, 204));
-        rbCodigo.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        grupoRadio.add(rbCodigo);
+        rbCodigo.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         rbCodigo.setText("código");
-        footer.add(rbCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+        footer.add(rbCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         rbProducto.setBackground(new java.awt.Color(204, 204, 204));
-        rbProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        grupoRadio.add(rbProducto);
+        rbProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         rbProducto.setText("producto");
-        footer.add(rbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+        footer.add(rbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         rbCategoria.setBackground(new java.awt.Color(204, 204, 204));
-        rbCategoria.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        grupoRadio.add(rbCategoria);
+        rbCategoria.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         rbCategoria.setText("categoria");
-        footer.add(rbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
+        footer.add(rbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
-        lblRegistros.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        lblRegistros.setText("_____________");
-        footer.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, -1, -1));
+        lblRegistros.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        lblRegistros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegistros.setText("__________");
+        footer.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 90, -1));
 
         txtValorizacion.setBackground(new java.awt.Color(204, 204, 204));
-        txtValorizacion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        txtValorizacion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtValorizacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        footer.add(txtValorizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 10, 180, 60));
+        footer.add(txtValorizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 40, 260, 30));
 
         btnImprimir.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
-        btnImprimir.setText("imprimir");
-        footer.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1430, 10, 120, 60));
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_PDF_2_24px.png"))); // NOI18N
+        btnImprimir.setText("reporte");
+        footer.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 40, 120, 30));
 
-        jLabel3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel3.setText("ordernar por");
-        footer.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 30));
+        jLabel3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel3.setText(" ordernar por :");
+        footer.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
 
-        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setText("VALORIZACIÓN");
-        footer.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 30, -1, -1));
+        footer.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jLabel5.setText("total registros");
-        footer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+        footer.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
 
         txtBuscarProducto.setBackground(new java.awt.Color(204, 204, 204));
-        txtBuscarProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        footer.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 210, -1));
+        txtBuscarProducto.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        footer.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 280, -1));
 
         btnBuscar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         btnBuscar.setText("buscar");
-        footer.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
+        footer.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, -1, -1));
 
-        getContentPane().add(footer, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 810, 1370, -1));
 
         tblInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,10 +165,115 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblInventario);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 1360, 750));
+
+        cmbAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAlmacenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 390, -1));
+
+        btnMostrar.setText("MOSTRAR POR ALMACEN");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
+
+        grupoCheckBoxTipoStock.add(cbTotal);
+        cbTotal.setText("TOTAL");
+        cbTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTotalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1360, 10));
+
+        grupoCheckBoxTipoStock.add(cbNotaPedido);
+        cbNotaPedido.setText("NOTA DE PEDIDO");
+        cbNotaPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNotaPedidoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbNotaPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
+
+        grupoCheckBoxTipoStock.add(cbFactura);
+        cbFactura.setText("FACTURA");
+        cbFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFacturaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+
+        btnMostrar1.setText("MOSTRAR STOCK GENERAL");
+        btnMostrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMostrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        try {
+            Almacen a = new Almacen();
+
+            a = (Almacen) cmbAlmacen.getSelectedItem();
+
+            if (cbFactura.isSelected() || cbNotaPedido.isSelected() || cbTotal.isSelected()) {
+                llenarTabla(a.getId(), tipoStock);
+
+                tipoStock = 0;
+                cbFactura.setSelected(false);
+                cbNotaPedido.setSelected(false);
+                cbTotal.setSelected(false);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "INDIQUE UN TIPO DE STOCK");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnMostrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMostrar1ActionPerformed
+
+    private void cbFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFacturaActionPerformed
+        tipoStock = 1;
+        System.out.println(tipoStock);
+    }//GEN-LAST:event_cbFacturaActionPerformed
+
+    private void cbNotaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNotaPedidoActionPerformed
+        tipoStock = 2;
+        System.out.println(tipoStock);
+    }//GEN-LAST:event_cbNotaPedidoActionPerformed
+
+    private void cbTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTotalActionPerformed
+        tipoStock = 3;
+        System.out.println(tipoStock);
+    }//GEN-LAST:event_cbTotalActionPerformed
+
+    private void cmbAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlmacenActionPerformed
+        if (cbFactura.isSelected()) {
+            tipoStock = 1;
+        }else if(cbNotaPedido.isSelected()){
+            tipoStock = 2;
+        }else if(cbTotal.isSelected()){
+            tipoStock = 3;
+        }else{
+            tipoStock = 0;
+        }
+    }//GEN-LAST:event_cmbAlmacenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,13 +313,21 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnMostrar1;
+    private javax.swing.JCheckBox cbFactura;
+    private javax.swing.JCheckBox cbNotaPedido;
+    private javax.swing.JCheckBox cbTotal;
+    private javax.swing.JComboBox<Almacen> cmbAlmacen;
     private javax.swing.JPanel footer;
+    private javax.swing.ButtonGroup grupoCheckBoxTipoStock;
     private javax.swing.ButtonGroup grupoRadio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblRegistros;
     private javax.swing.JRadioButton rbCategoria;
     private javax.swing.JRadioButton rbCodigo;
@@ -210,4 +337,126 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscarProducto;
     private javax.swing.JTextField txtValorizacion;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarComboAlmacen() {
+        try {
+            AlmacenDAO adao = new AlmacenDAO();
+
+            for (Almacen a : adao.listar()) {
+                cmbAlmacen.addItem(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cabecera() {
+        String titulos[] = {"CODIGO", "PRODUCTO", "PRESENTACION", "CATEGORIA", "STOCK", "PRECIO", "VALORIZACION"};
+        modeloAlmacenPrincipal = new DefaultTableModel(null, titulos);
+        tblInventario.setModel(modeloAlmacenPrincipal);
+
+        new ColumnasTablas().sieteColumnas(tblInventario, 10, 200, 50, 50, 20, 20, 20);
+    }
+
+//    public void llenarTabla() throws Exception {
+//        cabecera();
+//        ProductoPresentacionDAO ppd = new ProductoPresentacionDAO();
+//
+//        Object[] columna = new Object[7];
+//
+//        int numeroRegistros = ppd.getInventario().size();
+//
+//        for (int i = 0; i < numeroRegistros; i++) {
+//            columna[0] = ppd.getInventario().get(i).getCodigo();
+//            columna[1] = ppd.getInventario().get(i).getProducto();
+//            columna[2] = ppd.getInventario().get(i).getPresentacion();
+//            columna[3] = ppd.getInventario().get(i).getCategoria();
+//            columna[4] = ppd.getInventario().get(i).getStock();
+//            columna[5] = ppd.getInventario().get(i).getPrecio();
+//            columna[6] = ppd.getInventario().get(i).getValorizacion();
+//            modeloAlmacenPrincipal.addRow(columna);
+//        }
+//        tblInventario.setModel(modeloAlmacenPrincipal);
+//    }
+    private void llenarTabla(int idAlmacen, int typeStock) {
+        Conexion con = new Conexion();
+        cabecera();
+        String num = "";
+        switch (typeStock) {
+            case 1:
+                num = "";
+                break;
+            case 2:
+                num = "2";
+                break;
+            case 3:
+                num = "3";
+                break;
+        }
+
+        //SI tipoStock = 1 entonces cargar stock con factura
+        //SI tipoStock = 2 entonces cargar stock sin factura (nota de pedido)
+        //SI tipoStock = 3 entonces cargar suma de ambos stocks
+        String sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, productopresentacion.stock" + num + ", productopresentacion.precio, (productopresentacion.stock" + num + " * productopresentacion.precio) AS VALORIZACION\n"
+                + "FROM producto\n"
+                + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
+                + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
+                + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+
+        if (idAlmacen == 3) {
+            sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, productopresentacion.stock" + num + ", productopresentacion.precio2, (productopresentacion.stock" + num + " * productopresentacion.precio2) AS VALORIZACION\n"
+                    + "FROM producto\n"
+                    + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
+                    + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
+                    + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "WHERE productopresentacion.idalmacen = 3";
+        }
+
+        if (num.equals("3")) {
+            if (idAlmacen == 3) {
+                sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, (productopresentacion.stock + productopresentacion.stock2), productopresentacion.precio2, ((productopresentacion.stock + productopresentacion.stock2)*productopresentacion.precio2) AS VALORIZACION\n"
+                        + "FROM producto\n"
+                        + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
+                        + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
+                        + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                        + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+            } else {
+                sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, (productopresentacion.stock + productopresentacion.stock2), productopresentacion.precio, ((productopresentacion.stock + productopresentacion.stock2)*productopresentacion.precio) AS VALORIZACION\n"
+                        + "FROM producto\n"
+                        + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
+                        + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
+                        + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                        + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+            }
+        }
+
+        try {
+            con.conectar();
+
+            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+
+            ResultSet res = pst.executeQuery();
+
+            Object[] datos = new Object[7];
+
+            while (res.next()) {
+                datos[0] = res.getInt(1);
+                datos[1] = res.getString(2);
+                datos[2] = res.getString(3);
+                datos[3] = res.getString(4);
+                datos[4] = res.getInt(5);
+                datos[5] = res.getDouble(6);
+                datos[6] = res.getDouble(7);
+
+                modeloAlmacenPrincipal.addRow(datos);
+            }
+
+            tblInventario.setModel(modeloAlmacenPrincipal);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

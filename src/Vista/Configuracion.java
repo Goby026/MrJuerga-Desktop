@@ -214,7 +214,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 180, 170));
 
         jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel8.setText("ROL");
+        jLabel8.setText("caja");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
@@ -222,7 +222,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 880, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel9.setText("PERSONA");
+        jLabel9.setText("serie impresora");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -247,7 +247,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 750, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 750, 210));
 
         jButton3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         jButton3.setText("buscar");
@@ -256,7 +256,7 @@ public class Configuracion extends javax.swing.JInternalFrame {
         txtWebEmpresa1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtWebEmpresa1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtWebEmpresa1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        getContentPane().add(txtWebEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 260, -1));
+        getContentPane().add(txtWebEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

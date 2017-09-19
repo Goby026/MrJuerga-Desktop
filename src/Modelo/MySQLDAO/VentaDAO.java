@@ -121,34 +121,4 @@ public class VentaDAO extends Conexion implements VentaCRUD {
         }
         return lista;
     }
-
-    //venta de mes serie 3
-    public Object[] ventaMes(int mes, int serie) throws Exception {
-        Object[] datos = new Object[7];
-        try {
-            this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select venta.fechasistema, venta.idventa, round((ventaproducto.subtotal/1.18),2) as 'BASE-IMP',round(((ventaproducto.subtotal/1.18)*0.18),2) as 'IGV' ,ventaproducto.subtotal from venta\n"
-                    + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
-                    + "where month(fechasistema) = " + mes);
-            ResultSet rs = pst.executeQuery();
-            //estructura para contadora
-            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-            while (rs.next()) {
-                datos[0] = rs.getString("venta.fechasistema"); // fecha de la venta
-                datos[1] = "TICKET";//tipo documento
-                datos[2] = "003";//serie
-                datos[3] = rs.getInt("venta.idventa");// nro de ticket
-                datos[4] = rs.getDouble("BASE-IMP"); // base imponible
-                datos[5] = rs.getDouble("IGV");
-                datos[6] = rs.getDouble("ventaproducto.subtotal"); // importe
-            }
-            rs.close();
-            pst.close();
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            this.cerrar();
-        }
-        return datos;
-    }
 }

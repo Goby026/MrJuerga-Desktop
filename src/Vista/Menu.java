@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
-import Controlador.ImagenFondo;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,9 +9,6 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu(String usuario) {
         initComponents();
         cargarDatos(usuario);
@@ -67,25 +59,34 @@ public class Menu extends javax.swing.JFrame {
         registrarUsuarios = new javax.swing.JMenuItem();
         registrarPerfiles = new javax.swing.JMenuItem();
         cajas = new javax.swing.JMenuItem();
+        jMenu15 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         cerrarSesion = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuItem35 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        jMenuItem38 = new javax.swing.JMenuItem();
+        jMenu17 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem36 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem39 = new javax.swing.JMenuItem();
+        jMenu18 = new javax.swing.JMenu();
+        jMenuItem33 = new javax.swing.JMenuItem();
+        jMenuItem42 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -93,11 +94,17 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem40 = new javax.swing.JMenuItem();
+        jMenuItem41 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem37 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
@@ -112,19 +119,21 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ADMINISTRACION MRJUERGA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        aSide.setBackground(new java.awt.Color(85, 85, 85));
+        aSide.setBackground(new java.awt.Color(255, 255, 255));
         aSide.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnConteoDiario.setBackground(new java.awt.Color(200, 79, 62));
-        btnConteoDiario.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnConteoDiario.setForeground(new java.awt.Color(254, 223, 166));
+        btnConteoDiario.setBackground(new java.awt.Color(102, 102, 102));
+        btnConteoDiario.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnConteoDiario.setForeground(new java.awt.Color(51, 51, 51));
         btnConteoDiario.setText("CUENTA DIARIA");
-        btnConteoDiario.setBorder(null);
-        btnConteoDiario.setBorderPainted(false);
+        btnConteoDiario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnConteoDiario.setContentAreaFilled(false);
+        btnConteoDiario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConteoDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConteoDiarioActionPerformed(evt);
@@ -132,83 +141,89 @@ public class Menu extends javax.swing.JFrame {
         });
         aSide.add(btnConteoDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 50));
 
-        btnSalidaMercaderia.setBackground(new java.awt.Color(245, 160, 41));
-        btnSalidaMercaderia.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnSalidaMercaderia.setForeground(new java.awt.Color(254, 223, 166));
-        btnSalidaMercaderia.setText("SALIDA DE MERCADERIA");
-        btnSalidaMercaderia.setBorder(null);
-        btnSalidaMercaderia.setBorderPainted(false);
+        btnSalidaMercaderia.setBackground(new java.awt.Color(102, 102, 102));
+        btnSalidaMercaderia.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnSalidaMercaderia.setForeground(new java.awt.Color(51, 51, 51));
+        btnSalidaMercaderia.setText("SALIDAS");
+        btnSalidaMercaderia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnSalidaMercaderia.setContentAreaFilled(false);
+        btnSalidaMercaderia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalidaMercaderia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalidaMercaderiaActionPerformed(evt);
             }
         });
-        aSide.add(btnSalidaMercaderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 170, 50));
+        aSide.add(btnSalidaMercaderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 170, 50));
 
-        btnCompras.setBackground(new java.awt.Color(22, 145, 189));
-        btnCompras.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnCompras.setForeground(new java.awt.Color(254, 223, 166));
+        btnCompras.setBackground(new java.awt.Color(102, 102, 102));
+        btnCompras.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnCompras.setForeground(new java.awt.Color(51, 51, 51));
         btnCompras.setText("COMPRAS");
-        btnCompras.setBorder(null);
-        btnCompras.setBorderPainted(false);
+        btnCompras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnCompras.setContentAreaFilled(false);
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprasActionPerformed(evt);
             }
         });
-        aSide.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 170, 50));
+        aSide.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 170, 50));
 
-        btnInventarioValorizado.setBackground(new java.awt.Color(22, 107, 162));
-        btnInventarioValorizado.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnInventarioValorizado.setForeground(new java.awt.Color(254, 223, 166));
-        btnInventarioValorizado.setText("INVENTARIO VALORIZADO");
-        btnInventarioValorizado.setBorder(null);
-        btnInventarioValorizado.setBorderPainted(false);
+        btnInventarioValorizado.setBackground(new java.awt.Color(102, 102, 102));
+        btnInventarioValorizado.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnInventarioValorizado.setForeground(new java.awt.Color(51, 51, 51));
+        btnInventarioValorizado.setText("EXISTENCIAS");
+        btnInventarioValorizado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnInventarioValorizado.setContentAreaFilled(false);
+        btnInventarioValorizado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInventarioValorizado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInventarioValorizadoActionPerformed(evt);
             }
         });
-        aSide.add(btnInventarioValorizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 170, 50));
+        aSide.add(btnInventarioValorizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 170, 50));
 
-        btnMovimientos.setBackground(new java.awt.Color(27, 54, 71));
-        btnMovimientos.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnMovimientos.setForeground(new java.awt.Color(254, 223, 166));
+        btnMovimientos.setBackground(new java.awt.Color(102, 102, 102));
+        btnMovimientos.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnMovimientos.setForeground(new java.awt.Color(51, 51, 51));
         btnMovimientos.setText("MOVIMIENTOS");
-        btnMovimientos.setBorder(null);
-        btnMovimientos.setBorderPainted(false);
+        btnMovimientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnMovimientos.setContentAreaFilled(false);
+        btnMovimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMovimientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMovimientosActionPerformed(evt);
             }
         });
-        aSide.add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 170, 50));
+        aSide.add(btnMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 170, 50));
 
-        btnKardex.setBackground(new java.awt.Color(21, 40, 54));
-        btnKardex.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnKardex.setForeground(new java.awt.Color(254, 223, 166));
+        btnKardex.setBackground(new java.awt.Color(102, 102, 102));
+        btnKardex.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnKardex.setForeground(new java.awt.Color(51, 51, 51));
         btnKardex.setText("KARDEX");
-        btnKardex.setBorder(null);
-        btnKardex.setBorderPainted(false);
+        btnKardex.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnKardex.setContentAreaFilled(false);
+        btnKardex.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKardex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKardexActionPerformed(evt);
             }
         });
-        aSide.add(btnKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 170, 50));
+        aSide.add(btnKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 170, 50));
 
-        btnIngresoMercaderia.setBackground(new java.awt.Color(208, 101, 3));
-        btnIngresoMercaderia.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
-        btnIngresoMercaderia.setForeground(new java.awt.Color(254, 223, 166));
-        btnIngresoMercaderia.setText("INGRESO DE MERCADERIA");
-        btnIngresoMercaderia.setBorder(null);
-        btnIngresoMercaderia.setBorderPainted(false);
+        btnIngresoMercaderia.setBackground(new java.awt.Color(102, 102, 102));
+        btnIngresoMercaderia.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        btnIngresoMercaderia.setForeground(new java.awt.Color(51, 51, 51));
+        btnIngresoMercaderia.setText("INGRESOS");
+        btnIngresoMercaderia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 153)));
+        btnIngresoMercaderia.setContentAreaFilled(false);
+        btnIngresoMercaderia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIngresoMercaderia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresoMercaderiaActionPerformed(evt);
             }
         });
-        aSide.add(btnIngresoMercaderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 170, 50));
+        aSide.add(btnIngresoMercaderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 50));
 
         jPanel1.add(aSide, java.awt.BorderLayout.WEST);
 
@@ -235,12 +250,26 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(footer, java.awt.BorderLayout.PAGE_END);
 
         escritorio.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1750, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 980, Short.MAX_VALUE)
+        );
+
         jPanel1.add(escritorio, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1710, 1000));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1000));
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sistema.png"))); // NOI18N
         jMenu1.setText("SISTEMA");
 
+        jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_User_Groups_24px.png"))); // NOI18N
         jMenu13.setText("USUARIOS");
 
         registrarUsuarios.setText("REGISTRAR");
@@ -269,13 +298,26 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(cajas);
 
-        jMenuItem26.setText("CONFIGURACION");
+        jMenu15.setText("CONFIGURACIONES");
+
+        jMenuItem26.setText("GENERAL");
+        jMenuItem26.setEnabled(false);
         jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem26ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem26);
+        jMenu15.add(jMenuItem26);
+
+        jMenuItem6.setText("PRECIOS");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu15.add(jMenuItem6);
+
+        jMenu1.add(jMenu15);
 
         cerrarSesion.setText("CERRAR SESION");
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -295,6 +337,7 @@ public class Menu extends javax.swing.JFrame {
 
         navMenu.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Department_24px_1.png"))); // NOI18N
         jMenu2.setText("INVENTARIO");
 
         jMenuItem1.setText("CUENTA DIARIA");
@@ -307,13 +350,23 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu6.setText("COMPRAS");
 
+        jMenu16.setText("CON FACTURA");
+
+        jMenuItem35.setText("ORDEN DE COMPRA");
+        jMenuItem35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem35ActionPerformed(evt);
+            }
+        });
+        jMenu16.add(jMenuItem35);
+
         jMenuItem2.setText("REGISTRAR COMPRAS");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem2);
+        jMenu16.add(jMenuItem2);
 
         jMenuItem22.setText("SEGUIMIENTO DE COMPRAS");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -321,37 +374,82 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem22ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem22);
+        jMenu16.add(jMenuItem22);
 
         jMenuItem31.setText("SEGUIMIENTO POR PRODUCTO");
+        jMenuItem31.setEnabled(false);
         jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem31ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem31);
+        jMenu16.add(jMenuItem31);
 
-        jMenu2.add(jMenu6);
+        jMenuItem38.setText("GESTIONAR COMPRAS");
+        jMenuItem38.setEnabled(false);
+        jMenuItem38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem38ActionPerformed(evt);
+            }
+        });
+        jMenu16.add(jMenuItem38);
 
-        jMenu8.setText("MODIFICAR");
+        jMenu6.add(jMenu16);
 
-        jMenuItem8.setText("INGRESO DE MERCADERIA");
+        jMenu17.setText("CON NOTA DE PEDIDO");
+
+        jMenuItem8.setText("INGRESOS");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem8);
+        jMenu17.add(jMenuItem8);
 
-        jMenuItem9.setText("SALIDA DE MERCADERIA");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem36.setText("CONSOLIDAR A FACTURA");
+        jMenuItem36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                jMenuItem36ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem9);
+        jMenu17.add(jMenuItem36);
 
-        jMenu2.add(jMenu8);
+        jMenuItem32.setText("SEGUIMIENTO NOTAS DE PEDIDO");
+        jMenuItem32.setEnabled(false);
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
+        jMenu17.add(jMenuItem32);
+
+        jMenuItem39.setText("GESTION DE NOTAS DE PEDIDO");
+        jMenuItem39.setEnabled(false);
+        jMenu17.add(jMenuItem39);
+
+        jMenu6.add(jMenu17);
+
+        jMenu2.add(jMenu6);
+
+        jMenu18.setText("TRASLADOS");
+
+        jMenuItem33.setText("PRODUCTOS CON FACTURA");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu18.add(jMenuItem33);
+
+        jMenuItem42.setText("PRODUCTOS CON NOTA DE PEDIDO");
+        jMenuItem42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem42ActionPerformed(evt);
+            }
+        });
+        jMenu18.add(jMenuItem42);
+
+        jMenu2.add(jMenu18);
 
         jMenu9.setText("MANTENIMIENTO");
 
@@ -395,16 +493,19 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem18);
 
-        jMenuItem3.setText("INSUMOS");
-        jMenu9.add(jMenuItem3);
-
         jMenu2.add(jMenu9);
 
         jMenu10.setText("REPORTES");
+        jMenu10.setEnabled(false);
 
         jMenu11.setText("PRODUCTOS");
 
         jMenuItem13.setText("INVENTARIO VALORIZADO");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu11.add(jMenuItem13);
 
         jMenuItem14.setText("SALDOS FINALES SEGUN KARDEX");
@@ -433,9 +534,40 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.add(jMenu10);
 
+        jMenuItem34.setText("EXISTENCIAS");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem34);
+
+        jMenu8.setText("REQUERIMIENTOS");
+
+        jMenuItem7.setText("VERIFICAR REQUERIMIENTOS");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem7);
+
+        jMenuItem40.setText("LISTA DE REQUERIMIENTOS");
+        jMenuItem40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem40ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem40);
+
+        jMenuItem41.setText("GESTION DE REQUERIMIENTO");
+        jMenu8.add(jMenuItem41);
+
+        jMenu2.add(jMenu8);
+
         jMenu5.setText("PREPARACIONES");
 
-        jMenuItem21.setText("BEBIDAS");
+        jMenuItem21.setText("RECETAS");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem21ActionPerformed(evt);
@@ -447,17 +579,26 @@ public class Menu extends javax.swing.JFrame {
 
         navMenu.add(jMenu2);
 
-        jMenu3.setText("CONTABILIDAD");
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Manager_24px.png"))); // NOI18N
+        jMenu3.setText("ADMINISTRACION");
 
         jMenu4.setText("DOCUMENTOS");
 
-        jMenuItem23.setText("INFORME PARA CONTADORA");
+        jMenuItem23.setText("INFORME VENTAS");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem23ActionPerformed(evt);
             }
         });
         jMenu4.add(jMenuItem23);
+
+        jMenuItem37.setText("INFORME NOTAS DE PEDIDO");
+        jMenuItem37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem37ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem37);
 
         jMenuItem15.setText("TIPOS DE COMPROBANTES");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -517,6 +658,7 @@ public class Menu extends javax.swing.JFrame {
 
         navMenu.add(jMenu3);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_About_24px.png"))); // NOI18N
         jMenu7.setText("ACERCA");
 
         jMenuItem24.setText("MANUAL");
@@ -553,9 +695,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        ReporteContadora rc = new ReporteContadora();
-        escritorio.add(rc);
-        rc.setVisible(true);
+        try {
+            ReporteContadora rc = new ReporteContadora();
+            escritorio.add(rc);
+            rc.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -712,16 +858,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInventarioValorizadoActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        try {
-            KardexSalidas ks = new KardexSalidas(txtUsuario.getText()); // 
-            escritorio.add(ks);
-            ks.setVisible(true);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
     private void btnIngresoMercaderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoMercaderiaActionPerformed
         try {
             KardexIngresos ki = new KardexIngresos(txtUsuario.getText()); // 
@@ -734,7 +870,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSalidaMercaderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaMercaderiaActionPerformed
         try {
-            KardexSalidas ks = new KardexSalidas(txtUsuario.getText()); // 
+            MovimientosProductosNP ks = new MovimientosProductosNP(txtUsuario.getText()); // 
             escritorio.add(ks);
             ks.setVisible(true);
         } catch (Exception ex) {
@@ -753,11 +889,23 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKardexActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-        // TODO add your handling code here:
+        try {
+            RegistroCompras rc = new RegistroCompras(txtUsuario.getText());
+            escritorio.add(rc);
+            rc.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void btnMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientosActionPerformed
-        // TODO add your handling code here:
+        try {
+            MovimientosBarras mb = new MovimientosBarras(txtUsuario.getText());
+            escritorio.add(mb);
+            mb.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnMovimientosActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
@@ -830,6 +978,102 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        try {
+            ConfiguracionPrecios rc = new ConfiguracionPrecios();
+            escritorio.add(rc);
+            rc.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem35ActionPerformed
+        try {
+            OrdenDeCompraPendiente ocp = new OrdenDeCompraPendiente(txtUsuario.getText());
+            escritorio.add(ocp);
+            ocp.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem35ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        try {
+            ValidarRequerimiento vr = new ValidarRequerimiento(txtUsuario.getText());
+            escritorio.add(vr);
+            vr.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem36ActionPerformed
+        try {
+            BuscarNotaCompra bnc = new BuscarNotaCompra(txtUsuario.getText());
+            escritorio.add(bnc);
+            bnc.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem36ActionPerformed
+
+    private void jMenuItem37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem37ActionPerformed
+        try {
+            ReportesNotaPedido rnp = new ReportesNotaPedido();
+            escritorio.add(rnp);
+            rnp.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem37ActionPerformed
+
+    private void jMenuItem38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem38ActionPerformed
+
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        try {
+            InventarioValorizado iv = new InventarioValorizado();
+            escritorio.add(iv);
+            iv.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem32ActionPerformed
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        try {
+            MovimientosBarras mb = new MovimientosBarras(txtUsuario.getText());
+            escritorio.add(mb);
+            mb.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
+
+    private void jMenuItem42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem42ActionPerformed
+        try {
+            MovimientosProductosNP mb = new MovimientosProductosNP(txtUsuario.getText());
+            escritorio.add(mb);
+            mb.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem42ActionPerformed
+
+    private void jMenuItem40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem40ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem40ActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -888,6 +1132,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
+    private javax.swing.JMenu jMenu17;
+    private javax.swing.JMenu jMenu18;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -918,13 +1166,24 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
+    private javax.swing.JMenuItem jMenuItem32;
+    private javax.swing.JMenuItem jMenuItem33;
+    private javax.swing.JMenuItem jMenuItem34;
+    private javax.swing.JMenuItem jMenuItem35;
+    private javax.swing.JMenuItem jMenuItem36;
+    private javax.swing.JMenuItem jMenuItem37;
+    private javax.swing.JMenuItem jMenuItem38;
+    private javax.swing.JMenuItem jMenuItem39;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem40;
+    private javax.swing.JMenuItem jMenuItem41;
+    private javax.swing.JMenuItem jMenuItem42;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

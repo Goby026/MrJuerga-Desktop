@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.LoginControl;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,8 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
+        Color c = new Color(0, 0, 1, 0.015f);
+        this.setBackground(c);
         logo();
     }
 
@@ -40,17 +43,16 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         btnIniciar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jPanel4 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        lblImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
@@ -64,46 +66,18 @@ public class Login extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("ideas en software S.A.C.");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 420, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 420, 70));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 1140, 30));
 
-        txtUsuario.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setBorder(null);
-        txtUsuario.setOpaque(false);
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 300, 50));
+        jPanel1.setBackground(new java.awt.Color(16, 97, 154));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtPass.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPass.setBorder(null);
-        txtPass.setOpaque(false);
-        txtPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPassActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 300, 50));
-
-        btnIniciar.setBackground(new java.awt.Color(84, 142, 215));
-        btnIniciar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
-        btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciar.setText("LOGIN");
-        btnIniciar.setBorder(null);
-        btnIniciar.setBorderPainted(false);
-        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnIniciar.setFocusPainted(false);
-        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 180, 50));
+        jLabel10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 48)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("MR JUERGA");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 70));
 
         btnCancelar.setBackground(new java.awt.Color(200, 79, 62));
         btnCancelar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
@@ -118,34 +92,70 @@ public class Login extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 540, 180, 50));
-
-        jPanel1.setBackground(new java.awt.Color(200, 79, 62));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 48)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("mr juerga");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 420, 130));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 200));
-
-        jPanel3.setBackground(new java.awt.Color(43, 46, 55));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 170, 40));
 
         jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("iniciar sesión");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 420, -1));
+        jLabel9.setText("sistema de apoyo para el control de almacen");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 440, 50));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 420, 80));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 300, 10));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 300, 10));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 70));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 420, 360));
+        jPanel3.setBackground(new java.awt.Color(43, 46, 55));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtUsuario.setBackground(new java.awt.Color(43, 46, 55));
+        txtUsuario.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(204, 255, 255));
+        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        txtUsuario.setOpaque(false);
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 5, 220, 40));
+
+        txtPass.setBackground(new java.awt.Color(43, 46, 55));
+        txtPass.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(204, 255, 255));
+        txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        txtPass.setOpaque(false);
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 5, 230, 40));
+
+        btnIniciar.setBackground(new java.awt.Color(84, 142, 215));
+        btnIniciar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciar.setText("LOGIN");
+        btnIniciar.setBorder(null);
+        btnIniciar.setBorderPainted(false);
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIniciar.setFocusPainted(false);
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 5, 170, 40));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("iniciar sesión");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 5, 120, 40));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1140, 50));
+
+        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admini.jpg"))); // NOI18N
+        getContentPane().add(lblImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1140, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -223,14 +233,13 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblImg;
     public javax.swing.JPasswordField txtPass;
     public javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

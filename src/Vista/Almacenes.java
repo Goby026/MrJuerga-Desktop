@@ -233,6 +233,11 @@ public class Almacenes extends javax.swing.JInternalFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 730, 210));
 
         btnReportesExistencias.setText("REPORTE DE EXISTENCIAS");
+        btnReportesExistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesExistenciasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReportesExistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         btnReporteSalidas.addTab("EXISTENCIAS", jPanel1);
@@ -501,6 +506,10 @@ public class Almacenes extends javax.swing.JInternalFrame {
         btnRegistrar.setBackground(Color.BLACK);
         btnRegistrar.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnRegistrarMouseExited
+
+    private void btnReportesExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesExistenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesExistenciasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -81,7 +81,7 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
         String fec_fin = sdf.format(fin);
         String sql = "SELECT ordencompra.idordencompra, proveedor.razon , tipocomprobante.descripcion, ordencompra.serie, ordencompra.num_comprobante, ordencompra.moneda, ordencompra.fecha, ordencompra.hora,ordencompra.estado \n"
                 + "FROM ordencompra\n"
-                + "inner join proveedor on ordencompra.iproveedor = proveedor.idproveedor\n"
+                + "inner join proveedor on ordencompra.idproveedor = proveedor.idproveedor\n"
                 + "inner join tipocomprobante on ordencompra.idtipocomprobante = tipocomprobante.idtipocomprobante\n"
                 + "WHERE ordencompra.fecha between '" + fec_inicio + "' and '" + fec_fin + "';";
         String datos[] = new String[9];
@@ -122,10 +122,11 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
 
     public void cargarDetalleCompra(int id) throws Exception {
         limpiarTablaDetalleCompras();
-        String sql = "SELECT detallecompra.idcompra, producto.idproducto, producto.nombre, detallecompra.cantidad, detallecompra.precio, detallecompra.subtotal \n"
-                + "FROM ordencompra \n"
+        String sql = "SELECT detallecompra.idcompra, producto.idproducto, producto.nombre, detallecompra.cantidad, detallecompra.precio, detallecompra.subtotal\n"
+                + "FROM ordencompra\n"
                 + "INNER JOIN detallecompra ON ordencompra.idordencompra = detallecompra.idcompra \n"
-                + "INNER JOIN producto ON producto.idproducto = detallecompra.idproducto\n"
+                + "INNER JOIN productopresentacion ON productopresentacion.idproductopresentacion = detallecompra.idproductopresentacion\n"
+                + "INNER JOIN producto ON productopresentacion.idproducto = producto.idproducto\n"
                 + "WHERE ordencompra.idordencompra = " + id + "";
         String datos[] = new String[6];
         Conexion c = new Conexion();
@@ -135,12 +136,12 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                datos[0] = rs.getString("detallecompra.idcompra");
-                datos[1] = rs.getString("producto.idproducto");
-                datos[2] = rs.getString("producto.nombre");
-                datos[3] = rs.getString("detallecompra.cantidad");
-                datos[4] = rs.getString("detallecompra.precio");
-                datos[5] = rs.getString("detallecompra.subtotal");
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
                 modelDetalleCompra.addRow(datos);
             }
             tblDetalleCompras.setModel(modelDetalleCompra);
@@ -171,6 +172,15 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        formGestionCompra = new javax.swing.JFrame();
+        jLabel2 = new javax.swing.JLabel();
+        txtNumCompra = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -203,6 +213,52 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        formGestionCompra.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        formGestionCompra.setTitle("GESTION DE COMPRA");
+        formGestionCompra.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("N° COMPRA");
+        formGestionCompra.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        formGestionCompra.getContentPane().add(txtNumCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 160, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        formGestionCompra.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 450, 190));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setEnabled(false);
+        jScrollPane4.setViewportView(jTable2);
+
+        formGestionCompra.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 450, 190));
+
+        jCheckBox1.setText("INGRESAR FRACCION");
+        formGestionCompra.getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
+
+        jButton4.setText("FRACCIONAR");
+        formGestionCompra.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
 
         setClosable(true);
         setTitle("REPORTES DE COMPRAS");
@@ -356,6 +412,14 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
         jLabel21.setText("1° Indique un rango de fechas");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
+        jButton1.setText("GESTIONAR COMPRA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 290, 160, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -397,14 +461,14 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            this.dispose();
-            new ReporteDeCompras().setVisible(true);
-        } catch (SQLException ex) {
-            ex.getMessage();
-        } catch (Exception ex) {
-            Logger.getLogger(ReporteDeCompras.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.dispose();
+//            new ReporteDeCompras().setVisible(true);
+//        } catch (SQLException ex) {
+//            ex.getMessage();
+//        } catch (Exception ex) {
+//            Logger.getLogger(ReporteDeCompras.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
@@ -429,6 +493,10 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UNA COMPRA");
         }
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        formGestionCompra.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public double sumarTotalDetalles() {
         int numFilas = tblDetalleCompras.getRowCount();
@@ -476,7 +544,6 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
 //            c.cerrar();
 //        }
 //    }
-
     public void cargarNumeroDeCompra(int numBoleta) throws Exception {
         limpiarTablaCompras();
         String sql = "SELECT `id_compra`, `nom_provee`, `tipo_doc`, `num_serie`, `num_doc_compra`, `forma_pago`, `fecha_compra`, `hora_compra`,estado FROM `tcompras` WHERE `num_doc_compra` = '" + numBoleta + "'";
@@ -518,8 +585,12 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnReporte;
+    private javax.swing.JFrame formGestionCompra;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -531,6 +602,7 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
@@ -543,10 +615,15 @@ public class ReporteDeCompras extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private com.toedter.calendar.JDateChooser jdcDesde;
     private com.toedter.calendar.JDateChooser jdcHasta;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblCompras;
     private javax.swing.JTable tblDetalleCompras;
+    private javax.swing.JTextField txtNumCompra;
     // End of variables declaration//GEN-END:variables
 }

@@ -106,6 +106,34 @@ public class MovimientoProductoDAO extends Conexion implements MovimientoProduct
         }
         return lista;
     }
+    
+    //metodo para listar los productos movidos a partir de un idmovimiento
+    public List<MovimientoProducto> Listar(int idMovimiento) throws Exception {
+        List<MovimientoProducto> lista = new ArrayList<>();
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT * FROM movimientoproducto WHERE idmovimiento = ?");
+            pst.setInt(1, idMovimiento);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                MovimientoProducto mp = new MovimientoProducto();
+                mp.setIdMovimientoProducto(res.getInt("idmovimientoproducto"));
+                mp.setIdMovimiento(res.getInt("idmovimiento"));
+                mp.setIdProducto(res.getInt("idproducto"));
+                mp.setIdPresentacion(res.getInt("idpresentacion"));
+                mp.setCantidad(res.getDouble("cantidad"));
+                mp.setValorizacion(res.getDouble("valorizacion"));
+                lista.add(mp);
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return lista;
+    }
 
     @Override
     public MovimientoProducto obtener(int id) throws Exception {

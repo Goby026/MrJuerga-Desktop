@@ -12,7 +12,6 @@ import Modelo.MySQLDAO.CajaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -124,7 +123,7 @@ public class ResumenCajas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         getContentPane().add(cmbCajas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, -1));
-        getContentPane().add(jmcMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 110, -1));
+        getContentPane().add(jmcMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         btnMostrar.setText("MOSTRAR");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {

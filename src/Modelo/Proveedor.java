@@ -110,12 +110,9 @@ public class Proveedor implements Serializable{
         this.codProv = codProv;
     }
 
-   
-    
-    
-    
-    
-    
-    
+    @Override
+    public String toString() {
+        return razon;
+    }
     
 }

@@ -10,6 +10,8 @@ import Modelo.Producto;
 import Modelo.MySQLDAO.ProductoDAO;
 import Modelo.ProductoPresentacion;
 import Modelo.MySQLDAO.ProductoPresentacionDAO;
+import ModelosTablas.tablaBuscarProducto;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -24,59 +26,52 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProductoPresentacionControl {
 
-    DefaultListModel modeloProductos = new DefaultListModel();
+    DefaultTableModel modeloProductos = new DefaultTableModel();
     DefaultTableModel modeloTabla;
+  
 
-    public void llenarProductos(JList lista) throws Exception {
-        try {
-            ProductoDAO pdao = new ProductoDAO();
-            for (Producto p : pdao.listar()) {
-                modeloProductos.addElement(p.getNombre());
-                lista.setModel(modeloProductos);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        }
-    }
-
-    public void LlenarTabla(JTable tabla, int small, int large, int xl) throws Exception {
-        modeloTabla = new DefaultTableModel();
-        tabla.setModel(modeloTabla);
+    public void LlenarTablaProductos(JTable tabla) throws Exception {
+        cargarTitulosRequerimientos(tabla);
         ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
 
-        modeloTabla.addColumn("PRODUCTO");
-        modeloTabla.addColumn("CATEGORIA");
-        modeloTabla.addColumn("PRESENTACION");
-        modeloTabla.addColumn("ALMACEN");
-        modeloTabla.addColumn("STOCK");
-        modeloTabla.addColumn("PRECIO");
+        Object[] columna = new Object[4];
 
-        Object[] columna = new Object[6];
+        List<tablaBuscarProducto> tbp = ppdao.getProductoPresentacion();
 
-        int numeroRegistros = ppdao.listar().size();
-        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (int i = 0; i < numeroRegistros; i++) {
-            columna[0] = getProductoConId(ppdao.listar().get(i).getIdProducto());
-            columna[1] = getCategoriaConId(ppdao.listar().get(i).getIdcategoria());
-            columna[2] = getPresentacionConId(ppdao.listar().get(i).getIdPresentacion());
-            columna[3] = getAlmacenConId(ppdao.listar().get(i).getIdalmacen());
-            columna[4] = ppdao.listar().get(i).getStock();
-            columna[5] = ppdao.listar().get(i).getPrecio();
-            modeloTabla.addRow(columna);
+        for (int i = 0; i < tbp.size(); i++) {
+            columna[0] = ppdao.getProductoPresentacion().get(i).getIdProducto();
+            columna[1] = ppdao.getProductoPresentacion().get(i).getProducto();
+            columna[2] = ppdao.getProductoPresentacion().get(i).getPresentacion();
+            columna[3] = ppdao.getProductoPresentacion().get(i).getStock();
+            modeloProductos.addRow(columna);
         }
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(xl);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(large);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(large);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
+        tabla.setModel(modeloProductos);
+        new ColumnasTablas().cuatroColumnas(tabla, 10, 100, 100, 10);
+    }
 
+public void LlenarTablaBuscarProductos(JTable tabla, String nomProd) throws Exception {
+        cargarTitulosRequerimientos(tabla);
+        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+
+        Object[] columna = new Object[4];
+
+        int numeroRegistros = ppdao.buscarProducto(nomProd).size();
+
+        for (int i = 0; i < numeroRegistros; i++) {
+            columna[0] = ppdao.buscarProducto(nomProd).get(i).getIdProducto();
+            columna[1] = ppdao.buscarProducto(nomProd).get(i).getProducto();
+            columna[2] = ppdao.buscarProducto(nomProd).get(i).getPresentacion();
+            columna[3] = ppdao.buscarProducto(nomProd).get(i).getStock();
+            modeloProductos.addRow(columna);
+        }
+        tabla.setModel(modeloProductos);
+        new ColumnasTablas().cuatroColumnas(tabla, 10, 100, 100, 10);
     }
 
     public void cargarComboPresentacion(JComboBox cmb) throws Exception {
         PresentacionDAO pdao = new PresentacionDAO();
         for (Presentacion p : pdao.Listar()) {
-            cmb.addItem(p.getDescripcion());
+            cmb.addItem(p);
         }
     }
 
@@ -153,7 +148,7 @@ public class ProductoPresentacionControl {
     public int comprobarGestionProducto(int idproducto, int idpresentacion, int idalmacen) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idproducto && pp.getIdPresentacion() == idpresentacion && pp.getIdalmacen() == idalmacen) {
                     return pp.getIdProductoPresentacion();
                 }
@@ -179,12 +174,12 @@ public class ProductoPresentacionControl {
                 //modificar
                 pp.setIdProductoPresentacion(opc);
                 ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-                ppdao.modificar(pp);
+                ppdao.Modificar(pp);
                 flag++;
             } else {
                 //registrar
                 ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-                ppdao.registrar(pp);
+                ppdao.Registrar(pp);
                 flag++;
             }
             return flag;
@@ -251,5 +246,11 @@ public class ProductoPresentacionControl {
             throw e;
         }
         return null;
+    }
+
+    private void cargarTitulosRequerimientos(JTable tabla) {
+        String titulos[] = {"ID", "PRODUCTO", "PRESENTACION","PRECIO"};
+        modeloProductos = new DefaultTableModel(null, titulos);
+        tabla.setModel(modeloProductos);
     }
 }

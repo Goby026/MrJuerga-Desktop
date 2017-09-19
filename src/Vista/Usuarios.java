@@ -8,15 +8,11 @@ import Modelo.MySQLDAO.UsuarioDAO;
 import Modelo.UsuarioPerfil;
 import Modelo.MySQLDAO.UsuarioPerfilDAO;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -31,13 +27,14 @@ public class Usuarios extends javax.swing.JInternalFrame {
     File archivo;
     byte[] bytesImg;
     int indice = 1;
+    int idPerfil = 1;
 
     public Usuarios(String usuario) throws Exception {
         initComponents();
         //setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         new UsuariosControl().LlenarTablaUsuarios(tblUsuarios, 50, 100, 150);
-        new UsuariosControl().llenarComboPerfil(cmbPerfiles);
+        new UsuariosControl().cargarComboPerfiles(cmbPerfiles);
         txtUsuario1.setText(usuario);
     }
 
@@ -74,10 +71,8 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         txtRuc = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
@@ -93,19 +88,17 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnBuscarImagen = new javax.swing.JButton();
         lblPath = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listaPerfiles = new javax.swing.JList<>();
-        btnAddPerfil = new javax.swing.JButton();
-        btnDelPerfil = new javax.swing.JButton();
-        cmbPerfiles = new javax.swing.JComboBox<>();
-        cmbEmail = new javax.swing.JCheckBox();
-        cmbRuc = new javax.swing.JCheckBox();
-        cmbTelefono = new javax.swing.JCheckBox();
-        cmbDireccion = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         txtSueldo = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         cbPlanilla = new javax.swing.JCheckBox();
+        cmbPerfiles = new javax.swing.JComboBox<>();
+        cmbRuc = new javax.swing.JCheckBox();
+        cmbTelefono = new javax.swing.JCheckBox();
+        cmbDireccion = new javax.swing.JCheckBox();
+        cmbEmail = new javax.swing.JCheckBox();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,82 +108,128 @@ public class Usuarios extends javax.swing.JInternalFrame {
         setToolTipText("");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("PERFILES");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
+        jLabel1.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("PERFIL");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 150, -1));
 
+        jLabel4.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("NOMBRES *");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 150, -1));
 
+        jLabel5.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("DNI *");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 150, -1));
 
+        jLabel6.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("TELEFONO");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 150, -1));
 
+        jLabel7.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("DIRECCION");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 150, -1));
 
+        jLabel9.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("USUARIO *");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 150, -1));
 
+        jLabel10.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("CONTRASEÑA *");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 150, -1));
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(255, 102, 51));
+        txtId.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 60, -1));
+        txtId.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 60, -1));
 
+        txtNombre.setBackground(new java.awt.Color(255, 102, 51));
+        txtNombre.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtNombre.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 170, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 190, -1));
 
+        txtApellido.setBackground(new java.awt.Color(255, 102, 51));
+        txtApellido.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtApellido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtApellido.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 170, -1));
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 190, -1));
 
+        txtDni.setBackground(new java.awt.Color(255, 102, 51));
+        txtDni.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtDni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDni.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtDni.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDniActionPerformed(evt);
             }
         });
-        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 170, -1));
+        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 190, -1));
 
+        txtTelefono.setBackground(new java.awt.Color(255, 102, 51));
+        txtTelefono.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTelefono.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtTelefono.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtTelefono.setEnabled(false);
-        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 140, -1));
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, 190, -1));
 
+        txtDireccion.setBackground(new java.awt.Color(255, 102, 51));
+        txtDireccion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtDireccion.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtDireccion.setEnabled(false);
-        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 140, -1));
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 190, -1));
 
+        txtUsuario.setBackground(new java.awt.Color(255, 102, 51));
+        txtUsuario.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtUsuario.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 170, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 190, -1));
 
+        txtPass.setBackground(new java.awt.Color(255, 102, 51));
+        txtPass.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 170, -1));
+        txtPass.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 190, -1));
 
+        tblUsuarios.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -209,7 +248,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblUsuarios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 770, 530));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 780, 770));
 
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imprimir.png"))); // NOI18N
         btnImprimir.setBorder(null);
@@ -221,7 +260,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 120, -1));
+        getContentPane().add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 850, 120, -1));
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnGuardar.setBorder(null);
@@ -233,7 +272,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 690, -1, 40));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 850, -1, 40));
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/actualizar.png"))); // NOI18N
         btnModificar.setBorder(null);
@@ -245,7 +284,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 690, 120, 40));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 850, 120, 40));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         btnEliminar.setBorder(null);
@@ -257,7 +296,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 690, 120, 40));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 850, 120, 40));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
         btnNuevo.setBorder(null);
@@ -269,62 +308,66 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 690, -1, 40));
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 850, -1, 40));
 
+        jLabel16.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("RUC");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 150, -1));
 
+        txtRuc.setBackground(new java.awt.Color(255, 102, 51));
+        txtRuc.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtRuc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtRuc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtRuc.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtRuc.setEnabled(false);
-        getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 140, -1));
+        getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 190, -1));
 
-        jLabel17.setText("¿PLANILLA?");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
-
+        txtEmail.setBackground(new java.awt.Color(255, 102, 51));
+        txtEmail.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtEmail.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
         txtEmail.setEnabled(false);
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, 140, -1));
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 560, 190, -1));
 
         jPanel8.setBackground(new java.awt.Color(255, 102, 51));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel15.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("USUARIOS");
-        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 30));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hombre.png"))); // NOI18N
         jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
 
         txtFecha.setEditable(false);
         txtFecha.setBackground(new java.awt.Color(255, 102, 51));
+        txtFecha.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(255, 255, 255));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 20, 90, -1));
+        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, 90, -1));
 
         txtHora.setEditable(false);
         txtHora.setBackground(new java.awt.Color(255, 102, 51));
+        txtHora.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         txtHora.setForeground(new java.awt.Color(255, 255, 255));
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 90, -1));
+        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 90, -1));
 
         txtUsuario1.setEditable(false);
         txtUsuario1.setBackground(new java.awt.Color(255, 102, 51));
+        txtUsuario1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         txtUsuario1.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 140, -1));
+        txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 140, -1));
 
-        jLabel19.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 48)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("USUARIOS");
-        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, -1, 30));
+        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, 190, 40));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 70));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 70));
 
         jPanel6.setBackground(new java.awt.Color(255, 102, 51));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -351,11 +394,17 @@ public class Usuarios extends javax.swing.JInternalFrame {
         jLabel8.setText("MISTER JUERGA");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 0, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 1080, 40));
-        getContentPane().add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 160, 140));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 900, 1190, 40));
 
+        lblImagen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        getContentPane().add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 160, 140));
+
+        jLabel14.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("APELLIDOS *");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, -1));
 
         btnBuscarImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carpeta.png"))); // NOI18N
         btnBuscarImagen.setBorder(null);
@@ -367,77 +416,107 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnBuscarImagenActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, -1));
+        getContentPane().add(btnBuscarImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
 
+        lblPath.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        lblPath.setForeground(new java.awt.Color(204, 255, 255));
         lblPath.setText(".");
-        getContentPane().add(lblPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 260, -1));
+        getContentPane().add(lblPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 380, -1));
 
+        jLabel3.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("ID");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, -1));
 
-        jScrollPane3.setViewportView(listaPerfiles);
+        jLabel18.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel18.setText("E-MAIL");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 150, -1));
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 130, 100));
+        jLabel22.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("SUELDO");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 150, -1));
 
-        btnAddPerfil.setBackground(new java.awt.Color(51, 153, 0));
-        btnAddPerfil.setText("+");
-        btnAddPerfil.addActionListener(new java.awt.event.ActionListener() {
+        txtSueldo.setBackground(new java.awt.Color(255, 102, 51));
+        txtSueldo.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        txtSueldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSueldo.setText("0");
+        txtSueldo.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 590, 190, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("¿PLANILLA?");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 150, -1));
+
+        cbPlanilla.setBackground(new java.awt.Color(255, 102, 51));
+        cbPlanilla.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cbPlanilla.setBorderPaintedFlat(true);
+        jPanel1.add(cbPlanilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, 20, 20));
+
+        cmbPerfiles.setBackground(new java.awt.Color(255, 102, 51));
+        cmbPerfiles.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        cmbPerfiles.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cmbPerfiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPerfilActionPerformed(evt);
+                cmbPerfilesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 670, -1, -1));
+        jPanel1.add(cmbPerfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, 260, -1));
 
-        btnDelPerfil.setBackground(new java.awt.Color(255, 102, 102));
-        btnDelPerfil.setText("-");
-        btnDelPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelPerfilActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, -1, -1));
-
-        getContentPane().add(cmbPerfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 130, -1));
-
-        cmbEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEmailActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cmbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, -1, -1));
-
+        cmbRuc.setBackground(new java.awt.Color(255, 102, 51));
+        cmbRuc.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cmbRuc.setBorderPaintedFlat(true);
         cmbRuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbRucActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, -1));
+        jPanel1.add(cmbRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
+        cmbTelefono.setBackground(new java.awt.Color(255, 102, 51));
+        cmbTelefono.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cmbTelefono.setBorderPaintedFlat(true);
         cmbTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTelefonoActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, -1));
+        jPanel1.add(cmbTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, -1, -1));
 
+        cmbDireccion.setBackground(new java.awt.Color(255, 102, 51));
+        cmbDireccion.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cmbDireccion.setBorderPaintedFlat(true);
         cmbDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDireccionActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, -1));
+        jPanel1.add(cmbDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, -1));
 
-        jLabel18.setText("E-MAIL");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
+        cmbEmail.setBackground(new java.awt.Color(255, 102, 51));
+        cmbEmail.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        cmbEmail.setBorderPaintedFlat(true);
+        cmbEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEmailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, -1, -1));
 
-        jLabel22.setText("SUELDO");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
-
-        txtSueldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSueldo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        txtSueldo.setEnabled(false);
-        getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 140, -1));
-        getContentPane().add(cbPlanilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 410, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -493,86 +572,112 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //VALIDACIONES
-        int opc = 0;
-        Validaciones v = new Validaciones();
-        if (v.validarCampoVacio(txtNombre)) {
-            if (v.validarCampoVacio(txtApellido)) {
-                if (v.validarCampoVacio(txtDni)) {
-                    if (v.validarCampoVacio(txtUsuario)) {
-                        if (v.validarCampoVacio(txtPass)) {
-                            try {
-                                Usuario u = new Usuario();
-                                Perfil p = new Perfil();
-                                u.setNombre(txtNombre.getText().toUpperCase());
-                                u.setApellido(txtApellido.getText().toUpperCase());
-                                u.setDni(txtDni.getText());
-                                u.setRuc(txtRuc.getText());
-                                u.setTelefono(txtTelefono.getText());
-                                u.setDireccion(txtDireccion.getText().toUpperCase());
-                                u.setImagen(txtDireccion.getText().toUpperCase());
-                                u.setUsuario(txtUsuario.getText().toUpperCase());
-                                u.setPass(txtPass.getText().toUpperCase());
-                                u.setSueldo(Double.parseDouble(txtSueldo.getText()));
-                                if (cbPlanilla.isSelected()) {
-                                    opc = 1;
-                                }
-                                u.setPlanilla(opc);
-                                if (!new UsuariosControl().verificarUsuario(u)) {
-                                    UsuarioDAO udao = new UsuarioDAO();
-                                    if (udao.registrar(u)) {
-                                        System.out.println("SE REGISTRO EL USUARIO");
-                                        for (int i = 0; i < listaPerfiles.getModel().getSize(); i++) {
-                                            try {
-                                                //obtener el id de los perfiles agregados
-                                                p.setDescripcion(String.valueOf(listaModelo.getElementAt(i)));
-                                                int idPerfil = new UsuariosControl().getIdPerfil(p);
-                                                //obtener el ultimo id de usuario registrado
-                                                int ultimoId = new UsuariosControl().getUltimoIdUsuario();
-                                                //registrar en la tabla usuarioPerfil
-                                                UsuarioPerfil up = new UsuarioPerfil();
-                                                up.setIdusuario(ultimoId);
-                                                up.setIdperfil(idPerfil);
-                                                UsuarioPerfilDAO updao = new UsuarioPerfilDAO();
-                                                if (updao.registrar(up)) {
-                                                    System.out.println("SE REGISTRO PERFIL DE USUARIO");
-                                                } else {
-                                                    System.out.println("ERROR DE REGISTRO");
-                                                }
-                                            } catch (Exception ex) {
-                                                System.out.println(ex.getMessage());
-                                            }
-                                        }
-                                        new UsuariosControl().RefrescarTablaArea(tblUsuarios);
-                                    } else {
-                                        System.out.println("ERROR");
+        try {
+
+            int opc = 0;
+            Validaciones v = new Validaciones();
+            if (v.validarCampoVacio(txtNombre)) {
+                if (v.validarCampoVacio(txtApellido)) {
+                    if (v.validarCampoVacio(txtDni)) {
+                        if (v.validarCampoVacio(txtUsuario)) {
+                            if (v.validarCampoVacio(txtPass)) {
+                                try {
+                                    Usuario u = new Usuario();
+                                    u.setNombre(txtNombre.getText().toUpperCase());
+                                    System.out.println("asigno nombres");
+                                    u.setApellido(txtApellido.getText().toUpperCase());
+                                    System.out.println("asigno apellidos");
+                                    u.setDni(txtDni.getText());
+                                    System.out.println("asigno dni");
+                                    u.setRuc(txtRuc.getText());
+                                    System.out.println("asigno ruc");
+                                    u.setTelefono(txtTelefono.getText());
+                                    System.out.println("asigno telefono");
+                                    u.setDireccion(txtDireccion.getText().toUpperCase());
+                                    System.out.println("asigno direccion");
+                                    u.setImagen(txtDireccion.getText().toUpperCase());
+                                    System.out.println("asigno imagen");
+                                    u.setUsuario(txtUsuario.getText().toUpperCase());
+                                    System.out.println("asigno usuario");
+                                    u.setPass(txtPass.getText().toUpperCase());
+                                    System.out.println("asigno pass");
+                                    u.setSueldo(Double.parseDouble(txtSueldo.getText()));
+                                    System.out.println("asigno sueldo");
+                                    if (cbPlanilla.isSelected()) {
+                                        opc = 1;
                                     }
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "EL NOMBRE DE USUARIO INGRESADO YA EXISTE, INGRESE OTRO POR FAVOR");
-                                    txtUsuario.requestFocus();
+                                    u.setPlanilla(opc);
+                                    if (!new UsuariosControl().verificarUsuario(u)) {
+                                        UsuarioDAO udao = new UsuarioDAO();
+                                        if (udao.registrar(u)) {
+                                            System.out.println("SE REGISTRO EL USUARIO");
+                                            UsuarioPerfil up = new UsuarioPerfil();
+                                            int ultimoId = new UsuariosControl().getUltimoIdUsuario();
+                                            up.setIdusuario(ultimoId);
+                                            up.setIdperfil(idPerfil);
+                                            UsuarioPerfilDAO updao = new UsuarioPerfilDAO();
+                                            if (updao.registrar(up)) {
+                                                JOptionPane.showMessageDialog(null, "USUARIO REGISTRADO EXITOSAMENTE");
+                                                btnNuevo.doClick();
+                                            } else {
+                                                System.out.println("ERROR DE REGISTRO");
+                                            }
+//                                        try {
+//                                                //obtener el id de los perfiles agregados
+//                                                p.setDescripcion(String.valueOf(listaModelo.getElementAt(i)));
+//                                                int idPerfil = new UsuariosControl().getIdPerfil(p);
+//                                                //obtener el ultimo id de usuario registrado
+//                                                int ultimoId = new UsuariosControl().getUltimoIdUsuario();
+//                                                //registrar en la tabla usuarioPerfil
+//                                                UsuarioPerfil up = new UsuarioPerfil();
+//                                                up.setIdusuario(ultimoId);
+//                                                up.setIdperfil(idPerfil);
+//                                                UsuarioPerfilDAO updao = new UsuarioPerfilDAO();
+//                                                if (updao.registrar(up)) {
+//                                                    System.out.println("SE REGISTRO PERFIL DE USUARIO");
+//                                                } else {
+//                                                    System.out.println("ERROR DE REGISTRO");
+//                                                }
+//                                            } catch (Exception ex) {
+//                                                System.out.println(ex.getMessage());
+//                                            }
+//                                        for (int i = 0; i < listaPerfiles.getModel().getSize(); i++) {
+//                                            
+//                                        }
+                                            new UsuariosControl().RefrescarTablaArea(tblUsuarios);
+                                        } else {
+                                            System.out.println("ERROR");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "EL NOMBRE DE USUARIO O DNI INGRESADO EXISTE, INGRESE OTRO POR FAVOR");
+                                        txtUsuario.requestFocus();
+                                    }
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
                                 }
-                            } catch (Exception ex) {
-                                System.out.println(ex.getMessage());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "INGRESE INGRESE CONTRASEÑA");
+                                txtPass.requestFocus();
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "INGRESE INGRESE CONTRASEÑA");
-                            txtPass.requestFocus();
+                            JOptionPane.showMessageDialog(null, "INGRESE USUARIO");
+                            txtUsuario.requestFocus();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "INGRESE USUARIO");
-                        txtUsuario.requestFocus();
+                        JOptionPane.showMessageDialog(null, "INGRESE DNI");
+                        txtDni.requestFocus();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "INGRESE DNI");
-                    txtDni.requestFocus();
-                }
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "INGRESE APELLIDO");
+                    txtApellido.requestFocus();
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "INGRESE APELLIDO");
-                txtApellido.requestFocus();
+                JOptionPane.showMessageDialog(null, "INGRESE NOMBRE");
+                txtNombre.requestFocus();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "INGRESE NOMBRE");
-            txtNombre.requestFocus();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -603,21 +708,6 @@ public class Usuarios extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnBuscarImagenActionPerformed
-
-    private void btnAddPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPerfilActionPerformed
-        try {
-            System.out.println("");
-            listaModelo.addElement(cmbPerfiles.getSelectedItem());
-            listaPerfiles.setModel(listaModelo);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_btnAddPerfilActionPerformed
-
-    private void btnDelPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelPerfilActionPerformed
-        int numLista = listaPerfiles.getSelectedIndex();
-        listaModelo.removeElementAt(numLista);
-    }//GEN-LAST:event_btnDelPerfilActionPerformed
 
     private void cmbRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRucActionPerformed
         if (cmbRuc.isSelected()) {
@@ -698,6 +788,11 @@ public class Usuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void cmbPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPerfilesActionPerformed
+        Perfil p = (Perfil) cmbPerfiles.getSelectedItem();
+        idPerfil = p.getIdperfil();
+    }//GEN-LAST:event_cmbPerfilesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -738,9 +833,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddPerfil;
     private javax.swing.JButton btnBuscarImagen;
-    private javax.swing.JButton btnDelPerfil;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnImprimir;
@@ -749,7 +842,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox cbPlanilla;
     private javax.swing.JCheckBox cmbDireccion;
     private javax.swing.JCheckBox cmbEmail;
-    private javax.swing.JComboBox<String> cmbPerfiles;
+    private javax.swing.JComboBox<Perfil> cmbPerfiles;
     private javax.swing.JCheckBox cmbRuc;
     private javax.swing.JCheckBox cmbTelefono;
     private javax.swing.JLabel jLabel1;
@@ -757,7 +850,6 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -772,13 +864,12 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPath;
-    private javax.swing.JList<String> listaPerfiles;
     private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDireccion;

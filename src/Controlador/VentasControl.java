@@ -20,12 +20,8 @@ import Modelo.Venta;
 import Modelo.MySQLDAO.VentaDAO;
 import Modelo.VentaProducto;
 import Modelo.MySQLDAO.VentaProductoDAO;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +70,7 @@ public class VentasControl {
 
         //int numeroRegistros = ved.listar().size();
         //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.listar()) {
+        for (ProductoPresentacion pp : ppdao.Listar()) {
             if (pp.getIdcategoria() == idCategoria) {
                 columna[0] = getProductoConId(pp.getIdProducto());
                 columna[1] = getPresentacionConId(pp.getIdPresentacion());
@@ -202,7 +198,7 @@ public class VentasControl {
     public String getPrecio(int idProd, int presentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProd && pp.getIdPresentacion() == presentacion) {
                     return "" + pp.getPrecio();
                 }

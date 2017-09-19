@@ -27,8 +27,9 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelProductoSalida;
     DefaultTableModel modelAddSalida;
+    int idAlmacen = 0;
 
-    public KardexSalidas(String usuario) {
+    public KardexSalidas(String usuario) throws Exception {
         initComponents();
         txtFechaSalida.setText(new ManejadorFechas().getFechaActual());
         txtUsuario.setText(usuario);
@@ -42,13 +43,13 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         tblProductos.setModel(modelProductoSalida);
     }
 
-    public void titulosAddSalida() {
+    private void titulosAddSalida() {
         String[] titulos = {"#ID", "PRODUCTO", "PRESENTACION", "CANTIDAD", "CONCEPTO", "SUBTOTAL"};
         modelAddSalida = new DefaultTableModel(null, titulos);
         tblSalidas.setModel(modelAddSalida);
     }
 
-    public void limpiarTablaProductoSalidas() {
+    private void limpiarTablaProductoSalidas() {
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
             modelProductoSalida.removeRow(i);
             i -= 1;
@@ -64,47 +65,38 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        salidas = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
+        grupoDestino = new javax.swing.ButtonGroup();
         txtProductoSalida = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         btnAddSalida = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblSalidas = new javax.swing.JTable();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
         txtCantidadSalida = new javax.swing.JTextField();
         btnRegistrarSalida = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaObservacion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
         txtFechaSalida = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        panelDestino = new javax.swing.JPanel();
+        cbOtro = new javax.swing.JCheckBox();
+        cbBarraGeneral = new javax.swing.JCheckBox();
+        cbBarraVip = new javax.swing.JCheckBox();
+        txtConcepto = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setTitle("NOTAS DE PEDIDO - SALIDAS");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        salidas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel12.setBackground(new java.awt.Color(204, 51, 0));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("PRODUCTO");
-        jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
-
-        salidas.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, 30));
 
         txtProductoSalida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtProductoSalida.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -112,7 +104,7 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
                 txtProductoSalidaKeyReleased(evt);
             }
         });
-        salidas.add(txtProductoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 350, 30));
+        getContentPane().add(txtProductoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 350, 30));
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,7 +119,7 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(tblProductos);
 
-        salidas.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 930, 200));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 570, 220));
 
         btnAddSalida.setText("SELECCIONAR");
         btnAddSalida.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +127,7 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
                 btnAddSalidaActionPerformed(evt);
             }
         });
-        salidas.add(btnAddSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 400, 170, -1));
+        getContentPane().add(btnAddSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 170, -1));
 
         tblSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,44 +142,28 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         ));
         jScrollPane6.setViewportView(tblSalidas);
 
-        salidas.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 930, 150));
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 800, 150));
 
-        jPanel17.setBackground(new java.awt.Color(204, 51, 0));
-        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("CONCEPTO");
-        jPanel17.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, -1));
-
-        salidas.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 400, 20));
-
-        jPanel18.setBackground(new java.awt.Color(204, 51, 0));
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("UNIDADES");
-        jPanel18.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
-
-        salidas.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 150, 20));
-
-        txtCantidadSalida.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        txtCantidadSalida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCantidadSalida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        salidas.add(txtCantidadSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 150, 60));
+        getContentPane().add(txtCantidadSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 140, 30));
 
+        btnRegistrarSalida.setBackground(new java.awt.Color(102, 102, 102));
+        btnRegistrarSalida.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarSalida.setText("REGISTRAR SALIDA");
         btnRegistrarSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarSalidaActionPerformed(evt);
             }
         });
-        salidas.add(btnRegistrarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 610, 170, -1));
+        getContentPane().add(btnRegistrarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 240, 30));
 
         txaObservacion.setColumns(20);
         txaObservacion.setLineWrap(true);
         txaObservacion.setRows(5);
         jScrollPane1.setViewportView(txaObservacion);
 
-        salidas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 400, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 400, 100));
 
         jButton1.setText("X");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -195,42 +171,78 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        salidas.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 610, -1, -1));
-
-        jLabel2.setText("CATEGORIA");
-        salidas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
-
-        salidas.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 230, -1));
-
-        getContentPane().add(salidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 995, 680));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("MOVIMIENTOS : SALIDAS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel13.setBackground(new java.awt.Color(204, 51, 0));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("FECHA");
-        jPanel13.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 60, 20));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
 
         txtFechaSalida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 100, -1));
-
-        jPanel14.setBackground(new java.awt.Color(204, 51, 0));
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("USUARIO");
-        jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 70, 20));
+        getContentPane().add(txtFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 770, 100, -1));
 
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, 100, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, 100, -1));
+
+        jLabel28.setText("OBSERVACIONES");
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, -1, -1));
+
+        jLabel29.setText("UNIDADES");
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+
+        jLabel23.setText("PRODUCTO");
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 20));
+
+        jLabel25.setText("USUARIO");
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, -1, -1));
+
+        jLabel24.setText("FECHA");
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 770, -1, -1));
+
+        panelDestino.setBorder(javax.swing.BorderFactory.createTitledBorder("DESTINO"));
+        panelDestino.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        grupoDestino.add(cbOtro);
+        cbOtro.setText("OTRO");
+        cbOtro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOtroActionPerformed(evt);
+            }
+        });
+        panelDestino.add(cbOtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        grupoDestino.add(cbBarraGeneral);
+        cbBarraGeneral.setText("BARRA GENERAL");
+        cbBarraGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBarraGeneralActionPerformed(evt);
+            }
+        });
+        panelDestino.add(cbBarraGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        grupoDestino.add(cbBarraVip);
+        cbBarraVip.setText("BARRA VIP");
+        cbBarraVip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBarraVipActionPerformed(evt);
+            }
+        });
+        panelDestino.add(cbBarraVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        txtConcepto.setEnabled(false);
+        panelDestino.add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, -1));
+
+        getContentPane().add(panelDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 220, 160));
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 840, 100));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 840, 10));
+
+        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("SALIDAS - ALMACEN PRINCIPAL");
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,31 +259,27 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         int fila = tblProductos.getSelectedRow();
         if (fila >= 0) {
             if (!txtCantidadSalida.getText().trim().isEmpty()) {
-                if (!txaObservacion.getText().trim().isEmpty()) {
 
-                    String id = tblProductos.getValueAt(fila, 0).toString();
-                    String prod = tblProductos.getValueAt(fila, 1).toString();
-                    String presentacion = tblProductos.getValueAt(fila, 2).toString();
-                    Double cant = Double.parseDouble(txtCantidadSalida.getText());
-                    String concepto = txaObservacion.getText();
-                    double subtotal = cant * (Double.parseDouble(tblProductos.getValueAt(fila, 4).toString()));
+                String id = tblProductos.getValueAt(fila, 0).toString();
+                String prod = tblProductos.getValueAt(fila, 1).toString();
+                String presentacion = tblProductos.getValueAt(fila, 2).toString();
+                Double cant = Double.parseDouble(txtCantidadSalida.getText());
+                String concepto = txaObservacion.getText();
+                double subtotal = cant * (Double.parseDouble(tblProductos.getValueAt(fila, 4).toString()));
 
-                    if (Integer.parseInt(tblProductos.getValueAt(fila, 3).toString()) >= cant) {
-                        String datos[] = new String[6];
-                        datos[0] = id;
-                        datos[1] = prod;
-                        datos[2] = presentacion;
-                        datos[3] = String.valueOf(cant);
-                        datos[4] = concepto;
-                        datos[5] = String.valueOf(subtotal);
+                if (Integer.parseInt(tblProductos.getValueAt(fila, 3).toString()) >= cant) {
+                    String datos[] = new String[6];
+                    datos[0] = id;
+                    datos[1] = prod;
+                    datos[2] = presentacion;
+                    datos[3] = String.valueOf(cant);
+                    datos[4] = concepto;
+                    datos[5] = String.valueOf(subtotal);
 
-                        modelAddSalida.addRow(datos);
-                        tblSalidas.setModel(modelAddSalida);
-                    } else {
-                        JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES REQUERIDAS");
-                    }
+                    modelAddSalida.addRow(datos);
+                    tblSalidas.setModel(modelAddSalida);
                 } else {
-                    JOptionPane.showMessageDialog(getRootPane(), "INGRESE UN CONCEPTO DE SALIDA");
+                    JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES REQUERIDAS");
                 }
             } else {
                 JOptionPane.showMessageDialog(getRootPane(), "INGRESE UNA CANTIDAD");
@@ -282,51 +290,58 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddSalidaActionPerformed
 
     private void btnRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSalidaActionPerformed
-        try {
-            int numFilas = tblSalidas.getRowCount();
-            Movimiento m = new Movimiento();
-            m.setFecha(new ManejadorFechas().getFechaActualMySQL());
-            m.setHora(new ManejadorFechas().getHoraActual());
-            m.setIdtipoMovimiento(2);// tipo de movimiento 1 = entradas ; tipo mov 2 = salidas;
-            m.setIdUsuario(new UsuarioDAO().getIdUsuario(txtUsuario.getText()));
-            m.setObservacion(txaObservacion.getText());
-            
-            if (new MovimientoDAO().Registrar(m)) {
-                int ultimoMovimiento = new MovimientoDAO().getUltimoMovimiento();
-                System.out.println("MOVIMIENTO REGISTRADO");
-                //ACTUALIZANDO EL STOCK
-                int c = 0;
-                for (int i = 0; i < numFilas; i++) {
-                    MovimientoProducto mp = new MovimientoProducto();
-                    mp.setIdMovimiento(ultimoMovimiento);
-                    System.out.println("ultimo movimiento: " + ultimoMovimiento);
-                    mp.setIdProducto(new ProductoDAO().getIdProducto(Integer.parseInt(tblSalidas.getValueAt(i, 0).toString())));
-                    System.out.println("idproducto: " + mp.getIdProducto());
-                    mp.setIdPresentacion(new PresentacionDAO().getIdPresentacion(tblSalidas.getValueAt(i, 2).toString()));
-                    System.out.println("idpresentacion: " + mp.getIdPresentacion());
-                    mp.setCantidad(Double.parseDouble(tblSalidas.getValueAt(i, 3).toString()));
-                    System.out.println("cantidad: " + mp.getCantidad());
-                    mp.setValorizacion(Double.parseDouble(tblSalidas.getValueAt(i, 5).toString()));
-                    System.out.println("valorizacion: " + mp.getValorizacion());
+        if (idAlmacen != 0) {
+            try {
+                int numFilas = tblSalidas.getRowCount();
+                Movimiento m = new Movimiento();
+                m.setNotaPedido("NULL");
+                m.setFecha(new ManejadorFechas().getFechaActualMySQL());
+                m.setHora(new ManejadorFechas().getHoraActual());
+                m.setObservacion(txaObservacion.getText());
+                m.setIdtipoMovimiento(2);// tipo de movimiento 1 = entradas ; tipo mov 2 = salidas;            
+                m.setIdUsuario(new UsuarioDAO().getIdUsuario(txtUsuario.getText()));
+                m.setIdTipoComprobante(3);//
+                m.setIdProveedor(1);//proveedor por defecto mrjuerga
+                m.setIdAlmacen(1);//almacen por defecto mrjuerga almacen principal
 
-                    restarStock();
-                    if (new MovimientoProductoDAO().Registrar(mp)) {
-                        c++;
+                if (new MovimientoDAO().Registrar(m)) {
+                    int ultimoMovimiento = new MovimientoDAO().getUltimoMovimiento();
+                    System.out.println("MOVIMIENTO REGISTRADO");
+                    //ACTUALIZANDO EL STOCK
+                    int c = 0;
+                    for (int i = 0; i < numFilas; i++) {
+                        MovimientoProducto mp = new MovimientoProducto();
+                        mp.setIdMovimiento(ultimoMovimiento);
+                        System.out.println("ultimo movimiento: " + ultimoMovimiento);
+                        mp.setIdProducto(new ProductoDAO().getIdProducto(Integer.parseInt(tblSalidas.getValueAt(i, 0).toString())));
+                        System.out.println("idproducto: " + mp.getIdProducto());
+                        mp.setIdPresentacion(new PresentacionDAO().getIdPresentacion(tblSalidas.getValueAt(i, 2).toString()));
+                        System.out.println("idpresentacion: " + mp.getIdPresentacion());
+                        mp.setCantidad(Double.parseDouble(tblSalidas.getValueAt(i, 3).toString()));
+                        System.out.println("cantidad: " + mp.getCantidad());
+                        mp.setValorizacion(Double.parseDouble(tblSalidas.getValueAt(i, 5).toString()));
+                        System.out.println("valorizacion: " + mp.getValorizacion());
+                        
+                        if (new MovimientoProductoDAO().Registrar(mp)) {
+                            restarStock(1);//el stock q resta por el momento siempre debe ser almacen principal
+                            sumarStock(idAlmacen);
+                            c++;
+                        }
                     }
+                    if (c > 0) {
+                        JOptionPane.showMessageDialog(getRootPane(), "MOVIMIENTO REGISTRADO");
+                    }
+                } else {
+                    System.out.println("error");
                 }
-                if (c > 0) {
-                    JOptionPane.showMessageDialog(getRootPane(), "MOVIMIENTO REGISTRADO");
-                }
-            } else {
-                System.out.println("error");
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UN DESTINO");
         }
-
-
     }//GEN-LAST:event_btnRegistrarSalidaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -334,32 +349,56 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         modelAddSalida.removeRow(fila);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cbOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOtroActionPerformed
+        if (cbOtro.isSelected()) {
+            txtConcepto.setEnabled(true);
+            idAlmacen = 4;
+        } else {
+            txtConcepto.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbOtroActionPerformed
+
+    private void cbBarraGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBarraGeneralActionPerformed
+        if (cbBarraGeneral.isSelected()) {
+            txtConcepto.setEnabled(false);
+            idAlmacen = 2;
+        }
+    }//GEN-LAST:event_cbBarraGeneralActionPerformed
+
+    private void cbBarraVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBarraVipActionPerformed
+        if (cbBarraVip.isSelected()) {
+            txtConcepto.setEnabled(false);
+            idAlmacen = 3;
+        }
+    }//GEN-LAST:event_cbBarraVipActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSalida;
     private javax.swing.JButton btnRegistrarSalida;
-    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JCheckBox cbBarraGeneral;
+    private javax.swing.JCheckBox cbBarraVip;
+    private javax.swing.JCheckBox cbOtro;
+    private javax.swing.ButtonGroup grupoDestino;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JPanel salidas;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel panelDestino;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblSalidas;
     private javax.swing.JTextArea txaObservacion;
     private javax.swing.JTextField txtCantidadSalida;
+    private javax.swing.JTextField txtConcepto;
     private javax.swing.JTextField txtFechaSalida;
     private javax.swing.JTextField txtProductoSalida;
     private javax.swing.JTextField txtUsuario;
@@ -372,11 +411,11 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         limpiarTablaProductoSalidas();
         String art = txtProductoSalida.getText();
         String datos[] = new String[5];
-        String sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion, productopresentacion.stock, productopresentacion.precio\n"
+        String sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion, productopresentacion.stock2, productopresentacion.precio\n"
                 + "FROM producto\n"
                 + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
                 + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                + "where producto.nombre like '" + art + "%' or producto.nombre like '%" + art + "'\n"
+                + "where (producto.nombre like '" + art + "%' or producto.nombre like '%" + art + "') AND productopresentacion.idalmacen = 1 \n"
                 + "order by idproductopresentacion";
         try {
             Statement st = con.createStatement();
@@ -385,7 +424,7 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
                 datos[0] = String.valueOf(rs.getInt("productopresentacion.idproductopresentacion"));
                 datos[1] = rs.getString("producto.nombre");
                 datos[2] = rs.getString("presentacion.descripcion");
-                datos[3] = rs.getString("productopresentacion.stock");
+                datos[3] = rs.getString("productopresentacion.stock2");
                 datos[4] = rs.getString("productopresentacion.precio");
                 modelProductoSalida.addRow(datos);
             }
@@ -400,7 +439,7 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
         }
     }
 
-    private void restarStock() throws Exception {
+    private void restarStock(int idAlmacen) throws Exception {
         Conexion c = new Conexion();
         c.conectar();
         Connection con = c.getConexion();
@@ -412,12 +451,11 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
                 System.out.println("id: " + id);
                 double cantidad = Double.parseDouble(tblSalidas.getValueAt(i, 3).toString());
                 System.out.println("cantidad: " + cantidad);
-                double stock = new ProductoPresentacionDAO().obtenerProductoPresentacion(id).getStock();
+                double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock2();
                 System.out.println("stock: " + stock);
                 double newStock = stock - cantidad;
                 System.out.println("stock: " + newStock);
-
-                String sql = "UPDATE `productopresentacion` SET `stock`=" + newStock + " WHERE `idproductopresentacion` = " + id + " ";
+                String sql = "UPDATE `productopresentacion` SET `stock2`=" + newStock + " WHERE `idproducto` = " + id + " AND idalmacen = " + idAlmacen + "";
                 st = con.createStatement();
                 int rs = st.executeUpdate(sql);
                 if (rs > 0) {
@@ -427,7 +465,40 @@ public class KardexSalidas extends javax.swing.JInternalFrame {
             st.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
+        } finally{
+            con.close();
+            c.cerrar();
+        }
+    }
+    
+    private void sumarStock(int idAlmacen) throws Exception{//el parametro es para indicar la fila correcta que debe sumar el producto saliente y el destino es para especificar la columna
+        Conexion c = new Conexion();
+        c.conectar();
+        Connection con = c.getConexion();
+        int numFilas = tblSalidas.getRowCount();
+        try {
+            Statement st = null;
+            for (int i = 0; i < numFilas; i++) {
+                int id = Integer.parseInt(tblSalidas.getValueAt(i, 0).toString());
+                System.out.println("id: " + id);
+                double cantidad = Double.parseDouble(tblSalidas.getValueAt(i, 3).toString());
+                System.out.println("cantidad: " + cantidad);
+                double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock2();//debe obtener el stock de productos SIN FACTURA
+                System.out.println("stock: " + stock);
+                double newStock = stock + cantidad;
+                System.out.println("stock: " + newStock);
+                String sql = "UPDATE `productopresentacion` SET stock2  =" + newStock + " WHERE `idproducto` = " + id + " AND idalmacen = " + idAlmacen + "";
+                st = con.createStatement();
+                int rs = st.executeUpdate(sql);
+                if (rs > 0) {
+                    System.out.println("Se actualizo en stock del producto :" + id);
+                }
+            }
+            st.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally{
+            con.close();
             c.cerrar();
         }
     }

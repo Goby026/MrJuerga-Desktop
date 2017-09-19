@@ -31,6 +31,9 @@ public class Productos extends javax.swing.JInternalFrame {
         //new ProductosControl().cargarComboCategoria(cmbCategoria);
         //new ProductosControl().cargarComboPresentacion(cmbPresentacion);
     }
+    
+    public Productos(){
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -285,6 +288,8 @@ public class Productos extends javax.swing.JInternalFrame {
             if (new ProductoDAO().registrar(p)) {
                 JOptionPane.showMessageDialog(rootPane, "SE REGISTRÓ EL PRODUCTO");
                 new ProductosControl().RefrescarTablaProductos(tblProductos);
+                //recargar la tabla de productos
+                
             } else {
                 JOptionPane.showMessageDialog(rootPane, "ERROR DE REGISTRO");
             }

@@ -12,13 +12,15 @@ package Modelo;
 public class Medida {
     private Integer idmedida;
     private String descripcion;
+    private double valor;
 
     public Medida() {
     }
 
-    public Medida(Integer idmedida, String descripcion) {
+    public Medida(Integer idmedida, String descripcion, double valor) {
         this.idmedida = idmedida;
         this.descripcion = descripcion;
+        this.valor = valor;
     }
 
     public Integer getIdmedida() {
@@ -36,7 +38,18 @@ public class Medida {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return "Medida{" + "idmedida=" + idmedida + ", descripcion=" + descripcion + ", valor=" + valor + '}';
+    }
     
 }

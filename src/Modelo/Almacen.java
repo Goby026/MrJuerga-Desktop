@@ -67,6 +67,12 @@ public class Almacen {
     public void setResponsable(String responsable) {
         this.responsable = responsable;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
     
     
 }

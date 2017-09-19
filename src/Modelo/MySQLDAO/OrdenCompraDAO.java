@@ -3,6 +3,7 @@ package Modelo.MySQLDAO;
 import Interfaces.OrdenCompraCRUD;
 import Modelo.Conexion;
 import Modelo.OrdenCompra;
+import Modelo.Proveedor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import java.util.List;
 
 public class OrdenCompraDAO extends Conexion implements OrdenCompraCRUD {
 
-    String REGISTRAR = "INSERT INTO `ordencompra`(`fecha`, `hora`, `estado`, `moneda`, `serie`, `num_comprobante`, `entrega`, `idusuario`, `iproveedor`, `idtipocomprobante`) VALUES (?,?,?,?,?,?,?,?,?,?)";    
-    String MODIFICAR = "UPDATE `ordencompra` SET `fecha`=?,`hora`=?,`estado`=?,`moneda`=?,`serie`=?,`num_comprobante`=?,`entrega`=?,`idusuario`=?,`iproveedor`=?,`idtipocomprobante`=? WHERE `idordencompra`=?";
+    String REGISTRAR = "INSERT INTO `ordencompra`(`fecha`, `hora`, `estado`, `moneda`, `serie`, `num_comprobante`, `entrega`, `idusuario`, `idproveedor`, `idtipocomprobante`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    String MODIFICAR = "UPDATE `ordencompra` SET `fecha`=?,`hora`=?,`estado`=?,`moneda`=?,`serie`=?,`num_comprobante`=?,`entrega`=?,`idusuario`=?,`idproveedor`=?,`idtipocomprobante`=? WHERE `idordencompra`=?";
     String ANULAR = "UPDATE ordencompra SET estado = 0 WHERE idordencompra = ?";
     String OBTENER_TODAS = "SELECT * FROM ordencompra";
     String OBTENER_UNA = "SELECT * FROM ordencompra WHERE idordencompra = ?";
@@ -36,7 +37,7 @@ public class OrdenCompraDAO extends Conexion implements OrdenCompraCRUD {
             pst.setInt(10, oc.getIdTipoComprobante());
             int res = pst.executeUpdate();
             pst.close();
-            if (res>0) {
+            if (res > 0) {
                 return true;
             }
 //            this.getConexion().commit();
@@ -52,7 +53,6 @@ public class OrdenCompraDAO extends Conexion implements OrdenCompraCRUD {
     @Override
     public boolean modificar(OrdenCompra oc) throws Exception {
         try {
-
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(MODIFICAR);
             pst.setString(1, oc.getFecha());
@@ -132,8 +132,37 @@ public class OrdenCompraDAO extends Conexion implements OrdenCompraCRUD {
         }
         return lista;
     }
-    
-    public int getUltimaCompra() throws Exception{
+
+    public OrdenCompra obtener(int id) throws Exception {
+        OrdenCompra oc = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(OBTENER_UNA);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                oc = new OrdenCompra();
+                oc.setIdOrdenCompra(rs.getInt("idordencompra"));
+                oc.setFecha(rs.getString("fecha"));
+                oc.setHora(rs.getString("hora"));
+                oc.setEstado(rs.getInt("estado"));
+                oc.setMoneda(rs.getString("moneda"));
+                oc.setMoneda(rs.getString("serie"));
+                oc.setNroComprobante(rs.getString("num_comprobante"));
+                oc.setFechaEntrega(rs.getString("entrega"));
+                oc.setIdUsuario(rs.getInt("idusuario"));
+                oc.setIdProveedor(rs.getInt("idproveedor"));
+                oc.setIdTipoComprobante(rs.getInt("idtipocomprobante"));
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        }
+        return oc;
+    }
+
+    public int getUltimaCompra() throws Exception {
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(ULTIMA_COMPRA);
@@ -149,6 +178,38 @@ public class OrdenCompraDAO extends Conexion implements OrdenCompraCRUD {
             this.cerrar();
         }
         return -1;
+    }
+
+    //metodo para obtener proveedor a partir de una compra
+    public Proveedor obtenerPorOrdenCompra(int orden) throws Exception {
+        Proveedor p = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT proveedor.idProveedor, proveedor.razon, proveedor.ruc, proveedor.direccion, proveedor.ciudad, proveedor.telf_proveedor, proveedor.cod_postal, proveedor.correo, proveedor.codProveedor FROM ordencompra\n"
+                    + "INNER JOIN proveedor on ordencompra.idproveedor = proveedor.idproveedor\n"
+                    + "WHERE ordencompra.idordencompra =" + orden);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                p = new Proveedor();
+                p.setIdProveedor(res.getInt(1));
+                p.setRazon(res.getString(2));
+                p.setRuc(res.getString(3));
+                p.setDireccion(res.getString(4));
+                p.setCiudad(res.getString(5));
+                p.setTelf_prov(res.getString(6));
+                p.setCod_pos(res.getString(7));
+                p.setCorreo(res.getString(8));
+                p.setCodProv(res.getString(9));
+            }
+
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return p;
     }
 
 }

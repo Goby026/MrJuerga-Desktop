@@ -10,5 +10,5 @@ public interface ConteoProductoCRUD {
     public boolean Modificar(ConteoProducto cp)throws Exception;
     public boolean Eliminar(ConteoProducto cp)throws Exception;
     public List<ConteoProducto>Listar()throws Exception;
-    public ConteoProducto obtener(String fecha)throws Exception;
+    public ConteoProducto obtener(int id)throws Exception;
 }

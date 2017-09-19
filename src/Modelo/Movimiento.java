@@ -5,8 +5,6 @@
  */
 package Modelo;
 
-import java.util.Objects;
-
 /**
  *
  * @author Marce
@@ -14,22 +12,17 @@ import java.util.Objects;
 public class Movimiento {
     
     private int idMovimiento;
+    private String notaPedido;
     private String fecha;
     private String hora;
+    private String observacion;
     private int idtipoMovimiento;
-    private int idUsuario;
-    private String observacion;    
-    
-    public Movimiento() {
-    }
+    private int idUsuario;    
+    private int idTipoComprobante;
+    private int idProveedor;
+    private int idAlmacen;
 
-    public Movimiento(int idMovimiento, String fecha, String hora, int idtipoMovimiento, int idUsuario, String observacion) {
-        this.idMovimiento = idMovimiento;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.idtipoMovimiento = idtipoMovimiento;
-        this.idUsuario = idUsuario;
-        this.observacion = observacion;
+    public Movimiento() {
     }
 
     public int getIdMovimiento() {
@@ -40,6 +33,14 @@ public class Movimiento {
         this.idMovimiento = idMovimiento;
     }
 
+    public String getNotaPedido() {
+        return notaPedido;
+    }
+
+    public void setNotaPedido(String notaPedido) {
+        this.notaPedido = notaPedido;
+    }
+    
     public String getFecha() {
         return fecha;
     }
@@ -54,6 +55,14 @@ public class Movimiento {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public int getIdtipoMovimiento() {
@@ -72,62 +81,33 @@ public class Movimiento {
         this.idUsuario = idUsuario;
     }
 
-    public String getObservacion() {
-        return observacion;
+    public int getIdTipoComprobante() {
+        return idTipoComprobante;
     }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setIdTipoComprobante(int idTipoComprobante) {
+        this.idTipoComprobante = idTipoComprobante;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.idMovimiento;
-        hash = 89 * hash + Objects.hashCode(this.fecha);
-        hash = 89 * hash + Objects.hashCode(this.hora);
-        hash = 89 * hash + this.idtipoMovimiento;
-        hash = 89 * hash + this.idUsuario;
-        hash = 89 * hash + Objects.hashCode(this.observacion);
-        return hash;
+    public int getIdProveedor() {
+        return idProveedor;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Movimiento other = (Movimiento) obj;
-        if (this.idMovimiento != other.idMovimiento) {
-            return false;
-        }
-        if (this.idtipoMovimiento != other.idtipoMovimiento) {
-            return false;
-        }
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
-        if (!Objects.equals(this.fecha, other.fecha)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        if (!Objects.equals(this.observacion, other.observacion)) {
-            return false;
-        }
-        return true;
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public int getIdAlmacen() {
+        return idAlmacen;
+    }
+
+    public void setIdAlmacen(int idAlmacen) {
+        this.idAlmacen = idAlmacen;
     }
 
     @Override
     public String toString() {
-        return "Movimiento{" + "idMovimiento=" + idMovimiento + ", fecha=" + fecha + ", hora=" + hora + ", idtipoMovimiento=" + idtipoMovimiento + ", idUsuario=" + idUsuario + ", observacion=" + observacion + '}';
+        return "Movimiento{" + "idMovimiento=" + idMovimiento + ", fecha=" + fecha + ", hora=" + hora + ", observacion=" + observacion + ", idtipoMovimiento=" + idtipoMovimiento + ", idUsuario=" + idUsuario + ", idTipoComprobante=" + idTipoComprobante + ", idProveedor=" + idProveedor + ", idAlmacen=" + idAlmacen + '}';
     }
     
 }

@@ -48,4 +48,11 @@ public class Categoria {
         this.codcategoria = codcategoria;
     }
 
+    @Override
+    public String toString() {
+        return descripcion;
+    }
+    
+    
+
 }

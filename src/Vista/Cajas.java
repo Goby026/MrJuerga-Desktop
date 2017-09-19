@@ -50,19 +50,18 @@ public class Cajas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel8 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtHora = new javax.swing.JTextField();
-        txtUsuario = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnReporte = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        txtHora = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtNomCaja = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -82,50 +81,12 @@ public class Cajas extends javax.swing.JInternalFrame {
         btnAsignar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        fondo = new javax.swing.JPanel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel8.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel15.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("CAJAS");
-        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 30));
-
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/soltar.png"))); // NOI18N
-        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
-
-        txtFecha.setEditable(false);
-        txtFecha.setBackground(new java.awt.Color(153, 153, 153));
-        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
-        txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 90, -1));
-
-        txtHora.setEditable(false);
-        txtHora.setBackground(new java.awt.Color(153, 153, 153));
-        txtHora.setForeground(new java.awt.Color(255, 255, 255));
-        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 90, -1));
-
-        txtUsuario.setEditable(false);
-        txtUsuario.setBackground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel8.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 140, -1));
-
-        jLabel17.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel17.setText("CAJAS");
-        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, -1, 30));
-
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 70));
 
         jPanel6.setBackground(new java.awt.Color(153, 153, 153));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -152,20 +113,65 @@ public class Cajas extends javax.swing.JInternalFrame {
         jLabel5.setText("MISTER JUERGA");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 0, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 710, 820, 40));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 710, 1040, 40));
 
+        btnReporte.setBackground(new java.awt.Color(204, 204, 255));
+        btnReporte.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         btnReporte.setText("CREAR REPORTE");
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 150, 40));
+        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 230, 40));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("NUEVA CAJA"));
+        jPanel8.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/soltar.png"))); // NOI18N
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
+
+        txtFecha.setEditable(false);
+        txtFecha.setBackground(new java.awt.Color(153, 153, 153));
+        txtFecha.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 90, -1));
+
+        txtHora.setEditable(false);
+        txtHora.setBackground(new java.awt.Color(153, 153, 153));
+        txtHora.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtHora.setForeground(new java.awt.Color(255, 255, 255));
+        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 20, 90, -1));
+
+        txtUsuario.setEditable(false);
+        txtUsuario.setBackground(new java.awt.Color(153, 153, 153));
+        txtUsuario.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel8.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 140, -1));
+
+        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 48)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel17.setText("GESTION DE CAJAS");
+        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 40));
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new org.jdesktop.swingx.border.DropShadowBorder(), "NUEVA CAJA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(txtNomCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 150, -1));
 
+        txtNomCaja.setBackground(new java.awt.Color(153, 153, 153));
+        txtNomCaja.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        txtNomCaja.setForeground(new java.awt.Color(255, 255, 255));
+        txtNomCaja.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(txtNomCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 220, -1));
+
+        tblCajas.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         tblCajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -184,48 +190,88 @@ public class Cajas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblCajas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 310, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 420, 110));
 
+        btnGuardar.setBackground(new java.awt.Color(153, 153, 153));
+        btnGuardar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("guardar");
+        btnGuardar.setBorder(null);
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 130, -1));
 
+        btnNuevo.setBackground(new java.awt.Color(153, 153, 153));
+        btnNuevo.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("nuevo");
+        btnNuevo.setBorder(null);
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setContentAreaFilled(false);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 70, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 130, -1));
 
+        btnEditar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEditar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("editar");
+        btnEditar.setBorder(null);
+        btnEditar.setBorderPainted(false);
+        btnEditar.setContentAreaFilled(false);
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 70, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 130, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("eliminar");
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, -1, -1));
+        btnEliminar.setBorder(null);
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.setContentAreaFilled(false);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 130, -1));
 
+        jLabel3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("NOMBRE DE CAJA");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 510, 190));
+        jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 720, 190));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("ASIGNAR CAJEROS"));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 290));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ASIGNAR CAJEROS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 18))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.add(cmbCajas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 120, -1));
+        cmbCajas.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        cmbCajas.setBorder(new org.jdesktop.swingx.border.DropShadowBorder());
+        jPanel2.add(cmbCajas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 170, -1));
 
+        jLabel2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel2.setText("CAJA");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
+        tblUsuarios.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -239,8 +285,9 @@ public class Cajas extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tblUsuarios);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 290, 240));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 480, 320));
 
+        tblPersonalAsignado.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         tblPersonalAsignado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -254,34 +301,43 @@ public class Cajas extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(tblPersonalAsignado);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 290, 240));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 300, 280));
 
-        btnAsignar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAsignar.setBackground(new java.awt.Color(153, 153, 255));
+        btnAsignar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnAsignar.setForeground(new java.awt.Color(204, 204, 255));
         btnAsignar.setText(">");
         btnAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsignarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAsignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, 30));
+        jPanel2.add(btnAsignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 150, 30));
 
+        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 310, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
+        jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jButton2.setText("X");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 770, 350));
+        fondo.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 1040, 440));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 990, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -434,10 +490,10 @@ public class Cajas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnReporte;
     private javax.swing.JComboBox<String> cmbCajas;
+    private javax.swing.JPanel fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;

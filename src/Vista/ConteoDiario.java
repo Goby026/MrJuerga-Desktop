@@ -1,17 +1,9 @@
 package Vista;
 
-import Controlador.ColumnasTablas;
 import Controlador.ConteoDiarioControl;
 import Controlador.FormatoFechas;
-import Controlador.ManejadorFechas;
-import Controlador.MyiReportVisor;
-import Modelo.ConteoProducto;
-import Modelo.MySQLDAO.ConteoProductoDAO;
-import Modelo.MySQLDAO.PresentacionDAO;
-import Modelo.MySQLDAO.UsuarioDAO;
-import java.util.HashMap;
+import Modelo.Medida;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,33 +11,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConteoDiario extends javax.swing.JInternalFrame {
 
-    HashMap parametros = new HashMap();
-    MyiReportVisor mrv = null;
-    DefaultTableModel modelo;
+    ConteoDiarioControl cdc;
 
     public ConteoDiario(String usuario) {
         initComponents();
-        cargarDatos(usuario);
+        cdc = new ConteoDiarioControl(this);
+        lblUsuario.setText(usuario);
     }
 
     public ConteoDiario() {
     }
 
-    public void cargarDatos(String usuario) {
-        try {
-            new ConteoDiarioControl().cargarComboCategorias(cmbCategorias);
-            lblUsuario.setText(usuario);
-            titulosContados();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
-    public void titulosContados() {
-        String cabecera[] = {"ID", "PRODUCTO", "PRESENTACION", "CUENTA"};
-        modelo = new DefaultTableModel(null, cabecera);
-        tblContados.setModel(modelo);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +45,11 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        cmbMedida = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -74,23 +57,14 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         lblFecha = new javax.swing.JLabel();
         jlabelf = new javax.swing.JLabel();
         jlabelh = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        btnGuardar = new javax.swing.JButton();
-        btnQuitar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContados = new javax.swing.JTable();
         btnCrearReporte = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        btnAgregar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnQuitar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         ConteosPorFecha.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -105,6 +79,7 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         jdcFechas.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ConteosPorFecha.getContentPane().add(jdcFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 370, 40));
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 107, 83));
@@ -121,49 +96,77 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblBuscarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblBuscarProductosMouseClicked(evt);
-            }
-        });
         jScrollPane3.setViewportView(tblBuscarProductos);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 66, 1050, 300));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 300));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("cantidad");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, -1, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, -1));
 
         cmbCategorias.setBackground(new java.awt.Color(255, 107, 83));
         cmbCategorias.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         cmbCategorias.setForeground(new java.awt.Color(255, 255, 255));
         cmbCategorias.setBorder(null);
-        cmbCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoriasActionPerformed(evt);
-            }
-        });
-        jPanel4.add(cmbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 300, 30));
+        jPanel4.add(cmbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 300, 30));
 
         jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("categoria");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("datos de producto");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         txtCantidad.setBackground(new java.awt.Color(255, 107, 83));
         txtCantidad.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 255, 255));
+        txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtCantidad.setEnabled(false);
-        jPanel4.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, 130, -1));
+        jPanel4.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 130, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 1070, 440));
+        btnAgregar.setBackground(new java.awt.Color(8, 102, 0));
+        btnAgregar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("agregar");
+        btnAgregar.setBorderPainted(false);
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel4.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 450, 120, -1));
+
+        btnCancelar.setBackground(new java.awt.Color(8, 102, 0));
+        btnCancelar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("cancelar");
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel4.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 450, 120, -1));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Leelawadee", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("CONTEO DIARIO");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        cmbMedida.setBackground(new java.awt.Color(255, 107, 83));
+        cmbMedida.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        cmbMedida.setForeground(new java.awt.Color(255, 255, 255));
+        cmbMedida.setBorder(null);
+        jPanel4.add(cmbMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 300, 30));
+
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("medida");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 1070, 490));
 
         jPanel1.setBackground(new java.awt.Color(85, 74, 70));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -198,70 +201,7 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         jlabelh.setText("hora:");
         jPanel1.add(jlabelh, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 940, 1430, 50));
-
-        jPanel3.setBackground(new java.awt.Color(239, 239, 239));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnGuardar.setBackground(new java.awt.Color(8, 102, 0));
-        btnGuardar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(120, 113, 109));
-        btnGuardar.setText("guardar");
-        btnGuardar.setBorderPainted(false);
-        btnGuardar.setContentAreaFilled(false);
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 120, -1));
-
-        btnQuitar.setBackground(new java.awt.Color(8, 102, 0));
-        btnQuitar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        btnQuitar.setForeground(new java.awt.Color(120, 113, 109));
-        btnQuitar.setText("quitar");
-        btnQuitar.setBorderPainted(false);
-        btnQuitar.setContentAreaFilled(false);
-        btnQuitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnQuitar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 120, -1));
-
-        btnLimpiar.setBackground(new java.awt.Color(8, 102, 0));
-        btnLimpiar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        btnLimpiar.setForeground(new java.awt.Color(120, 113, 109));
-        btnLimpiar.setText("limpiar");
-        btnLimpiar.setBorderPainted(false);
-        btnLimpiar.setContentAreaFilled(false);
-        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimpiar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, -1));
-
-        jButton6.setBackground(new java.awt.Color(8, 102, 0));
-        jButton6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(120, 113, 109));
-        jButton6.setText("cancelar");
-        jButton6.setBorderPainted(false);
-        jButton6.setContentAreaFilled(false);
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 120, -1));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("EN ESTA SECCION APARECEN LOS PRODUCTOS CONTABILIZADOS, PULSE LA OPCION GUARDAR PARA GUARDAR LA CUENTA Y GENERAR UN REPORTE, O SELECCIONE UN PRODUCTO Y PULSE EL BOTON ELIMINAR PARA QUITARLO DE LA LISTA, O SELECCIONE LA OPCION NUEVO PARA BORRAR TODA LA LISTA.");
-        jScrollPane2.setViewportView(jTextArea1);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 320, 170));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 360, 450));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 870, 1070, 50));
 
         jPanel9.setBackground(new java.awt.Color(120, 113, 109));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -279,7 +219,7 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblContados);
 
-        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1050, 370));
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1050, 310));
 
         btnCrearReporte.setBackground(new java.awt.Color(120, 113, 109));
         btnCrearReporte.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
@@ -289,193 +229,61 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
         btnCrearReporte.setContentAreaFilled(false);
         btnCrearReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCrearReporte.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCrearReporte.addActionListener(new java.awt.event.ActionListener() {
+        jPanel9.add(btnCrearReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 330, 180, -1));
+
+        btnGuardar.setBackground(new java.awt.Color(8, 102, 0));
+        btnGuardar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("guardar");
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearReporteActionPerformed(evt);
+                nPerformed(evt);
             }
         });
-        jPanel9.add(btnCrearReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, 180, -1));
+        jPanel9.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 120, -1));
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, 1070, 450));
+        btnQuitar.setBackground(new java.awt.Color(8, 102, 0));
+        btnQuitar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        btnQuitar.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuitar.setText("quitar");
+        btnQuitar.setBorderPainted(false);
+        btnQuitar.setContentAreaFilled(false);
+        btnQuitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuitar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel9.add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 120, -1));
 
-        jPanel2.setBackground(new java.awt.Color(11, 114, 133));
-        jPanel2.setPreferredSize(new java.awt.Dimension(360, 140));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnLimpiar.setBackground(new java.awt.Color(8, 102, 0));
+        btnLimpiar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setText("limpiar");
+        btnLimpiar.setBorderPainted(false);
+        btnLimpiar.setContentAreaFilled(false);
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel9.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 120, -1));
 
-        btnAgregar.setBackground(new java.awt.Color(8, 102, 0));
-        btnAgregar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("agregar");
-        btnAgregar.setBorderPainted(false);
-        btnAgregar.setContentAreaFilled(false);
-        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 120, -1));
+        jButton6.setBackground(new java.awt.Color(8, 102, 0));
+        jButton6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("cancelar");
+        jButton6.setBorderPainted(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 120, -1));
 
-        btnCancelar.setBackground(new java.awt.Color(8, 102, 0));
-        btnCancelar.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("cancelar");
-        btnCancelar.setBorderPainted(false);
-        btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 120, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 50, 360, 440));
-
-        jPanel5.setBackground(new java.awt.Color(85, 74, 70));
-
-        jLabel4.setFont(new java.awt.Font("Leelawadee", 1, 48)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("CONTEO DIARIO");
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("SALIR");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 980, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1430, 60));
+        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 1070, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriasActionPerformed
-        try {
-            String categoria = cmbCategorias.getSelectedItem().toString();
-            new ConteoDiarioControl().tablaBuscarProductos(tblBuscarProductos, categoria);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_cmbCategoriasActionPerformed
-
-    private void tblBuscarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscarProductosMouseClicked
-        try {
-            int fila = tblBuscarProductos.getSelectedRow();
-
-            if (fila >= 0) {
-                txtCantidad.setEnabled(true);
-            } else {
-                txtCantidad.setEnabled(false);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_tblBuscarProductosMouseClicked
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int fila = tblBuscarProductos.getSelectedRow();
-        if (fila >= 0 && !txtCantidad.getText().trim().isEmpty()) {
-            //agregar a tabla contados
-            String datos[] = new String[4];
-            datos[0] = tblBuscarProductos.getValueAt(fila, 0).toString();
-            datos[1] = tblBuscarProductos.getValueAt(fila, 1).toString();
-            datos[2] = tblBuscarProductos.getValueAt(fila, 2).toString();
-            datos[3] = txtCantidad.getText();
-            modelo.addRow(datos);
-            tblContados.setModel(modelo);
-            txtCantidad.setText("");
-        } else {
-            JOptionPane.showMessageDialog(getRootPane(), "DEBE INDICAR PRODUCTO Y CANTIDAD");
-        }
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        tblBuscarProductos.clearSelection();
-        txtCantidad.setText("");
-        txtCantidad.setEnabled(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnCrearReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearReporteActionPerformed
-        ConteosPorFecha.setVisible(true);
-        ConteosPorFecha.setBounds(350, 200, 750, 390);
-    }//GEN-LAST:event_btnCrearReporteActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (tblContados.getRowCount() > 0) {
-            //validar si ya se realizo la cuenta
-            int opc = JOptionPane.showConfirmDialog(null, "¿DESEA GUARDAR LA LISTA?", "GUARDAR CONTEO " + new ManejadorFechas().getFechaActual(), JOptionPane.YES_NO_OPTION);
-            if (opc == 0) { //verdadero
-                int c = 0;
-                try {
-                    for (int i = 0; i < tblContados.getRowCount(); i++) {
-                        ConteoProducto cp = new ConteoProducto();
-                        cp.setIdUsuario(new UsuarioDAO().getIdUsuario(lblUsuario.getText()));
-                        cp.setIdProducto(Integer.parseInt(tblContados.getValueAt(i, 0).toString()));
-                        cp.setIdPresentacion(new PresentacionDAO().getIdPresentacion(tblContados.getValueAt(i, 2).toString()));
-                        cp.setStock(Integer.parseInt(tblContados.getValueAt(i, 3).toString()));
-                        new ConteoProductoDAO().Registrar(cp);
-                        c++;
-                    }
-                    if (c>0) {
-                        JOptionPane.showMessageDialog(getRootPane(), "SE REGISTRO EL CONTEO EXITOSAMENTE");
-                        parametros.put("fecha", lblFecha.getText());
-                        mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ConteoProductos.jrxml", parametros, new ColumnasTablas().getPageSize(tblContados));
-                        mrv.setNombreArchivo("Conteo"+lblFecha.getText());
-                        mrv.exportarAPdf();
-                        mrv.dispose();
-                    }
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-            } else {//falso
-            }
-        } else {
-            JOptionPane.showMessageDialog(getRootPane(), "NO SE PUEDE REGISTRAR UN CONTEO VACIO, INGRESE PRODUCTOS CONTADOS");
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        int fila = tblContados.getSelectedRow();
-        if (fila >= 0) {
-            modelo = (DefaultTableModel) tblContados.getModel();
-            modelo.removeRow(fila);
-        } else {
-            JOptionPane.showMessageDialog(getRootPane(), "DEBE INDICAR EL PRODUCTO QUE DESEA QUITAR");
-        }
-    }//GEN-LAST:event_btnQuitarActionPerformed
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        dispose();
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void nPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nPerformed
+        
+    }//GEN-LAST:event_nPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(getRootPane(), new FormatoFechas().FormatoFec(jdcFechas));
@@ -484,39 +292,35 @@ public class ConteoDiario extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog ConteosPorFecha;
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCrearReporte;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnQuitar;
-    private javax.swing.JComboBox<String> cmbCategorias;
+    public javax.swing.JButton btnAgregar;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnCrearReporte;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnLimpiar;
+    public javax.swing.JButton btnQuitar;
+    public javax.swing.JComboBox<String> cmbCategorias;
+    public javax.swing.JComboBox<Medida> cmbMedida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
+    public javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private com.toedter.calendar.JDateChooser jdcFechas;
     private javax.swing.JLabel jlabelf;
     private javax.swing.JLabel jlabelh;
     private javax.swing.JLabel jlabelu;
-    private javax.swing.JLabel lblFecha;
-    private javax.swing.JLabel lblHora;
-    private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTable tblBuscarProductos;
-    private javax.swing.JTable tblContados;
-    private javax.swing.JTextField txtCantidad;
+    public javax.swing.JLabel lblFecha;
+    public javax.swing.JLabel lblHora;
+    public javax.swing.JLabel lblUsuario;
+    public javax.swing.JTable tblBuscarProductos;
+    public javax.swing.JTable tblContados;
+    public javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }

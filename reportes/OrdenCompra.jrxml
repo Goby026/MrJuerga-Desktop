@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-09-14T11:39:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenCompra" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1afe4174-64ae-4206-9e4e-0b0cf8dec893">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Local"/>
+	<parameter name="proveedor" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="fechaPedido" class="java.lang.String"/>
+	<parameter name="fechaEntrega" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer"/>
+	<field name="nomProd" class="java.lang.String"/>
+	<field name="presentacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="552" height="38" uuid="d953010a-8650-4a19-a1ae-25d53209e2f7"/>
+				<textElement textAlignment="Center">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[MR. JUERGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="552" height="19" forecolor="#003399" uuid="3a542f73-a820-4d2d-987d-54ad99bea85d"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[ORDEN DE COMPRA N° _____]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="13" uuid="e5a0ecd7-4f3b-4ce9-a01b-b45193959aba"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="120" height="13" uuid="0b60cdb9-b0fb-4d84-b0ae-01de2d6ca994"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha de pedido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="120" height="13" uuid="c043482b-f34e-4f9c-bee0-f10acd6baf11"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha de entrega:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="120" height="13" uuid="606fb2d3-e3c6-4c57-8f2f-5a2ffd61e997"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Términos de entrega:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="310" height="13" uuid="8beedd80-0ea9-4c5e-af39-027a489feb09"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Sirvase por medio de este medio suministrarnos los siguientes artículos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="60" width="180" height="13" uuid="3b27a1a9-d062-43d1-bb93-71d77cc1ccbb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[En las instalaciones de la empresa. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="0" width="150" height="13" uuid="d8910160-8799-48bc-9f2f-f671b976edf5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="20" width="150" height="13" uuid="1004ee5c-0d81-4da9-9943-6908765e6908">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{fechaPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="40" width="150" height="13" uuid="bd7be372-b03b-4261-b4c6-2dee7060adfd"/>
+				<textFieldExpression><![CDATA[$P{fechaEntrega}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="13" uuid="fe665941-aa3e-493e-a452-20f378869104">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[idProducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="13" uuid="f78189c2-a2f2-4b76-a77a-a0b8e2cf57da"/>
+				<text><![CDATA[nomProd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="13" uuid="2f6a4fc9-7b84-4188-be55-49f55f4284c1"/>
+				<text><![CDATA[presentacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="13" uuid="c521e510-4b67-47a9-8b13-74de3ad22a0c"/>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="141" height="13" uuid="bb184f04-67e5-4314-a2a4-43a90ddf78a8"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="0" width="138" height="13" uuid="f1bf2ec5-d9e7-4fd0-aa5a-195ec4ffefb4"/>
+				<textFieldExpression><![CDATA[$F{nomProd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="138" height="13" uuid="faa5ee53-541b-402d-9557-3e4f9bc9407a"/>
+				<textFieldExpression><![CDATA[$F{presentacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="0" width="138" height="13" uuid="428a6eda-331e-4c81-99ed-43dfb5e3aded"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="30" width="69" height="13" uuid="238f6860-dc95-428f-8eda-685aa6da607a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Elaborado por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="30" width="180" height="13" uuid="787a91f7-d2b3-4987-a15b-9dcd049e6bdb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Autorizado por: ___________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="30" width="176" height="13" uuid="632e95e0-aa8b-437c-9c82-bdbe245875a0"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Recibido por: ___________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="30" width="120" height="13" uuid="34f8377d-9ffc-45a0-9213-18489b941adf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="552" height="19" forecolor="#000000" uuid="d709431e-7315-460f-ac4a-4bb5e1889ecc"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DISCOTECA MR. JUERGA]]></text>
+			</staticText>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="0" y="19" width="552" height="13" uuid="443e6b3e-9861-47f9-a754-54c2ace1319d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="32" width="552" height="19" forecolor="#000000" uuid="640a2af3-8ed3-47b6-aff6-a16bf459c7e1"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Huancayo - Perú]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

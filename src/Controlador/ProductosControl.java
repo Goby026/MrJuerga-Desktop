@@ -8,13 +8,26 @@ import Modelo.Presentacion;
 import Modelo.MySQLDAO.PresentacionDAO;
 import Modelo.Producto;
 import Modelo.MySQLDAO.ProductoDAO;
+import Vista.Productos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ProductosControl {
+public class ProductosControl  implements ActionListener, WindowListener{
     DefaultTableModel modelo;
-    
+    Productos p;    
+
+    public ProductosControl(Productos p) {
+        this.p = p;
+    }
+
+    public ProductosControl() {
+        
+    }
     
     public void LlenarTablaProductos(JTable tabla, int small, int large, int xl) throws Exception {
         modelo = new DefaultTableModel();
@@ -112,6 +125,50 @@ public class ProductosControl {
             i -= 1;
         }
         LlenarTablaProductos(tabla,50, 100, 150);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == p) {
+            
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        if (e.getSource() == p) {
+            
+        }
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
     
 }
