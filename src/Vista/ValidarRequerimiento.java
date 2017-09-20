@@ -5,19 +5,25 @@
  */
 package Vista;
 
+import Controlador.ColumnasTablas;
 import Modelo.Almacen;
 import Modelo.Conexion;
+import Modelo.Medida;
 import Modelo.MySQLDAO.AlmacenDAO;
+import Modelo.MySQLDAO.MedidaDAO;
 import Modelo.MySQLDAO.ProductoPresentacionDAO;
 import Modelo.MySQLDAO.ProductoRequerimientoDAO;
 import Modelo.MySQLDAO.RequerimientoDAO;
 import Modelo.MySQLDAO.UsuarioDAO;
 import Modelo.Requerimiento;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +33,8 @@ import javax.swing.table.DefaultTableModel;
 public class ValidarRequerimiento extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloProductos;
+    DefaultTableModel modeloModReq;
+    DefaultTableModel modeloBuscarProductoPresentacion;
     Almacen a = null;
 
     /**
@@ -36,19 +44,13 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         initComponents();
         txtUsuario.setText(usuario);
         cargarTitulosProductos();
+        cargarCombo();
     }
 
     public void cargarTitulosProductos() {
         String cabeceraAdd[] = {"ID", "PRODUCTO", "PRESENTACION", "MEDIDA", "CANTIDAD"};
         modeloProductos = new DefaultTableModel(null, cabeceraAdd);
         tblProductos.setModel(modeloProductos);
-    }
-
-    public void LimpiarTabla() {
-        for (int i = 0; i < tblProductos.getRowCount(); i++) {
-            modeloProductos.removeRow(i);
-            i -= 1;
-        }
     }
 
     /**
@@ -60,6 +62,36 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        formModificar = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblModificarRequerimiento = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtModCodigo = new javax.swing.JTextField();
+        btnCerrarForm = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtModProducto = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtModPresentacion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtModMedida = new javax.swing.JTextField();
+        txtModCantidad = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btnConfirmarProd = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnAgregarProducto = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        btnConfirmar = new javax.swing.JButton();
+        panelProductoPresentacion = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblBuscarProductoPresentacion = new javax.swing.JTable();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        txtFiltroProductoPresentacion = new javax.swing.JTextField();
+        btnSeleccionarProductoPresentacion = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtAddCantidad = new javax.swing.JTextField();
+        cmbMedida = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -85,6 +117,195 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         tblProductos = new javax.swing.JTable();
         txtHoraRequerimiento = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+
+        formModificar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblModificarRequerimiento = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblModificarRequerimiento.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        tblModificarRequerimiento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblModificarRequerimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblModificarRequerimientoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblModificarRequerimiento);
+
+        formModificar.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 450, 250));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel1.setText("COD");
+        formModificar.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 80, -1));
+
+        txtModCodigo.setEditable(false);
+        txtModCodigo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        formModificar.getContentPane().add(txtModCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 90, -1));
+
+        btnCerrarForm.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnCerrarForm.setText("CERRAR");
+        btnCerrarForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarFormActionPerformed(evt);
+            }
+        });
+        formModificar.getContentPane().add(btnCerrarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 100, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel4.setText("PRODUCTO");
+        formModificar.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 80, -1));
+
+        txtModProducto.setEditable(false);
+        txtModProducto.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        formModificar.getContentPane().add(txtModProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 340, -1));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel5.setText("PRESENTACION");
+        formModificar.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 80, -1));
+
+        txtModPresentacion.setEditable(false);
+        txtModPresentacion.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        formModificar.getContentPane().add(txtModPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 340, -1));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel6.setText("MEDIDA");
+        formModificar.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 80, -1));
+
+        txtModMedida.setEditable(false);
+        txtModMedida.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        formModificar.getContentPane().add(txtModMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 90, -1));
+
+        txtModCantidad.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        formModificar.getContentPane().add(txtModCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 90, -1));
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel8.setText("CANTIDAD");
+        formModificar.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 80, -1));
+
+        btnConfirmarProd.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnConfirmarProd.setText("MODIFICAR");
+        btnConfirmarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarProdActionPerformed(evt);
+            }
+        });
+        formModificar.getContentPane().add(btnConfirmarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 100, -1));
+        formModificar.getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 450, 10));
+
+        btnAgregarProducto.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnAgregarProducto.setText("AGREGAR PRODUCTO");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
+        formModificar.getContentPane().add(btnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setText("MODIFICAR REQUERIMIENTO");
+        formModificar.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnConfirmar.setText("CONFIRMAR");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        formModificar.getContentPane().add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 100, -1));
+
+        panelProductoPresentacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblBuscarProductoPresentacion = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblBuscarProductoPresentacion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        tblBuscarProductoPresentacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBuscarProductoPresentacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscarProductoPresentacionMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblBuscarProductoPresentacion);
+
+        panelProductoPresentacion.getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 51, 470, 290));
+
+        jPanel9.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel15.setText("PRODUCTO");
+        jPanel9.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
+
+        txtFiltroProductoPresentacion.setBackground(new java.awt.Color(204, 204, 204));
+        txtFiltroProductoPresentacion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        txtFiltroProductoPresentacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFiltroProductoPresentacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroProductoPresentacionKeyReleased(evt);
+            }
+        });
+        jPanel9.add(txtFiltroProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 250, -1));
+
+        panelProductoPresentacion.getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 50));
+
+        btnSeleccionarProductoPresentacion.setBackground(new java.awt.Color(153, 255, 153));
+        btnSeleccionarProductoPresentacion.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        btnSeleccionarProductoPresentacion.setText("ACEPTAR");
+        btnSeleccionarProductoPresentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarProductoPresentacionActionPerformed(evt);
+            }
+        });
+        panelProductoPresentacion.getContentPane().add(btnSeleccionarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 470, -1));
+
+        jLabel16.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("medida");
+        panelProductoPresentacion.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 130, 30));
+
+        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("cantidad");
+        panelProductoPresentacion.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 130, 30));
+
+        txtAddCantidad.setBackground(new java.awt.Color(240, 240, 240));
+        txtAddCantidad.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        txtAddCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAddCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAddCantidadKeyReleased(evt);
+            }
+        });
+        panelProductoPresentacion.getContentPane().add(txtAddCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 180, 30));
+
+        cmbMedida.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        panelProductoPresentacion.getContentPane().add(cmbMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 330, -1));
 
         setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -263,7 +484,18 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 120, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 46, 120, -1));
+
+        btnModificar.setBackground(new java.awt.Color(102, 102, 102));
+        btnModificar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -283,7 +515,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
             restarStock(1);//se quita los productos de almacen principal (1)
             RequerimientoDAO rdao = new RequerimientoDAO();
             rdao.Confirmar(Integer.parseInt(txtNumRequerimiento.getText()));
-            
+
             limpiar();
         } catch (Exception ex) {
             Logger.getLogger(ValidarRequerimiento.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,7 +554,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
 
             if (!txtNumRequerimiento.getText().trim().isEmpty()) {
 
-                LimpiarTabla();
+                LimpiarTabla(tblProductos, modeloProductos);
 
                 RequerimientoDAO rdao = new RequerimientoDAO();
                 Requerimiento r = new Requerimiento();
@@ -367,6 +599,130 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        if (cargarTablaModificarReq()) {
+            formModificar.setVisible(true);
+            formModificar.setBounds(200, 100, 480, 543);
+        }
+
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnCerrarFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarFormActionPerformed
+        formModificar.dispose();
+    }//GEN-LAST:event_btnCerrarFormActionPerformed
+
+    private void btnConfirmarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarProdActionPerformed
+        int fila = tblModificarRequerimiento.getSelectedRow();
+        if (fila >= 0) {
+            tblModificarRequerimiento.setValueAt(txtModCantidad.getText(), fila, 4);
+        } else {
+            JOptionPane.showMessageDialog(formModificar.getRootPane(), "SELECCIONE UN PRODUCTO");
+        }
+    }//GEN-LAST:event_btnConfirmarProdActionPerformed
+
+    private void tblBuscarProductoPresentacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscarProductoPresentacionMouseClicked
+        if (evt.getClickCount() == 2) {
+            btnSeleccionarProductoPresentacion.doClick();
+        }
+    }//GEN-LAST:event_tblBuscarProductoPresentacionMouseClicked
+
+    private void txtFiltroProductoPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroProductoPresentacionKeyReleased
+        try {
+            LlenarTablaBuscarProductoPresentacion(txtFiltroProductoPresentacion.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(CartaBebidas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtFiltroProductoPresentacionKeyReleased
+
+    private void btnSeleccionarProductoPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarProductoPresentacionActionPerformed
+        int fila = tblBuscarProductoPresentacion.getSelectedRow();
+        try {
+            if (fila >= 0) {
+                //txtComponente.setText(tblBuscarProductoPresentacion.getValueAt(fila, 1).toString());
+                //lblProductoPresentacion.setText(tblBuscarProductoPresentacion.getValueAt(fila, 0).toString());
+                if (!txtAddCantidad.getText().trim().isEmpty()) {
+                    Object datos[] = new Object[5];
+
+                    datos[0] = tblBuscarProductoPresentacion.getValueAt(fila, 0).toString();
+                    datos[1] = tblBuscarProductoPresentacion.getValueAt(fila, 1).toString();
+                    datos[2] = tblBuscarProductoPresentacion.getValueAt(fila, 2).toString();
+                    datos[3] = cmbMedida.getSelectedItem();
+                    datos[4] = txtAddCantidad.getText();
+
+                    modeloModReq.addRow(datos);
+
+                    tblModificarRequerimiento.setModel(modeloModReq);
+
+                    panelProductoPresentacion.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(panelProductoPresentacion.getRootPane(), "INDIQUE CANTIDAD");
+                }
+            } else {
+                JOptionPane.showMessageDialog(panelProductoPresentacion.getRootPane(), "SELECCIONE UN PRODUCTO");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnSeleccionarProductoPresentacionActionPerformed
+
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        panelProductoPresentacion.setBounds(300, 300, 488, 516);
+        panelProductoPresentacion.setVisible(true);
+
+        try {
+            LlenarTablaBuscarProductoPresentacion("");
+        } catch (Exception ex) {
+            Logger.getLogger(CartaBebidas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+
+    private void tblModificarRequerimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblModificarRequerimientoMouseClicked
+        int fila = tblModificarRequerimiento.getSelectedRow();
+        if (fila >= 0) {
+            txtModCodigo.setText(tblModificarRequerimiento.getValueAt(fila, 0).toString());
+            txtModProducto.setText(tblModificarRequerimiento.getValueAt(fila, 1).toString());
+            txtModPresentacion.setText(tblModificarRequerimiento.getValueAt(fila, 2).toString());
+            txtModMedida.setText(tblModificarRequerimiento.getValueAt(fila, 3).toString());
+            txtModCantidad.setText(tblModificarRequerimiento.getValueAt(fila, 4).toString());
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UN PRODUCTO");
+        }
+
+    }//GEN-LAST:event_tblModificarRequerimientoMouseClicked
+
+    private void txtAddCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddCantidadKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddCantidadKeyReleased
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        int filas = tblModificarRequerimiento.getRowCount();
+        if (filas >= 0) {
+
+            LimpiarTabla(tblProductos, modeloProductos);
+
+            Object datos[] = new Object[5];
+
+            for (int i = 0; i < filas; i++) {
+                datos[0] = tblModificarRequerimiento.getValueAt(i, 0).toString();
+                datos[1] = tblModificarRequerimiento.getValueAt(i, 1).toString();
+                datos[2] = tblModificarRequerimiento.getValueAt(i, 2).toString();
+                datos[3] = tblModificarRequerimiento.getValueAt(i, 3).toString();
+                datos[4] = tblModificarRequerimiento.getValueAt(i, 4).toString();
+
+                modeloProductos.addRow(datos);
+            }
+
+            tblProductos.setModel(modeloProductos);
+
+            formModificar.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(formModificar.getRootPane(), "NO HAY PRODUCTOS EN LA LISTA A MODIFICAR");
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
     private void limpiar() {
         txtNumRequerimiento.setText("");
         txtUsuarioRequerimiento.setText("");
@@ -374,33 +730,64 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         txtFechaRequerimiento.setText("");
         txtHoraRequerimiento.setText("");
         txtEstado.setText("");
-        LimpiarTabla();
+        LimpiarTabla(tblProductos, modeloProductos);
         txtNumRequerimiento.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCerrarForm;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnConfirmarProd;
     private javax.swing.JButton btnConfirmarRequerimiiento;
+    private javax.swing.JButton btnModificar;
+    public javax.swing.JButton btnSeleccionarProductoPresentacion;
+    private javax.swing.JComboBox<String> cmbMedida;
+    private javax.swing.JFrame formModificar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JDialog panelProductoPresentacion;
+    public javax.swing.JTable tblBuscarProductoPresentacion;
+    private javax.swing.JTable tblModificarRequerimiento;
     private javax.swing.JTable tblProductos;
+    public javax.swing.JTextField txtAddCantidad;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaEntrada;
     private javax.swing.JTextField txtFechaRequerimiento;
+    public javax.swing.JTextField txtFiltroProductoPresentacion;
     private javax.swing.JTextField txtHoraRequerimiento;
+    private javax.swing.JTextField txtModCantidad;
+    private javax.swing.JTextField txtModCodigo;
+    private javax.swing.JTextField txtModMedida;
+    private javax.swing.JTextField txtModPresentacion;
+    private javax.swing.JTextField txtModProducto;
     private javax.swing.JTextField txtNumRequerimiento;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtUsuarioRequerimiento;
@@ -411,24 +798,34 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         c.conectar();
         Connection con = c.getConexion();
         int numFilas = tblProductos.getRowCount();
+        int idRequerimiento = Integer.parseInt(txtNumRequerimiento.getText());
         try {
             Statement st = null;
             for (int i = 0; i < numFilas; i++) {
                 int id = Integer.parseInt(tblProductos.getValueAt(i, 0).toString());
                 System.out.println("id: " + id);
-                double cantidad = Double.parseDouble(tblProductos.getValueAt(i, 4).toString());
-                System.out.println("cantidad: " + cantidad);
-                double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock();
-                System.out.println("stock: " + stock);
-                double newStock = stock + cantidad;
-                System.out.println("stock: " + newStock);
-                String sql = "UPDATE productopresentacion SET stock = " + newStock + " WHERE idproducto = " + id + " AND idalmacen = " + idAlmacen + "";
 
-                st = con.createStatement();
-                int rs = st.executeUpdate(sql);
-                if (rs > 0) {
-                    System.out.println("Se actualizo en stock del producto :" + id);
+                if (!new ProductoRequerimientoDAO().verificarProductoPresentacion(idRequerimiento, id)) {
+                    //registrar
+                    
+                    //actualiza
+                    
+                } else {//solamente actualiza
+                    double cantidad = Double.parseDouble(tblProductos.getValueAt(i, 4).toString());
+                    System.out.println("cantidad: " + cantidad);
+                    double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock();
+                    System.out.println("stock: " + stock);
+                    double newStock = stock + cantidad;
+                    System.out.println("stock: " + newStock);
+                    String sql = "UPDATE productopresentacion SET stock = " + newStock + " WHERE idproducto = " + id + " AND idalmacen = " + idAlmacen + "";
+
+                    st = con.createStatement();
+                    int rs = st.executeUpdate(sql);
+                    if (rs > 0) {
+                        System.out.println("Se actualizo en stock del producto :" + id);
+                    }
                 }
+
             }
             st.close();
         } catch (Exception e) {
@@ -438,8 +835,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
             c.cerrar();
         }
     }
-    
-    
+
     private void restarStock(int idAlmacen) throws Exception {
         Conexion c = new Conexion();
         c.conectar();
@@ -466,9 +862,102 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
             st.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally{
+        } finally {
             con.close();
             c.cerrar();
+        }
+    }
+
+    private void cargarCombo() {
+        try {
+            MedidaDAO mdao = new MedidaDAO();
+
+            for (Medida m : mdao.Listar()) {
+                cmbMedida.addItem(m.getDescripcion());
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cargarTitulosModReq() {
+        String cabeceraAdd[] = {"ID", "PRODUCTO", "PRESENTACION", "MEDIDA", "CANTIDAD"};
+        modeloModReq = new DefaultTableModel(null, cabeceraAdd);
+        tblModificarRequerimiento.setModel(modeloModReq);
+    }
+
+    private boolean cargarTablaModificarReq() {
+        if (!txtNumRequerimiento.getText().trim().isEmpty()) {
+            cargarTitulosModReq();
+            Object datos[] = new Object[5];
+
+            for (int i = 0; i < tblProductos.getRowCount(); i++) {
+                datos[0] = tblProductos.getValueAt(i, 0).toString();
+                datos[1] = tblProductos.getValueAt(i, 1).toString();
+                datos[2] = tblProductos.getValueAt(i, 2).toString();
+                datos[3] = tblProductos.getValueAt(i, 3).toString();
+                datos[4] = tblProductos.getValueAt(i, 4).toString();
+
+                modeloModReq.addRow(datos);
+            }
+
+            tblModificarRequerimiento.setModel(modeloModReq);
+
+            return true;
+
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "INGRESE NUMERO DE REQUERIMIENTO");
+            txtNumRequerimiento.requestFocus();
+            return false;
+        }
+    }
+
+    public void titulosBuscarComponentes() {
+        String titulos[] = {"ID", "PRODUCTO", "PRESENTACION"};
+        modeloBuscarProductoPresentacion = new DefaultTableModel(null, titulos);
+        tblBuscarProductoPresentacion.setModel(modeloBuscarProductoPresentacion);
+    }
+
+    public void LlenarTablaBuscarProductoPresentacion(String nomProd) throws Exception {
+        titulosBuscarComponentes();
+        LimpiarTabla(tblBuscarProductoPresentacion, modeloBuscarProductoPresentacion);
+        Conexion con = new Conexion();
+        try {
+            con.conectar();
+            String sql = "select pp.idproductopresentacion, p.nombre, pre.descripcion from producto p\n"
+                    + "INNER JOIN productopresentacion pp on p.idproducto = pp.idproducto\n"
+                    + "INNER JOIN presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
+                    + "WHERE (pp.idcategoria > 2  AND pp.idalmacen = 1) AND p.nombre like '%" + nomProd + "%'";
+
+            Object[] datos = new Object[3];
+            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+
+            while (res.next()) {
+                datos[0] = res.getInt(1);
+                datos[1] = res.getString(2);
+                datos[2] = res.getString(3);
+
+                modeloBuscarProductoPresentacion.addRow(datos);
+            }
+
+            tblBuscarProductoPresentacion.setModel(modeloBuscarProductoPresentacion);
+            new ColumnasTablas().tresColumnas(tblBuscarProductoPresentacion, 50, 200, 100);
+
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            con.cerrar();
+        }
+    }
+
+    private void LimpiarTabla(JTable tabla, DefaultTableModel modelo) {
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
         }
     }
 

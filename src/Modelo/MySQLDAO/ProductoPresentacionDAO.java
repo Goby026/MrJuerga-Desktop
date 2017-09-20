@@ -521,5 +521,4 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         }
         return pp;
     }
-
 }

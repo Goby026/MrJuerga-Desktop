@@ -105,7 +105,7 @@ public class ProductoRequerimientoDAO extends Conexion implements DAO<ProductoRe
         }
         return lista;
     }
-    
+
     public List<tablaDetalleRequerimiento> Listar(int id) throws Exception {
         List<tablaDetalleRequerimiento> lista = new ArrayList<>();
         tablaDetalleRequerimiento m = null;
@@ -127,7 +127,7 @@ public class ProductoRequerimientoDAO extends Conexion implements DAO<ProductoRe
                 m.setProducto(res.getString(2));
                 m.setPresentacion(res.getString(3));
                 m.setMedida(res.getString(4));
-                m.setCantidad(res.getInt(5));                
+                m.setCantidad(res.getInt(5));
                 lista.add(m);
             }
             pst.close();
@@ -186,16 +186,16 @@ public class ProductoRequerimientoDAO extends Conexion implements DAO<ProductoRe
                     + "WHERE r.idrequerimiento = ?");
             pst.setInt(1, id);
             ResultSet res = pst.executeQuery();
-            
+
             while (res.next()) {
                 tdr = new tablaDetalleRequerimiento();
                 tdr.setCantidad(res.getInt(1));
                 tdr.setMedida(res.getString(2));
                 tdr.setProducto(res.getString(3));
-                
+
                 lista.add(tdr);
             }
-            
+
             pst.close();
             res.close();
         } catch (Exception e) {
@@ -204,6 +204,31 @@ public class ProductoRequerimientoDAO extends Conexion implements DAO<ProductoRe
             this.cerrar();
         }
         return lista;
+    }
+
+    //metodo para saber si se agregaron mas productos al requerimiento
+    //original, de tal manera se debe insertar dichos productos al detalle de requerimiento original
+    //y los productos que ya estaban, si sufren una modificacion solo se deben actualizar
+    public boolean verificarProductoPresentacion(int idRequerimiento, int idProductoPresentacion) throws Exception {
+        try {
+            this.conectar();
+            String sql = "select * from producto_requerimiento where idrequerimiento = ? and idproductopresentacion = ?";
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            pst.setInt(1, idRequerimiento);
+            pst.setInt(2, idProductoPresentacion);
+            ResultSet res = pst.executeQuery() ;
+            
+            if (res.next()) {
+                return true;
+            }
+            
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+
+        return false;
     }
 
     /* CLASE INTERNA PARA OBTENER LOS DATOS DEL DETALLE DE REQUERIMIENTO */
