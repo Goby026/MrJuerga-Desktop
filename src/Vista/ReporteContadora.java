@@ -346,6 +346,11 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 550, 640));
 
         cmbCaja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCajaActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 220, -1));
 
         jLabel2.setText("RESUMEN POR PRODUCTOS");
@@ -597,6 +602,10 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
             Logger.getLogger(ReporteContadora.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pruebaPOIDetallesActionPerformed
+
+    private void cmbCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCajaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -122,5 +122,29 @@ public class MedidaDAO extends Conexion implements MedidasCRUD {
         }
         return m;
     }
+    
+    //metodo para obtener una medida a partir de su nombre
+    public Medida Obtener(String nomMedida) throws Exception {
+        Medida m = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT * FROM medida WHERE descripcion = ?");
+            pst.setString(1, nomMedida);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                m = new Medida();
+                m.setIdmedida(res.getInt(1));
+                m.setDescripcion(res.getString(2));
+                m.setValor(res.getDouble(3));
+            }
+            pst.close();
+            res.close();
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }finally{
+            this.cerrar();
+        }
+        return m;
+    }
 
 }

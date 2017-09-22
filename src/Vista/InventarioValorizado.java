@@ -148,6 +148,11 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 
         btnBuscar.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
         btnBuscar.setText("buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         footer.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, -1, -1));
 
         getContentPane().add(footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 810, 1370, -1));
@@ -228,7 +233,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
             a = (Almacen) cmbAlmacen.getSelectedItem();
 
             if (cbFactura.isSelected() || cbNotaPedido.isSelected() || cbTotal.isSelected()) {
-                llenarTabla(a.getId(), tipoStock);
+                llenarTabla(a.getId(), tipoStock, "");
 
                 tipoStock = 0;
                 cbFactura.setSelected(false);
@@ -266,14 +271,24 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private void cmbAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlmacenActionPerformed
         if (cbFactura.isSelected()) {
             tipoStock = 1;
-        }else if(cbNotaPedido.isSelected()){
+        } else if (cbNotaPedido.isSelected()) {
             tipoStock = 2;
-        }else if(cbTotal.isSelected()){
+        } else if (cbTotal.isSelected()) {
             tipoStock = 3;
-        }else{
+        } else {
             tipoStock = 0;
         }
     }//GEN-LAST:event_cmbAlmacenActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if (rootPaneCheckingEnabled) {
+            
+        }
+        String valor = txtBuscarProducto.getText().toUpperCase();
+        Almacen a = new Almacen();
+        a = (Almacen) cmbAlmacen.getSelectedItem();
+        llenarTabla(a.getId(), tipoStock, valor);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,7 +394,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 //        }
 //        tblInventario.setModel(modeloAlmacenPrincipal);
 //    }
-    private void llenarTabla(int idAlmacen, int typeStock) {
+    private void llenarTabla(int idAlmacen, int typeStock, String nomProd) {
         Conexion con = new Conexion();
         cabecera();
         String num = "";
@@ -403,7 +418,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                 + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                 + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+                + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
 
         if (idAlmacen == 3) {
             sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, productopresentacion.stock" + num + ", productopresentacion.precio2, (productopresentacion.stock" + num + " * productopresentacion.precio2) AS VALORIZACION\n"
@@ -411,7 +426,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                     + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                     + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                     + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                    + "WHERE productopresentacion.idalmacen = 3";
+                    + "WHERE productopresentacion.idalmacen = 3 AND producto.nombre LIKE '%" + nomProd + "%'";
         }
 
         if (num.equals("3")) {
@@ -421,14 +436,14 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                         + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                         + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                         + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                        + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+                        + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
             } else {
                 sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, (productopresentacion.stock + productopresentacion.stock2), productopresentacion.precio, ((productopresentacion.stock + productopresentacion.stock2)*productopresentacion.precio) AS VALORIZACION\n"
                         + "FROM producto\n"
                         + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                         + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                         + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                        + "WHERE productopresentacion.idalmacen = " + idAlmacen;
+                        + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
             }
         }
 

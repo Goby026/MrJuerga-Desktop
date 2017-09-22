@@ -4,7 +4,7 @@ package Modelo;
 public class ConteoProducto {
     private int idConteoProducto;
     private int idconteo;
-    private int idProducto;
+    private int idProductoPresentacion;
     private int idPresentacion;
     private Medida medida;
     private int stock;
@@ -12,10 +12,10 @@ public class ConteoProducto {
     public ConteoProducto() {
     }
 
-    public ConteoProducto(int idConteoProducto, int idconteo, int idProducto, int idPresentacion, Medida medida, int stock) {
+    public ConteoProducto(int idConteoProducto, int idconteo, int idProductoPresentacion, int idPresentacion, Medida medida, int stock) {
         this.idConteoProducto = idConteoProducto;
         this.idconteo = idconteo;
-        this.idProducto = idProducto;
+        this.idProductoPresentacion = idProductoPresentacion;
         this.idPresentacion = idPresentacion;
         this.medida = medida;
         this.stock = stock;
@@ -37,12 +37,12 @@ public class ConteoProducto {
         this.idconteo = idconteo;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public int getIdProductoPresentacion() {
+        return idProductoPresentacion;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setIdProductoPresentacion(int idProductoPresentacion) {
+        this.idProductoPresentacion = idProductoPresentacion;
     }
 
     public int getIdPresentacion() {
@@ -71,8 +71,9 @@ public class ConteoProducto {
 
     @Override
     public String toString() {
-        return "ConteoProducto{" + "idConteoProducto=" + idConteoProducto + ", idconteo=" + idconteo + ", idProducto=" + idProducto + ", presentacion=" + idPresentacion + ", medida=" + medida + ", stock=" + stock + '}';
+        return "ConteoProducto{" + "idConteoProducto=" + idConteoProducto + ", idconteo=" + idconteo + ", idProductoPresentacion=" + idProductoPresentacion + ", idPresentacion=" + idPresentacion + ", medida=" + medida + ", stock=" + stock + '}';
     }
+
 }
 
 

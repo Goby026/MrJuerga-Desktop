@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo.MySQLDAO;
 
 import Interfaces.DAO;
@@ -23,10 +18,11 @@ public class ConteoDAO extends Conexion implements DAO<Conteo> {
     public boolean Registrar(Conteo c) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("INSERT INTO conteo(idusuario, fecha, hora) VALUES(?,?,?)");
+            PreparedStatement pst = this.conexion.prepareStatement("INSERT INTO conteo(idusuario,idalmacen ,fecha, hora) VALUES(?,?,?,?)");
             pst.setInt(1, c.getIdusuario());
-            pst.setString(2, c.getFecha());
-            pst.setString(3, c.getHora());
+            pst.setInt(2, c.getIdAlmacen());
+            pst.setString(3, c.getFecha());
+            pst.setString(4, c.getHora());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -44,11 +40,12 @@ public class ConteoDAO extends Conexion implements DAO<Conteo> {
     public boolean Modificar(Conteo c) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("UPDATE conteo SET idusuario=?, fecha = ?, hora = ? WHERE idconteo = ?");
+            PreparedStatement pst = this.conexion.prepareStatement("UPDATE conteo SET idusuario=?, idalmacen=?, fecha = ?, hora = ? WHERE idconteo = ?");
             pst.setInt(1, c.getIdusuario());
-            pst.setString(2, c.getFecha());
-            pst.setString(3, c.getHora());
-            pst.setInt(4, c.getIdConteo());
+            pst.setInt(2, c.getIdAlmacen());
+            pst.setString(3, c.getFecha());
+            pst.setString(4, c.getHora());
+            pst.setInt(5, c.getIdConteo());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -92,9 +89,10 @@ public class ConteoDAO extends Conexion implements DAO<Conteo> {
             while (res.next()) {
                 c = new Conteo();
                 c.setIdConteo(res.getInt(1));
-                c.setIdusuario(res.getInt(2));
-                c.setFecha(res.getString(3));
-                c.setHora(res.getString(4));
+                c.setIdAlmacen(res.getInt(2));
+                c.setIdusuario(res.getInt(3));
+                c.setFecha(res.getString(4));
+                c.setHora(res.getString(5));
                 lista.add(c);
             }
             pst.close();
@@ -118,9 +116,10 @@ public class ConteoDAO extends Conexion implements DAO<Conteo> {
             if (res.next()) {
                 c = new Conteo();
                 c.setIdConteo(res.getInt(1));
-                c.setIdusuario(res.getInt(2));
-                c.setFecha(res.getString(3));
-                c.setHora(res.getString(4));
+                c.setIdAlmacen(res.getInt(2));
+                c.setIdusuario(res.getInt(3));
+                c.setFecha(res.getString(4));
+                c.setHora(res.getString(5));
             }
             pst.close();
             res.close();
@@ -137,7 +136,7 @@ public class ConteoDAO extends Conexion implements DAO<Conteo> {
         int id = 0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(idconteo) FROM conteo ORDER BY idconte DESC LIMIT 1");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(idconteo) FROM conteo ORDER BY idconteo DESC LIMIT 1");
             ResultSet res = pst.executeQuery();
             if (res.next()) {
                 id = res.getInt(1);

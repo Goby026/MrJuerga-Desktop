@@ -41,12 +41,12 @@ public class ProductoRequerimientoDAO extends Conexion implements DAO<ProductoRe
     public boolean Modificar(ProductoRequerimiento m) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("UPDATE producto_requerimiento SET idrequerimiento = ?, idproductopresentacion = ?, idmedida = ?, cantidad = ? WHERE idrequerimiento = ?");
-            pst.setInt(1, m.getIdRequerimiento());
-            pst.setInt(2, m.getIdProductoPresentacion());
-            pst.setInt(3, m.getMedida().getIdmedida());
-            pst.setInt(4, m.getCantidad());
-            pst.setInt(5, m.getIdProductoRequerimiento());
+            PreparedStatement pst = this.conexion.prepareStatement("UPDATE producto_requerimiento SET idproductopresentacion = ?, idmedida = ?, cantidad = ? WHERE idrequerimiento = ?");
+            
+            pst.setInt(1, m.getIdProductoPresentacion());
+            pst.setInt(2, m.getMedida().getIdmedida());
+            pst.setInt(3, m.getCantidad());
+            pst.setInt(4, m.getIdRequerimiento());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;

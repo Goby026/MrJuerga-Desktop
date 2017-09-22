@@ -15,6 +15,7 @@ import Modelo.MySQLDAO.ProductoPresentacionDAO;
 import Modelo.MySQLDAO.ProductoRequerimientoDAO;
 import Modelo.MySQLDAO.RequerimientoDAO;
 import Modelo.MySQLDAO.UsuarioDAO;
+import Modelo.ProductoRequerimiento;
 import Modelo.Requerimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -155,6 +156,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         txtModCodigo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         formModificar.getContentPane().add(txtModCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 90, -1));
 
+        btnCerrarForm.setBackground(new java.awt.Color(255, 153, 153));
         btnCerrarForm.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnCerrarForm.setText("CERRAR");
         btnCerrarForm.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +198,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         formModificar.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 80, -1));
 
         btnConfirmarProd.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnConfirmarProd.setText("MODIFICAR");
+        btnConfirmarProd.setText("OK");
         btnConfirmarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarProdActionPerformed(evt);
@@ -218,6 +220,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         jLabel9.setText("MODIFICAR REQUERIMIENTO");
         formModificar.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        btnConfirmar.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirmar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnConfirmar.setText("CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -549,45 +552,65 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtHoraRequerimientoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int idRequerimiento = Integer.parseInt(txtNumRequerimiento.getText());
         try {
-
             if (!txtNumRequerimiento.getText().trim().isEmpty()) {
 
-                LimpiarTabla(tblProductos, modeloProductos);
+                int idRequerimiento = Integer.parseInt(txtNumRequerimiento.getText());
 
-                RequerimientoDAO rdao = new RequerimientoDAO();
-                Requerimiento r = new Requerimiento();
+                if (new RequerimientoDAO().Obtener(idRequerimiento) != null) {
 
-                r = rdao.Obtener(idRequerimiento);
+                    //verificar el estado del requerimiento
+                    if (new RequerimientoDAO().Obtener(idRequerimiento).getEstado() == 1) {
+                        JOptionPane.showMessageDialog(getRootPane(), "EL REQUERIMIENTO N° " + idRequerimiento + " YA FUE VALIDADO");
+                        btnModificar.setEnabled(false);
+                        btnConfirmarRequerimiiento.setEnabled(false);
+                    } else {
+                        btnModificar.setEnabled(true);
+                        btnConfirmarRequerimiiento.setEnabled(true);
+                    }
+                    LimpiarTabla(tblProductos, modeloProductos);
 
-                UsuarioDAO udao = new UsuarioDAO();
-                AlmacenDAO adao = new AlmacenDAO();
-                a = adao.Obtener(r.getIdAlmacen());
+                    RequerimientoDAO rdao = new RequerimientoDAO();
+                    Requerimiento r = new Requerimiento();
 
-                txtUsuarioRequerimiento.setText("" + udao.Obtener(r.getIdUsuario()).getNombre());
-                txtDestino.setText("" + a.getNombre());
-                txtFechaRequerimiento.setText(r.getFecha());
-                txtHoraRequerimiento.setText(r.getHora());
-                txtEstado.setText("" + r.getEstado());
+                    r = rdao.Obtener(idRequerimiento);
 
-                ProductoRequerimientoDAO prdao = new ProductoRequerimientoDAO();
+                    UsuarioDAO udao = new UsuarioDAO();
+                    AlmacenDAO adao = new AlmacenDAO();
+                    a = adao.Obtener(r.getIdAlmacen());
 
-                Object datos[] = new Object[5];
+                    txtUsuarioRequerimiento.setText("" + udao.Obtener(r.getIdUsuario()).getNombre());
+                    txtDestino.setText("" + a.getNombre());
+                    txtFechaRequerimiento.setText(r.getFecha());
+                    txtHoraRequerimiento.setText(r.getHora());
+                    if (r.getEstado() == 1) {
+                        txtEstado.setText("REQ. CONFIRMADO");
+                    } else {
+                        txtEstado.setText("PENDIENTE");
+                    }
 
-                int numFilas = prdao.Listar(idRequerimiento).size();
+                    ProductoRequerimientoDAO prdao = new ProductoRequerimientoDAO();
 
-                for (int i = 0; i < numFilas; i++) {
-                    datos[0] = prdao.Listar(idRequerimiento).get(i).getIdProducto();
-                    datos[1] = prdao.Listar(idRequerimiento).get(i).getProducto();
-                    datos[2] = prdao.Listar(idRequerimiento).get(i).getPresentacion();
-                    datos[3] = prdao.Listar(idRequerimiento).get(i).getMedida();
-                    datos[4] = prdao.Listar(idRequerimiento).get(i).getCantidad();
+                    Object datos[] = new Object[5];
 
-                    modeloProductos.addRow(datos);
+                    int numFilas = prdao.Listar(idRequerimiento).size();
+
+                    for (int i = 0; i < numFilas; i++) {
+                        datos[0] = prdao.Listar(idRequerimiento).get(i).getIdProducto();
+                        datos[1] = prdao.Listar(idRequerimiento).get(i).getProducto();
+                        datos[2] = prdao.Listar(idRequerimiento).get(i).getPresentacion();
+                        datos[3] = prdao.Listar(idRequerimiento).get(i).getMedida();
+                        datos[4] = prdao.Listar(idRequerimiento).get(i).getCantidad();
+
+                        modeloProductos.addRow(datos);
+                    }
+
+                    tblProductos.setModel(modeloProductos);
+
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane(), "NO EXISTE EL REQUERIMIENTO N° " + idRequerimiento);
+                    limpiar();
                 }
-
-                tblProductos.setModel(modeloProductos);
 
             } else {
                 JOptionPane.showMessageDialog(getRootPane(), "INGRESE NUMERO DE REQUERIMIENTO");
@@ -716,7 +739,11 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
 
             tblProductos.setModel(modeloProductos);
 
-            formModificar.dispose();
+            if (actualizarProductoRequerimiento()) {
+                formModificar.dispose();
+            } else {
+                JOptionPane.showMessageDialog(formModificar.getRootPane(), "NO SE PUDO CONFIRMAR LA MODIFICACION DEL REQUERIMIENTO");
+            }
 
         } else {
             JOptionPane.showMessageDialog(formModificar.getRootPane(), "NO HAY PRODUCTOS EN LA LISTA A MODIFICAR");
@@ -806,24 +833,40 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
                 System.out.println("id: " + id);
 
                 if (!new ProductoRequerimientoDAO().verificarProductoPresentacion(idRequerimiento, id)) {
-                    //registrar
-                    
-                    //actualiza
-                    
-                } else {//solamente actualiza
-                    double cantidad = Double.parseDouble(tblProductos.getValueAt(i, 4).toString());
-                    System.out.println("cantidad: " + cantidad);
-                    double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock();
-                    System.out.println("stock: " + stock);
-                    double newStock = stock + cantidad;
-                    System.out.println("stock: " + newStock);
-                    String sql = "UPDATE productopresentacion SET stock = " + newStock + " WHERE idproducto = " + id + " AND idalmacen = " + idAlmacen + "";
+                    ProductoRequerimiento pr = new ProductoRequerimiento();
+                    pr.setIdRequerimiento(idRequerimiento);
+                    pr.setIdProductoPresentacion(id);
 
-                    st = con.createStatement();
-                    int rs = st.executeUpdate(sql);
-                    if (rs > 0) {
-                        System.out.println("Se actualizo en stock del producto :" + id);
+                    if (!tblProductos.getValueAt(i, 3).toString().trim().isEmpty()) {
+                        pr.setMedida(new MedidaDAO().Obtener(tblProductos.getValueAt(i, 3).toString()));
+                    } else {
+                        Medida m = new MedidaDAO().Obtener(1);
+                        pr.setMedida(m);
                     }
+                    pr.setCantidad(Integer.parseInt(tblProductos.getValueAt(i, 4).toString()));
+
+                    //registrar productos añadidos al requerimiento
+                    ProductoRequerimientoDAO prdao = new ProductoRequerimientoDAO();
+
+                    if (prdao.Registrar(pr)) {
+                        System.out.println("Producto añadido al requerimiento");
+                    } else {
+                        System.out.println("Algo salio mal, revisa tu código");
+                    }
+                }
+
+                double cantidad = Double.parseDouble(tblProductos.getValueAt(i, 4).toString());
+                System.out.println("cantidad: " + cantidad);
+                double stock = new ProductoPresentacionDAO().Obtener(id, idAlmacen).getStock();
+                System.out.println("stock: " + stock);
+                double newStock = stock + cantidad;
+                System.out.println("stock: " + newStock);
+                String sql = "UPDATE productopresentacion SET stock = " + newStock + " WHERE idproducto = " + id + " AND idalmacen = " + idAlmacen + "";
+
+                st = con.createStatement();
+                int rs = st.executeUpdate(sql);
+                if (rs > 0) {
+                    System.out.println("Se actualizo en stock del producto :" + id);
                 }
 
             }
@@ -866,6 +909,33 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
             con.close();
             c.cerrar();
         }
+    }
+
+    private boolean actualizarProductoRequerimiento() {
+        try {
+            int c = 0;
+            ProductoRequerimiento pr = new ProductoRequerimiento();
+            ProductoRequerimientoDAO prdao = new ProductoRequerimientoDAO();
+            Medida m = null;
+            for (int i = 0; i < tblProductos.getRowCount(); i++) {
+                pr.setIdProductoPresentacion(Integer.parseInt(tblProductos.getValueAt(i, 0).toString()));
+                m = new MedidaDAO().Obtener(tblProductos.getValueAt(i, 3).toString());
+                pr.setMedida(m);
+                pr.setCantidad(Integer.parseInt(tblProductos.getValueAt(i, 4).toString()));
+                pr.setIdRequerimiento(Integer.parseInt(txtNumRequerimiento.getText()));
+                if (prdao.Modificar(pr)) {
+                    c++;
+                }
+            }
+
+            if (c > 0) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getRootPane(), "ERROR: " + e.getMessage());
+        }
+        return false;
     }
 
     private void cargarCombo() {

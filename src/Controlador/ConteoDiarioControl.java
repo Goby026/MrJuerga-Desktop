@@ -1,16 +1,10 @@
 package Controlador;
 
 import Modelo.Categoria;
-import Modelo.Conteo;
-import Modelo.ConteoProducto;
 import Modelo.Medida;
 import Modelo.MySQLDAO.CategoriaDAO;
-import Modelo.MySQLDAO.ConteoDAO;
-import Modelo.MySQLDAO.ConteoProductoDAO;
 import Modelo.MySQLDAO.MedidaDAO;
-import Modelo.MySQLDAO.PresentacionDAO;
 import Modelo.MySQLDAO.ProductoPresentacionDAO;
-import Modelo.MySQLDAO.UsuarioDAO;
 import Vista.ConteoDiario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -128,52 +122,7 @@ public class ConteoDiarioControl implements ActionListener, InternalFrameListene
 
         //boton guardar
         if (e.getSource() == cd.btnGuardar) {
-            if (cd.tblContados.getRowCount() > 0) {
-                //validar si ya se realizo la cuenta
-                int opc = JOptionPane.showConfirmDialog(null, "¿DESEA GUARDAR LA LISTA?", "GUARDAR CONTEO " + new ManejadorFechas().getFechaActual(), JOptionPane.YES_NO_OPTION);
-                if (opc == 0) { //verdadero
-                    int contador = 0;
-                    try {
-                        //primero registrar el conteo
-                        Conteo c = new Conteo();
-                        UsuarioDAO udao = new UsuarioDAO();
-                        int idUsuario = udao.getIdUsuario(cd.lblUsuario.getText());
-                        c.setIdusuario(idUsuario);
-                        c.setFecha(new ManejadorFechas().getFechaActualMySQL());
-                        c.setHora(new ManejadorFechas().getHoraActual());
-
-                        ConteoDAO cdao = new ConteoDAO();
-
-                        if (cdao.Registrar(c)) {
-                            int idConteo = cdao.getLastId();
-                            for (int i = 0; i < cd.tblContados.getRowCount(); i++) {
-                                ConteoProducto cp = new ConteoProducto();
-                                cp.setIdconteo(idConteo);
-                                cp.setIdProducto(Integer.parseInt(cd.tblContados.getValueAt(i, 0).toString()));
-                                cp.setIdPresentacion(new PresentacionDAO().getIdPresentacion(cd.tblContados.getValueAt(i, 2).toString()));
-                                cp.setMedida((Medida) cd.cmbMedida.getSelectedItem());
-                                cp.setStock(Integer.parseInt(cd.tblContados.getValueAt(i, 3).toString()));
-                                new ConteoProductoDAO().Registrar(cp);
-                                contador++;
-                            }
-                        }
-
-                        if (contador > 0) {
-                            JOptionPane.showMessageDialog(cd.getRootPane(), "SE REGISTRO EL CONTEO EXITOSAMENTE");
-                            parametros.put("fecha", cd.lblFecha.getText());
-                            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ConteoProductos.jrxml", parametros, new ColumnasTablas().getPageSize(cd.tblContados));
-                            mrv.setNombreArchivo("Conteo" + cd.lblFecha.getText());
-                            mrv.exportarAPdf();
-                            mrv.dispose();
-                        }
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                } else {//falso
-                }
-            } else {
-                JOptionPane.showMessageDialog(cd.getRootPane(), "NO SE PUEDE REGISTRAR UN CONTEO VACIO, INGRESE PRODUCTOS CONTADOS");
-            }
+            
         }
 
         //boton quitar

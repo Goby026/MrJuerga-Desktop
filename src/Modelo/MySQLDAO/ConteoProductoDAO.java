@@ -1,21 +1,20 @@
 package Modelo.MySQLDAO;
 
-import Interfaces.ConteoProductoCRUD;
+import Interfaces.DAO;
 import Modelo.Conexion;
 import Modelo.ConteoProducto;
-import Modelo.Presentacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
+public class ConteoProductoDAO extends Conexion implements DAO<ConteoProducto> {
 
-    String REGISTRAR = "INSERT INTO `conteoproducto`(idconteo, idproducto, idpresentacion, idmedida, stock) VALUES (?,?,?,?,?)";
-    String MODIFICAR = "UPDATE `conteoproducto` SET idconteo = ? ,`idproducto`=?,`idpresentacion`=?, idmedida=?,`stock`=? WHERE `idconteoproducto`=?";
+    String REGISTRAR = "INSERT INTO `conteoproducto`(idconteo, idproductopresentacion, idpresentacion, idmedida, stock) VALUES (?,?,?,?,?)";
+    String MODIFICAR = "UPDATE `conteoproducto` SET idconteo = ? ,`idproductopresentacion`=?,`idpresentacion`=?, idmedida=?,`stock`=? WHERE `idconteoproducto`=?";
     String ELIMINAR = "DELETE FROM `conteoproducto` WHERE `idconteoproducto` = ?";
-    String LISTAR_TODOS = "SELECT idconteoproducto, idconteo, idproducto, idpresentacion, idmedida, stock FROM `conteoproducto`";
-    String OBTENER = "SELECT idconteoproducto, idconteo, idproducto, idpresentacion, idmedida, stock FROM `conteoproducto` WHERE `idconteoproducto` = ?";
+    String LISTAR_TODOS = "SELECT idconteoproducto, idconteo, idproductopresentacion, idpresentacion, idmedida, stock FROM `conteoproducto`";
+    String OBTENER = "SELECT idconteoproducto, idconteo, idproductopresentacion, idpresentacion, idmedida, stock FROM `conteoproducto` WHERE `idconteoproducto` = ?";
 
     @Override
     public boolean Registrar(ConteoProducto cp) throws Exception {
@@ -23,7 +22,7 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(REGISTRAR);
             pst.setInt(1, cp.getIdconteo());
-            pst.setInt(2, cp.getIdProducto());
+            pst.setInt(2, cp.getIdProductoPresentacion());
             pst.setInt(3, cp.getIdPresentacion());
             pst.setInt(4, cp.getMedida().getIdmedida());
             pst.setInt(5, cp.getStock());
@@ -46,7 +45,7 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(MODIFICAR);
             pst.setInt(1, cp.getIdconteo());
-            pst.setInt(2, cp.getIdProducto());
+            pst.setInt(2, cp.getIdProductoPresentacion());
             pst.setInt(3, cp.getIdPresentacion());
             pst.setInt(4, cp.getMedida().getIdmedida());
             pst.setInt(5, cp.getStock());
@@ -65,11 +64,11 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
     }
 
     @Override
-    public boolean Eliminar(ConteoProducto cp) throws Exception {
+    public boolean Eliminar(int id) throws Exception {
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(ELIMINAR);
-            pst.setInt(1, cp.getIdConteoProducto());
+            pst.setInt(1, id);
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -94,7 +93,7 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
                 ConteoProducto cp = new ConteoProducto();
                 cp.setIdConteoProducto(res.getInt(1));
                 cp.setIdconteo(res.getInt(2));
-                cp.setIdProducto(res.getInt(3));
+                cp.setIdProductoPresentacion(res.getInt(3));
                 cp.setIdPresentacion(res.getInt(4));
                 cp.setMedida(new MedidaDAO().Obtener(res.getInt(5)));
                 cp.setStock(res.getInt(6));
@@ -111,7 +110,7 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
     }
 
     @Override
-    public ConteoProducto obtener(int ID) throws Exception {
+    public ConteoProducto Obtener(int ID) throws Exception {
         ConteoProducto cp = null;
         try {
             this.conectar();
@@ -122,7 +121,7 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
                 cp = new ConteoProducto();
                 cp.setIdConteoProducto(res.getInt(1));
                 cp.setIdconteo(res.getInt(2));
-                cp.setIdProducto(res.getInt(3));
+                cp.setIdProductoPresentacion(res.getInt(3));
                 cp.setIdPresentacion(res.getInt(4));
                 cp.setMedida(new MedidaDAO().Obtener(res.getInt(5)));
                 cp.setStock(res.getInt(6));
@@ -135,6 +134,11 @@ public class ConteoProductoDAO extends Conexion implements ConteoProductoCRUD {
             this.cerrar();
         }
         return cp;
+    }
+
+    @Override
+    public boolean Anular(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
