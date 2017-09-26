@@ -14,7 +14,7 @@ public class Conexion {
     private final String USER = "root";
     private final String PASS = "";
 //    
-    //CONEXION SERVIDOR
+//CONEXION SERVIDOR
 //    private final String DB_URL ="jdbc:mysql://192.168.1.57:3306/mrjuerga";
 //    private final String USER = "mrjuerga";
 //    private final String PASS = "mrjuerga";

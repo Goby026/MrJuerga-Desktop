@@ -114,6 +114,17 @@ public class StockBebidasPreparadas {
                     ProductoPresentacion pp = ppdao.Obtener(p.getIdProductoPresentacion(), idWarehouse);
 
                     double stock = pp.getStock() - valor;
+                    
+//                    System.out.println("stock antes: "+pp.getStock());
+//                    
+//                    System.out.println("stock productopresentacion: "+stock);
+//                    
+//                    System.out.println("cantidad de producto para preparar:"+ p.getCantidad());
+//                    
+//                    System.out.println("Valor en ML: "+pre.getValorMl());
+//                    
+//                    System.out.println("valor final: "+valor);
+                    
                     if (ppdao.updateStock(stock, p.getIdProductoPresentacion(), idAlmacen)) {
                         c++;
                     }
@@ -137,7 +148,7 @@ public class StockBebidasPreparadas {
     public static void main(String[] args) {
         try {
             StockBebidasPreparadas sbp = new StockBebidasPreparadas(1,2);//(productoPadre, almacen)
-            Presentacion p = new PresentacionDAO().obtenerPresentacion(1);
+            Presentacion p = new PresentacionDAO().obtenerPresentacion(13);
             sbp.updateStockVenta(p,2);
         } catch (Exception ex) {
             Logger.getLogger(StockBebidasPreparadas.class.getName()).log(Level.SEVERE, null, ex);
