@@ -462,7 +462,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 datos[1] = res.getString(2);
                 datos[2] = res.getString(3);
                 datos[3] = res.getString(4);
-                datos[4] = res.getDouble(5);
+                datos[4] = new Validaciones().Redondear(res.getDouble(5));
                 datos[5] = res.getDouble(6);
                 datos[6] = res.getDouble(7);
 

@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 import Controlador.PagonPersonalControl;
 import Controlador.Validaciones;
 import Modelo.UsuarioGastos;
 import Modelo.MySQLDAO.UsuarioGastosDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Marce
  */
-public class PagosPersonal extends javax.swing.JInternalFrame {
+public class ConfPromociones extends javax.swing.JInternalFrame {
 
     //DefaultTableModel modeloPersonal;
-    public PagosPersonal() throws Exception {
+    public ConfPromociones() throws Exception {
         initComponents();
         new PagonPersonalControl().titulosTabla(tblPersonal);
         new PagonPersonalControl().cargarComboConcepto(cmbConcepto);
