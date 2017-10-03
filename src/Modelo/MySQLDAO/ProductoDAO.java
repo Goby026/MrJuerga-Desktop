@@ -88,6 +88,7 @@ public class ProductoDAO extends Conexion implements ProductoCRUD {
         try {
             this.conectar();
             CallableStatement cst = this.conexion.prepareCall("{call cargar_productos}");
+            //PreparedStatement cst = this.conexion.prepareStatement("SELECT * FROM producto");
             lista = new ArrayList();
             ResultSet rs = cst.executeQuery();
             while (rs.next()) {

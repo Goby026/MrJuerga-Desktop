@@ -14,12 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class ProductosControl  implements ActionListener, WindowListener{
-    DefaultTableModel modelo;
-    Productos p;    
+    
+    Productos p;
 
     public ProductosControl(Productos p) {
         this.p = p;
@@ -27,31 +25,6 @@ public class ProductosControl  implements ActionListener, WindowListener{
 
     public ProductosControl() {
         
-    }
-    
-    public void LlenarTablaProductos(JTable tabla, int small, int large, int xl) throws Exception {
-        modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        ProductoDAO ved = new ProductoDAO();
-
-        modelo.addColumn("ID");
-        modelo.addColumn("NOMBRE");
-        //modelo.addColumn("CATEGORIA");
-
-        Object[] columna = new Object[2];
-
-        int numeroRegistros = ved.listar().size();
-
-        for (int i = 0; i < numeroRegistros; i++) {
-            columna[0] = ved.listar().get(i).getIdProducto();
-            columna[1] = ved.listar().get(i).getNombre();
-            //columna[2] = ved.listar().get(i).getIdCategoria();
-            modelo.addRow(columna);
-        }
-
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(small);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(xl);
-        //tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
     }
     
     public Object capturarCamposDeTabla(int idProducto) throws Exception{
@@ -117,16 +90,6 @@ public class ProductosControl  implements ActionListener, WindowListener{
         return 0;
     }
     
-    //METODO PARA ACTUALIZAR LA TABLA CUANDO SE REGISTRE, ELIMINE O MODIFIQUE UN PRODUCTO
-    public void RefrescarTablaProductos(JTable tabla) throws Exception {
-        tabla.setModel(modelo);
-        for (int i = 0; i < tabla.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
-        LlenarTablaProductos(tabla,50, 100, 150);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == p) {

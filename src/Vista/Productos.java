@@ -2,14 +2,17 @@ package Vista;
 
 import Controlador.MyiReportVisor;
 import Controlador.ProductosControl;
+import Modelo.Conexion;
 import Modelo.Producto;
 import Modelo.MySQLDAO.ProductoDAO;
 import java.awt.Color;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class Productos extends javax.swing.JInternalFrame {
 
+    DefaultTableModel modelo;
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
     DefaultListModel presentacionModel = new DefaultListModel();
@@ -27,12 +31,13 @@ public class Productos extends javax.swing.JInternalFrame {
         //setLocationRelativeTo(null);
         txtUsuario.setText(usuario);
         this.getContentPane().setBackground(Color.WHITE);
-        new ProductosControl().LlenarTablaProductos(tblProductos, 40, 100, 200);
+        titulos();
+        LlenarTablaProductos(40, 300);
         //new ProductosControl().cargarComboCategoria(cmbCategoria);
         //new ProductosControl().cargarComboPresentacion(cmbPresentacion);
     }
-    
-    public Productos(){
+
+    public Productos() {
     }
 
     /**
@@ -287,9 +292,9 @@ public class Productos extends javax.swing.JInternalFrame {
 
             if (new ProductoDAO().registrar(p)) {
                 JOptionPane.showMessageDialog(rootPane, "SE REGISTRÓ EL PRODUCTO");
-                new ProductosControl().RefrescarTablaProductos(tblProductos);
+                RefrescarTablaProductos();
                 //recargar la tabla de productos
-                
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "ERROR DE REGISTRO");
             }
@@ -357,44 +362,6 @@ public class Productos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new Productos().setVisible(true);
-//                } catch (Exception ex) {
-//                    Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -422,4 +389,72 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+//    public void LlenarTablaProductos(int small, int large) throws Exception {
+//        
+//        ProductoDAO ved = new ProductoDAO();
+//        Object[] columna = new Object[2];
+//
+//        int numeroRegistros = ved.listar().size();
+//
+//        for (int i = 0; i < numeroRegistros; i++) {
+//            columna[0] = ved.listar().get(i).getIdProducto();
+//            columna[1] = ved.listar().get(i).getNombre();
+//            //columna[2] = ved.listar().get(i).getIdCategoria();
+//            modelo.addRow(columna);
+//        }
+//        
+//        tblProductos.setModel(modelo);
+//
+//        tblProductos.getColumnModel().getColumn(0).setPreferredWidth(small);
+//        tblProductos.getColumnModel().getColumn(1).setPreferredWidth(large);
+//        //tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
+//    }
+    private void titulos() {
+        String titulos[] = {"COD", "PRODUCTO"};
+        modelo = new DefaultTableModel(null, titulos);
+        tblProductos.setModel(modelo);
+    }
+
+    private void LlenarTablaProductos(int small, int large) throws SQLException {
+        Conexion con = new Conexion();
+        try {
+            con.conectar();
+
+            CallableStatement pst = con.getConexion().prepareCall("{call cargar_productos}");
+
+            ResultSet res = pst.executeQuery();
+            Object datos[] = new Object[2];
+
+            while (res.next()) {
+                datos[0] = res.getInt(1);
+                datos[1] = res.getString(2);
+                modelo.addRow(datos);
+            }
+
+            tblProductos.setModel(modelo);
+
+            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(small);
+            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(large);
+
+            pst.close();
+            res.close();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            con.cerrar();
+        }
+    }
+
+//METODO PARA ACTUALIZAR LA TABLA CUANDO SE REGISTRE, ELIMINE O MODIFIQUE UN PRODUCTO
+    public void RefrescarTablaProductos() throws Exception {
+        tblProductos.setModel(modelo);
+        for (int i = 0; i < tblProductos.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+        LlenarTablaProductos(40, 300);
+    }
+
 }
