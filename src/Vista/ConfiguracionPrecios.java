@@ -259,9 +259,9 @@ public class ConfiguracionPrecios extends javax.swing.JInternalFrame {
                 ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
                 ProductoPresentacion pp = new ProductoPresentacion();
                 //pp = pdao.obtenerProductoPresentacion(idProducto);
-                pp.setPrecio(Double.parseDouble(txtPrecio.getText()));
+                pp.setPrecio(Double.parseDouble(txtPrecio.getText()));                
                 pp.setIdProductoPresentacion(idProducto);
-                if (pdao.updatePrecio(pp)) {
+                if (pdao.updatePrecio(pp,idAlmacen)) {
                     JOptionPane.showMessageDialog(getRootPane(), "PRECIO DE " + txtProducto.getText() + " ACTUALIZADO");
                     //LimpiarTabla(tblProductos, modelo);
                     Categoria c = (Categoria)cmbCategoria.getSelectedItem();

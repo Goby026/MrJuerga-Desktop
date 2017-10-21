@@ -171,7 +171,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
             PreparedStatement pst = this.conexion.prepareStatement("SELECT pp.idproductopresentacion, pp.idproducto, pp.idpresentacion, pp.idalmacen, pp.stock, pp.stock2, pp.stock3, pp.precio, pp.precio2, pp.idcategoria  \n"
                     + "FROM  productopresentacion pp\n"
                     + "INNER JOIN producto p ON p.idproducto = pp.idproducto\n"
-                    + "WHERE p.nombre = '"+nomProd+"' AND pp.idalmacen = "+idAlmacen);
+                    + "WHERE p.nombre = '" + nomProd + "' AND pp.idalmacen = " + idAlmacen);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 pp.setIdProductoPresentacion(rs.getInt(1));
@@ -396,8 +396,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         }
         return false;
     }
-    
-    
+
     //actualizar el stock segun almacen indicado
     public boolean updateStock(double newStock, int idProducto, int idAlmacen) throws Exception {
         String sql = "UPDATE productopresentacion SET stock = ? WHERE idproducto = ? AND idalmacen = ?";
@@ -417,8 +416,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         }
         return false;
     }
-    
-    
+
     //actualizar el stock de productos con nota de pedido
     public boolean updateStock2(double newStock, int idProductoPresentacion) throws Exception {
         String sql = "UPDATE productopresentacion SET stock2 = ? WHERE idproductopresentacion = ?";
@@ -438,10 +436,11 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         return false;
     }
 
-    public boolean updatePrecio(ProductoPresentacion pp) throws Exception {
+    public boolean updatePrecio(ProductoPresentacion pp, int Almacen) throws Exception {
         try {
             this.conectar();
             CallableStatement cst = this.conexion.prepareCall("{call set_updateprecio(?,?)}");
+
             cst.setDouble(1, pp.getPrecio());
             cst.setInt(2, pp.getIdProductoPresentacion());
             if (cst.executeUpdate() > 0) {

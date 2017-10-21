@@ -484,7 +484,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                     }
                 }
 
-                String ruta = "C:\\Users\\MARCEL\\Desktop\\REPORTE-VENTA-JORNADA-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+                String ruta = "D:\\reportes contables\\REPORTE-VENTA-JORNADA-" + new ManejadorFechas().getFechaActual() + ".xlsx";
 
                 int res = new ReportesControl().generarExcel(entrada, ruta);
 
@@ -552,7 +552,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                     }
                 }
 
-                String ruta = "C:\\Users\\MARCEL\\Desktop\\REPORTE-VENTA-PRODUCTOS-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+                String ruta = "D:\\reportes contables\\REPORTE-VENTA-PRODUCTOS-" + new ManejadorFechas().getFechaActual() + ".xlsx";
 
                 ApachePOIExcelWrite ape = new ApachePOIExcelWrite(titulos, entrada, ruta);
 
@@ -585,7 +585,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                     }
                 }
 
-                String ruta = "C:\\Users\\MARCEL\\Desktop\\REPORTE-DETALLES-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+                String ruta = "D:\\reportes contables\\REPORTE-DETALLES-" + new ManejadorFechas().getFechaActual() + ".xlsx";
 
                 ApachePOIExcelWrite ape = new ApachePOIExcelWrite(titulos, entrada, ruta);
 
@@ -794,7 +794,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         Conexion con = new Conexion();
         try {
             Object[] datos = new Object[7];
-            con.conectar("localhost", "mrjuerga_entradas");
+            con.conectar("192.168.1.57", "mrjuerga_entradas");
             String sql = "";
             switch (serie) {
                 case 1:
@@ -850,7 +850,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         Conexion con = new Conexion();
         try {
             Object[] datos = new Object[4];
-            con.conectar("localhost", "mrjuerga_entradas");
+            con.conectar("192.168.1.57", "mrjuerga_entradas");
             String sql = "";
             switch (serie) {
                 case 1:
@@ -970,7 +970,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
                     break;
                 case 2:
-                    con.conectar("localhost", "mrjuerga_entradas");
+                    con.conectar("192.168.157", "mrjuerga_entradas");
                     sql = "SELECT sum(total) FROM ventaentrada\n"
                             + "WHERE month(fecha) = " + mes + " ";
                     break;

@@ -866,6 +866,7 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
                 st = con.createStatement();
                 int rs = st.executeUpdate(sql);
                 if (rs > 0) {
+                    
                     System.out.println("Se actualizo en stock del producto :" + id);
                 }
 
