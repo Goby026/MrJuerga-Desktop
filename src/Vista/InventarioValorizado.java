@@ -5,8 +5,12 @@ import Controlador.Validaciones;
 import Modelo.Almacen;
 import Modelo.Conexion;
 import Modelo.MySQLDAO.AlmacenDAO;
+import Modelo.MySQLDAO.ProductoPresentacionDAO;
+import Modelo.ProductoPresentacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,6 +59,33 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 
         grupoRadio = new javax.swing.ButtonGroup();
         grupoCheckBoxTipoStock = new javax.swing.ButtonGroup();
+        formModificarProducto = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        txtIdProductoPresentacion = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
+        txtIdProducto = new javax.swing.JTextField();
+        txtIdPresentacion = new javax.swing.JTextField();
+        txtIdAlmacen = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
+        txtStock2 = new javax.swing.JTextField();
+        txtStock3 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        txtPrecio2 = new javax.swing.JTextField();
+        txtPrecio3 = new javax.swing.JTextField();
+        txtIdCategoria = new javax.swing.JTextField();
+        btnModificarProductoPresentacion = new javax.swing.JButton();
+        btnCancelarModificarProductoPresentacion = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         rbStock = new javax.swing.JRadioButton();
@@ -78,6 +109,81 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         cbNotaPedido = new javax.swing.JCheckBox();
         cbFactura = new javax.swing.JCheckBox();
         btnMostrar1 = new javax.swing.JButton();
+
+        formModificarProducto.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("ESTADO");
+        formModificarProducto.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 160, -1));
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("IDPRODUCTOPRESENTACION");
+        formModificarProducto.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 160, -1));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("IDPRODUCTO");
+        formModificarProducto.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("IDPRESENTACION");
+        formModificarProducto.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 160, -1));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("IDALMACEN");
+        formModificarProducto.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 160, -1));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("STOCK");
+        formModificarProducto.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 160, -1));
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("STOCK2");
+        formModificarProducto.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 160, -1));
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("STOCK3");
+        formModificarProducto.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 160, -1));
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("PRECIO");
+        formModificarProducto.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 160, -1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("PRECIO2");
+        formModificarProducto.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 160, -1));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("PRECIO3");
+        formModificarProducto.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 160, -1));
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("IDCATEGORIA");
+        formModificarProducto.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, -1));
+        formModificarProducto.getContentPane().add(txtIdProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, -1));
+        formModificarProducto.getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 80, -1));
+        formModificarProducto.getContentPane().add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 80, -1));
+        formModificarProducto.getContentPane().add(txtIdPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 80, -1));
+        formModificarProducto.getContentPane().add(txtIdAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 80, -1));
+        formModificarProducto.getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 80, -1));
+        formModificarProducto.getContentPane().add(txtStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 80, -1));
+        formModificarProducto.getContentPane().add(txtStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 80, -1));
+        formModificarProducto.getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 80, -1));
+        formModificarProducto.getContentPane().add(txtPrecio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 80, -1));
+        formModificarProducto.getContentPane().add(txtPrecio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 80, -1));
+        formModificarProducto.getContentPane().add(txtIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 80, -1));
+
+        btnModificarProductoPresentacion.setBackground(new java.awt.Color(153, 255, 153));
+        btnModificarProductoPresentacion.setText("MODIFICAR");
+        btnModificarProductoPresentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarProductoPresentacionActionPerformed(evt);
+            }
+        });
+        formModificarProducto.getContentPane().add(btnModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+
+        btnCancelarModificarProductoPresentacion.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelarModificarProductoPresentacion.setText("CANCELAR");
+        formModificarProducto.getContentPane().add(btnCancelarModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 90, -1));
 
         setClosable(true);
         setTitle("INVENTARIO VALORIZADO (SOLES)");
@@ -158,6 +264,11 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 
         getContentPane().add(footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 810, 1370, -1));
 
+        tblInventario = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tblInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -169,6 +280,11 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblInventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInventarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblInventario);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 1360, 750));
@@ -291,6 +407,61 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         llenarTabla(a.getId(), tipoStock, valor);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void tblInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInventarioMouseClicked
+        if (evt.getClickCount() == 2) {
+            try {
+                int fila = tblInventario.getSelectedRow();
+                int idProd = Integer.parseInt(tblInventario.getValueAt(fila, 0).toString());
+                ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProd);
+                txtIdProductoPresentacion.setText(""+pp.getIdProductoPresentacion());
+                txtIdProducto.setText(""+pp.getIdProducto());
+                txtIdPresentacion.setText(""+pp.getIdPresentacion());
+                txtIdAlmacen.setText(""+pp.getIdalmacen());
+                txtStock.setText(""+pp.getStock());
+                txtStock2.setText(""+pp.getStock2());
+                txtStock3.setText(""+pp.getStock3());
+                txtPrecio.setText(""+pp.getPrecio());
+                txtPrecio2.setText(""+pp.getPrecio2());
+                txtPrecio3.setText(""+pp.getPrecio3());
+                txtIdCategoria.setText(""+pp.getIdcategoria());
+                txtEstado.setText(""+pp.getEstado());
+                formModificarProducto.setVisible(true);
+                formModificarProducto.setBounds(750, 400, 304, 469);
+            } catch (Exception ex) {
+                Logger.getLogger(InventarioValorizado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_tblInventarioMouseClicked
+
+    private void btnModificarProductoPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoPresentacionActionPerformed
+        ProductoPresentacion pp = new ProductoPresentacion();
+        
+        pp.setIdProducto(Integer.parseInt(txtIdProducto.getText()));
+        pp.setIdPresentacion(Integer.parseInt(txtIdPresentacion.getText()));
+        pp.setIdalmacen(Integer.parseInt(txtIdAlmacen.getText()));
+        pp.setStock(Double.parseDouble(txtStock.getText()));
+        pp.setStock2(Double.parseDouble(txtStock2.getText()));
+        pp.setStock3(Double.parseDouble(txtStock3.getText()));
+        pp.setPrecio(Double.parseDouble(txtPrecio.getText()));
+        pp.setPrecio2(Double.parseDouble(txtPrecio2.getText()));
+        pp.setPrecio3(Double.parseDouble(txtPrecio3.getText()));
+        pp.setIdcategoria(Integer.parseInt(txtIdCategoria.getText()));
+        pp.setEstado(Integer.parseInt(txtEstado.getText()));
+        pp.setIdProductoPresentacion(Integer.parseInt(txtIdProductoPresentacion.getText()));
+        
+        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+        
+        try {
+            if (ppdao.Modificar(pp)) {
+                JOptionPane.showMessageDialog(getRootPane(), "DATOS MODIFICADOS");
+                formModificarProducto.dispose();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(InventarioValorizado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnModificarProductoPresentacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,7 +499,9 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCancelarModificarProductoPresentacion;
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnModificarProductoPresentacion;
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnMostrar1;
     private javax.swing.JCheckBox cbFactura;
@@ -336,12 +509,25 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox cbTotal;
     private javax.swing.JComboBox<Almacen> cmbAlmacen;
     private javax.swing.JPanel footer;
+    private javax.swing.JDialog formModificarProducto;
     private javax.swing.ButtonGroup grupoCheckBoxTipoStock;
     private javax.swing.ButtonGroup grupoRadio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblRegistros;
@@ -351,6 +537,18 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbStock;
     private javax.swing.JTable tblInventario;
     private javax.swing.JTextField txtBuscarProducto;
+    private javax.swing.JTextField txtEstado;
+    private javax.swing.JTextField txtIdAlmacen;
+    private javax.swing.JTextField txtIdCategoria;
+    private javax.swing.JTextField txtIdPresentacion;
+    private javax.swing.JTextField txtIdProducto;
+    private javax.swing.JTextField txtIdProductoPresentacion;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtPrecio2;
+    private javax.swing.JTextField txtPrecio3;
+    private javax.swing.JTextField txtStock;
+    private javax.swing.JTextField txtStock2;
+    private javax.swing.JTextField txtStock3;
     private javax.swing.JTextField txtValorizacion;
     // End of variables declaration//GEN-END:variables
 
@@ -419,7 +617,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                 + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                 + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
+                + "WHERE (productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%') AND productopresentacion.estado = 1";
 
         if (idAlmacen == 3) {
             sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, productopresentacion.stock" + num + ", productopresentacion.precio2, (productopresentacion.stock" + num + " * productopresentacion.precio2) AS VALORIZACION\n"
@@ -427,7 +625,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                     + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                     + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                     + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                    + "WHERE productopresentacion.idalmacen = 3 AND producto.nombre LIKE '%" + nomProd + "%'";
+                    + "WHERE (productopresentacion.idalmacen = 3 AND producto.nombre LIKE '%" + nomProd + "%') AND productopresentacion.estado = 1";
         }
 
         if (num.equals("3")) {
@@ -437,14 +635,14 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                         + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                         + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                         + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                        + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
+                        + "WHERE (productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%') AND productopresentacion.estado = 1";
             } else {
                 sql = "SELECT productopresentacion.idproductopresentacion, producto.nombre,presentacion.descripcion ,categoria.descripcion, (productopresentacion.stock + productopresentacion.stock2), productopresentacion.precio, ((productopresentacion.stock + productopresentacion.stock2)*productopresentacion.precio) AS VALORIZACION\n"
                         + "FROM producto\n"
                         + "INNER JOIN productopresentacion ON producto.idproducto = productopresentacion.idproducto\n"
                         + "INNER JOIN categoria ON productopresentacion.idcategoria = categoria.idcategoria\n"
                         + "INNER JOIN presentacion ON productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                        + "WHERE productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%'";
+                        + "WHERE (productopresentacion.idalmacen = " + idAlmacen + " AND producto.nombre LIKE '%" + nomProd + "%') AND productopresentacion.estado = 1";
             }
         }
 

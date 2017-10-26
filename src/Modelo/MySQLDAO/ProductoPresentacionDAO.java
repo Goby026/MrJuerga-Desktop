@@ -55,7 +55,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
     @Override
     public boolean Modificar(ProductoPresentacion pp) throws Exception {
         try {
-            String sql = ("UPDATE productopresentacion SET idproducto=?, idpresentacion=?, idalmacen=?, stock=?, stock2=?, stock3=?,precio=?, precio2=?, idcategoria=? WHERE idproductopresentacion=?");
+            String sql = ("UPDATE productopresentacion SET idproducto=?, idpresentacion=?, idalmacen=?, stock=?, stock2=?, stock3=?,precio=?, precio2=?, precio3=?, idcategoria=?, estado = ? WHERE idproductopresentacion=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, pp.getIdProducto());
@@ -66,8 +66,10 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
             pst.setDouble(6, pp.getStock3());
             pst.setDouble(7, pp.getPrecio());
             pst.setDouble(8, pp.getPrecio2());
-            pst.setDouble(9, pp.getIdcategoria());
-            pst.setInt(10, pp.getIdProductoPresentacion());
+            pst.setDouble(9, pp.getPrecio3());
+            pst.setDouble(10, pp.getIdcategoria());
+            pst.setInt(11, pp.getEstado());
+            pst.setInt(12, pp.getIdProductoPresentacion());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -509,7 +511,9 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setStock3(rs.getDouble(7));
                 pp.setPrecio(rs.getDouble(8));
                 pp.setPrecio2(rs.getDouble(9));
-                pp.setIdcategoria(rs.getInt(10));
+                pp.setPrecio3(rs.getDouble(10));
+                pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
             }
             rs.close();
             pst.close();

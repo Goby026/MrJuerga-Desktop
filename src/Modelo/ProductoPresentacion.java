@@ -15,14 +15,16 @@ public class ProductoPresentacion {
     private double stock3;
     private double precio;
     private double precio2;
+    private double precio3;
     private int idcategoria;
+    private int estado;
     
     
 
     public ProductoPresentacion() {
     }
 
-    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, int idcategoria) {
+    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, double precio3, int idcategoria, int estado) {
         this.idProductoPresentacion = idProductoPresentacion;
         this.idProducto = idProducto;
         this.idPresentacion = idPresentacion;
@@ -32,7 +34,9 @@ public class ProductoPresentacion {
         this.stock3 = stock3;
         this.precio = precio;
         this.precio2 = precio2;
+        this.precio3 = precio3;
         this.idcategoria = idcategoria;
+        this.estado = estado;
     }
 
     public int getIdProductoPresentacion() {
@@ -90,7 +94,7 @@ public class ProductoPresentacion {
     public void setStock3(double stock3) {
         this.stock3 = stock3;
     }
-    
+
     public double getPrecio() {
         return precio;
     }
@@ -107,6 +111,14 @@ public class ProductoPresentacion {
         this.precio2 = precio2;
     }
 
+    public double getPrecio3() {
+        return precio3;
+    }
+
+    public void setPrecio3(double precio3) {
+        this.precio3 = precio3;
+    }
+
     public int getIdcategoria() {
         return idcategoria;
     }
@@ -114,6 +126,17 @@ public class ProductoPresentacion {
     public void setIdcategoria(int idcategoria) {
         this.idcategoria = idcategoria;
     }
-    
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoPresentacion{" + "idProductoPresentacion=" + idProductoPresentacion + ", idProducto=" + idProducto + ", idPresentacion=" + idPresentacion + ", idalmacen=" + idalmacen + ", stock=" + stock + ", stock2=" + stock2 + ", stock3=" + stock3 + ", precio=" + precio + ", precio2=" + precio2 + ", precio3=" + precio3 + ", idcategoria=" + idcategoria + ", estado=" + estado + '}';
+    }
 }
