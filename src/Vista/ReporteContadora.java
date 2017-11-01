@@ -472,36 +472,59 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVentaJornadaActionPerformed
 
     private void btnExcelJornadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelJornadasActionPerformed
+        int filas = tblDatos.getRowCount();
         try {
-            int filas = tblVentasJornada.getRowCount();
             if (filas > 0) {
                 int columnas = tblVentasJornada.getColumnCount();
-                String[][] entrada = new String[filas][columnas];
+
+                String[] titulos = {"INICIO", "FIN", "TICKET INICIAL", "TICKET FINAL", "SUBTOTAL"};
+                Object[][] entrada = new Object[filas][columnas];
 
                 for (int i = 0; i < filas; i++) {
                     for (int j = 0; j < columnas; j++) {
-                        entrada[i][j] = tblVentasJornada.getValueAt(i, j).toString();
+                        entrada[i][j] = tblVentasJornada.getValueAt(i, j);
                     }
                 }
 
-                String ruta = "D:\\reportes contables\\REPORTE-VENTA-JORNADA-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+                String ruta = "D:\\reportes contables\\REPORTE-POR-JORNADA-" + new ManejadorFechas().getFechaActual() + ".xlsx";
 
-                int res = new ReportesControl().generarExcel(entrada, ruta);
+                ApachePOIExcelWrite ape = new ApachePOIExcelWrite(titulos, entrada, ruta);
 
-                if (res == 1) {
+                if (ape.CrearExcel()) {
                     JOptionPane.showMessageDialog(null, "REPORTE CREADO CON EXITO EN LA RUTA: " + ruta);
                 } else {
                     JOptionPane.showMessageDialog(null, "EL DOCUMENTO NO TIENE PAGINAS");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "DEBE GENERAR DATOS (BOTON REVISAR), PARA EL REPORTE");
+                JOptionPane.showMessageDialog(null, "DEBE GENERAR DATOS (BOTON REVISAR), PARA CREAR EL REPORTE");
             }
-
-        } catch (IOException ex) {
-            Logger.getLogger(ReporteContadora.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (WriteException ex) {
-            Logger.getLogger(ReporteContadora.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getRootPane(), "ERROR: " + e.getMessage());
         }
+
+        ////////////////////////////////////
+//            if (filas > 0) {
+//                int columnas = tblVentasJornada.getColumnCount();
+//                String[][] entrada = new String[filas][columnas];
+//
+//                for (int i = 0; i < filas; i++) {
+//                    for (int j = 0; j < columnas; j++) {
+//                        entrada[i][j] = tblVentasJornada.getValueAt(i, j).toString();
+//                    }
+//                }
+//
+//                String ruta = "D:\\reportes contables\\REPORTE-VENTA-JORNADA-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+//
+//                int res = new ReportesControl().generarExcel(entrada, ruta);
+//
+//                if (res == 1) {
+//                    JOptionPane.showMessageDialog(null, "REPORTE CREADO CON EXITO EN LA RUTA: " + ruta);
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "EL DOCUMENTO NO TIENE PAGINAS");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "DEBE GENERAR DATOS (BOTON REVISAR), PARA EL REPORTE");
+//            }
     }//GEN-LAST:event_btnExcelJornadasActionPerformed
 
     private void btnVentaTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaTotalActionPerformed
