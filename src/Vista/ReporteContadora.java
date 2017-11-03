@@ -2,12 +2,10 @@ package Vista;
 
 import Controlador.ApachePOIExcelWrite;
 import Controlador.ManejadorFechas;
-import Controlador.ReportesControl;
 import Controlador.Validaciones;
 import Modelo.Caja;
 import Modelo.Conexion;
 import Modelo.MySQLDAO.CajaDAO;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import jxl.write.WriteException;
 
 public class ReporteContadora extends javax.swing.JInternalFrame {
 
@@ -230,6 +227,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
 
         formVentaJornada.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 679, 380));
 
+        btnExcelJornadas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
         btnExcelJornadas.setText("CREAR EXCEL");
         btnExcelJornadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,11 +237,11 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         formVentaJornada.getContentPane().add(btnExcelJornadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, -1, -1));
 
         jLabel7.setText("TOTAL");
-        formVentaJornada.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
+        formVentaJornada.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         txtTotalJornadas.setEditable(false);
         txtTotalJornadas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        formVentaJornada.getContentPane().add(txtTotalJornadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 120, -1));
+        formVentaJornada.getContentPane().add(txtTotalJornadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 120, -1));
 
         formTotales.setTitle("MONTOS TOTALES");
         formTotales.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -431,13 +429,14 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         try {
             int mes = jmcMeses.getMonth() + 1;
 
-            if ((cmbCaja.getSelectedIndex() + 1) == 1 || (cmbCaja.getSelectedIndex() + 1) == 2) {
-                ventasEntrada(mes, 2);//detalles
-                ventaEntradaPorProducto(mes, 2);//por producto
-            } else {
-                ventaMes(mes, cmbCaja.getSelectedIndex() + 1);
-                ventaPorProducto(mes, cmbCaja.getSelectedIndex() + 1);
-            }
+//            if ((cmbCaja.getSelectedIndex() + 1) == 1 || (cmbCaja.getSelectedIndex() + 1) == 2) {
+//                ventasEntrada(mes, 2);//detalles
+//                ventaEntradaPorProducto(mes, 2);//por producto
+//            } else {
+//
+//            }
+            ventaMes(mes, cmbCaja.getSelectedIndex() + 1);
+            ventaPorProducto(mes, cmbCaja.getSelectedIndex() + 1);
 
             calculos(1);
         } catch (Exception ex) {
@@ -457,12 +456,14 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
 
             int mes = jmcMeses.getMonth() + 1;
 
-            if ((cmbCaja.getSelectedIndex() + 1) == 1 || (cmbCaja.getSelectedIndex() + 1) == 2) {
-                JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-            } else {
-                ventaPorJornada(mes, cmbCaja.getSelectedIndex() + 1);
-                calculos(2);
-            }
+//            if ((cmbCaja.getSelectedIndex() + 1) == 1 || (cmbCaja.getSelectedIndex() + 1) == 2) {
+//                JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//            } else {
+//                ventaPorJornada(mes, cmbCaja.getSelectedIndex() + 1);
+//                calculos(2);
+//            }
+            ventaPorJornada(mes, cmbCaja.getSelectedIndex() + 1);
+            calculos(2);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -472,7 +473,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnVentaJornadaActionPerformed
 
     private void btnExcelJornadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelJornadasActionPerformed
-        int filas = tblDatos.getRowCount();
+        int filas = tblVentasJornada.getRowCount();
         try {
             if (filas > 0) {
                 int columnas = tblVentasJornada.getColumnCount();
@@ -689,13 +690,24 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
             String sql = "";
             String sigla = "";
             switch (serie) {
-                case 1:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 1://jaime
+                    sql = "select eg.fecha,\"TICKET\" ,\"002\",eg.identradageneral ,sum(round((ve.total/1.18),2)) as 'BASE-IMP',sum(round(((ve.total/1.18)*0.18),2)) as 'IGV' ,sum(ve.total) \n"
+                            + "	from entradageneral eg\n"
+                            + "	inner join ventaentrada ve on eg.identradageneral = ve.venta_idventa\n"
+                            + "	where month(fechasistema) = " + mes + "  \n"
+                            + "	group by ve.idventaentrada";
+                    sigla = "2";
+
                     break;
-                case 2:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 2://burro
+                    sql = "select ev.fecha,\"TICKET\" ,\"001\",ev.identradavip ,sum(round((vev.total/1.18),2)) as 'BASE-IMP',sum(round(((vev.total/1.18)*0.18),2)) as 'IGV' ,sum(vev.total) \n"
+                            + "	from entradavip ev\n"
+                            + "	inner join ventaentradavip vev on ev.identradavip = vev.venta_idventa\n"
+                            + "	where month(ev.fechasistema) = " + mes + " \n"
+                            + "	group by vev.identradavip";
+                    sigla = "1";
                     break;
-                case 3:
+                case 3://caja 01
                     sql = "select venta.fecha,\"TICKET\" ,\"003\",venta.idventa ,sum(round((ventaproducto.subtotal/1.18),2)) as 'BASE-IMP',sum(round(((ventaproducto.subtotal/1.18)*0.18),2)) as 'IGV' ,sum(ventaproducto.subtotal) \n"
                             + "from venta\n"
                             + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
@@ -703,7 +715,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                             + "group by venta.idventa";
                     sigla = "3";
                     break;
-                case 4:
+                case 4://caja 02
                     sql = "select venta2.fecha,\"TICKET\" ,\"004\",venta2.idventa2, sum(round((ventaproducto2.subtotal/1.18),2)) as 'BASE-IMP', sum(round(((ventaproducto2.subtotal/1.18)*0.18),2)) as 'IGV' ,sum(ventaproducto2.subtotal)\n"
                             + "from venta2\n"
                             + "inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa\n"
@@ -711,13 +723,21 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                             + "group by venta2.idventa2";
                     sigla = "4";
                     break;
-                case 5:
+                case 5://caja vip
                     sql = "select venta3.fecha,\"TICKET\" ,\"005\",venta3.idventa3, sum(round((ventaproducto3.subtotal/1.18),2)) as 'BASE-IMP',sum(round(((ventaproducto3.subtotal/1.18)*0.18),2)) as 'IGV' ,sum(ventaproducto3.subtotal) \n"
                             + "from venta3\n"
                             + "inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa\n"
                             + "where month(fechasistema) = " + mes + " \n"
                             + "group by venta3.idventa3";
                     sigla = "5";
+                    break;
+                case 6://entrada general 2
+                    sql = "select eg.fecha,\"TICKET\" ,\"002\",eg.identradageneral2 ,sum(round((ve.total/1.18),2)) as 'BASE-IMP',sum(round(((ve.total/1.18)*0.18),2)) as 'IGV' ,sum(ve.total) \n"
+                            + "	from entradageneral2 eg\n"
+                            + "	inner join ventaentrada2 ve on eg.identradageneral2 = ve.venta_idventa\n"
+                            + "	where month(eg.fechasistema) = " + mes + " \n"
+                            + "	group by ve.idventaentrada2";
+                    sigla = "6";
                     break;
             }
             PreparedStatement pst = con.getConexion().prepareStatement(sql);
@@ -756,13 +776,25 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
             con.conectar();
             String sql = "";
             switch (serie) {
-                case 1:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 1://entrada general
+                    sql = "select producto.nombre,\"000\", sum(ventaentrada.numCovers) as cantcover, sum(ventaentrada.total) as total \n"
+                            + "from entradageneral \n"
+                            + "inner join ventaentrada on entradageneral.identradageneral = ventaentrada.venta_idventa\n"
+                            + "inner join productopresentacion on ventaentrada.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "inner join usuario on entradageneral.idusuario = usuario.idusuario\n"
+                            + "where month(entradageneral.fechasistema) = " + mes + " \n"
+                            + "group by producto.nombre";
                     break;
-                case 2:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 2://entrada vip
+                    sql = "select producto.nombre,\"000\",if(producto.nombre = 'BOX',sum(ventaentradavip.numPersonas),count(ventaentradavip.numPersonas)) as cantidad,sum(ventaentradavip.total) AS subtotal from entradavip \n"
+                            + "inner join ventaentradavip on entradavip.identradavip = ventaentradavip.venta_idventa\n"
+                            + "inner join productopresentacion on ventaentradavip.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "where month(entradavip.fechasistema) = " + mes + " \n"
+                            + "group by producto.nombre";
                     break;
-                case 3:
+                case 3://caja 01
                     sql = "select producto.nombre,ventaproducto.preciou, sum(ventaproducto.cantidad), sum(subtotal) \n"
                             + "from venta \n"
                             + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
@@ -770,7 +802,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                             + "where month(venta.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
                     break;
-                case 4:
+                case 4://caja 02
                     sql = "select producto.nombre,ventaproducto2.preciou, sum(ventaproducto2.cantidad), sum(subtotal) \n"
                             + "from venta2 \n"
                             + "inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa\n"
@@ -778,12 +810,21 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                             + "where month(venta2.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
                     break;
-                case 5:
+                case 5://caja vip
                     sql = "select producto.nombre,ventaproducto3.preciou, sum(ventaproducto3.cantidad), sum(subtotal) \n"
                             + "from venta3\n"
                             + "inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa\n"
                             + "inner join producto on ventaproducto3.idProducto = producto.idproducto\n"
                             + "where month(venta3.fechasistema) = " + mes + " \n"
+                            + "group by producto.nombre";
+                    break;
+                case 6://entrada general 2
+                    sql = "select producto.nombre, \"000\",sum(ventaentrada2.numCovers) as cantcover, sum(ventaentrada2.total) as total from entradageneral2\n"
+                            + "inner join ventaentrada2 on entradageneral2.identradageneral2 = ventaentrada2.venta_idventa\n"
+                            + "inner join productopresentacion on ventaentrada2.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "inner join usuario on entradageneral2.idusuario = usuario.idusuario\n"
+                            + "where month(entradageneral2.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
                     break;
             }
@@ -930,11 +971,21 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
             con.conectar();
             String sql = "";
             switch (serie) {
-                case 1:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 1://jaime serie 002
+                    sql = "    select fc.fecha_inicio, fc.fecha_final, min(eg.identradageneral),max(eg.identradageneral), sum(ve.total) \n"
+                            + "    from entradageneral eg\n"
+                            + "    inner join ventaentrada ve on eg.identradageneral = ve.venta_idventa\n"
+                            + "    inner join flujocaja fc on eg.idflujocaja = fc.idflujocaja\n"
+                            + "    where month(eg.fechasistema) = " + mes + " \n"
+                            + "    group by eg.idflujocaja";
                     break;
-                case 2:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 2://burro serie 001
+                    sql = "select fc.fecha_inicio, fc.fecha_final, min(ev.identradavip),max(ev.identradavip), sum(vev.total) \n"
+                            + "    from entradavip ev\n"
+                            + "    inner join ventaentradavip vev on ev.identradavip = vev.venta_idventa\n"
+                            + "    inner join flujocaja fc on ev.idflujocaja = fc.idflujocaja\n"
+                            + "    where month(ev.fechasistema) = " + mes + " \n"
+                            + "    group by ev.idflujocaja";
                     break;
                 case 3:
                     sql = "select flujocaja.fecha_inicio, flujocaja.fecha_final, min(venta.idventa),max(venta.idventa), sum(ventaproducto.subtotal) from venta\n"
@@ -956,6 +1007,14 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                             + "inner join flujocaja on venta3.idflujocaja = flujocaja.idflujocaja\n"
                             + "where month(venta3.fechasistema) = " + mes + " \n"
                             + "group by venta3.idflujocaja";
+                    break;
+                case 6:
+                    sql = "select fc.fecha_inicio, fc.fecha_final, min(eg.identradageneral2),max(eg.identradageneral2), sum(ve.total) \n"
+                            + "    from entradageneral2 eg\n"
+                            + "    inner join ventaentrada2 ve on eg.identradageneral2 = ve.venta_idventa\n"
+                            + "    inner join flujocaja fc on eg.idflujocaja = fc.idflujocaja\n"
+                            + "    where month(eg.fechasistema) = " + mes + " \n"
+                            + "    group by eg.idflujocaja";
                     break;
             }
             PreparedStatement pst = con.getConexion().prepareStatement(sql);

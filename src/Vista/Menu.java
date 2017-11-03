@@ -105,6 +105,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem37 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
@@ -599,6 +600,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem37);
+
+        jMenuItem3.setText("ANULADOS");
+        jMenu4.add(jMenuItem3);
 
         jMenuItem15.setText("TIPOS DE COMPROBANTES");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -1166,6 +1170,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;

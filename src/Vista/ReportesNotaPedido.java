@@ -52,10 +52,10 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
         double ventas = 0.0;
         double igv = 0.0;
         for (int i = 0; i < tblDatos.getRowCount(); i++) {
-            ventas += Double.parseDouble(tblDatos.getValueAt(i, 3).toString());            
+            ventas += Double.parseDouble(tblDatos.getValueAt(i, 3).toString());
         }
         txtTotalVentas.setText("" + ventas);
-        txtIgvAcumulado.setText("" + (ventas*0.18));
+        txtIgvAcumulado.setText("" + (ventas * 0.18));
     }
 
     @SuppressWarnings("unchecked")
@@ -89,7 +89,7 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
                 btnRevisarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRevisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
+        getContentPane().add(btnRevisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,7 +114,7 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnGenerarExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 740, 150, 50));
 
-        getContentPane().add(cmbCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 120, -1));
+        getContentPane().add(cmbCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 240, -1));
 
         jLabel2.setText("NOTA PEDIDO MES");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
@@ -193,26 +193,27 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
         LimpiarTabla(tblDatos, modeloTablaVentas);
         Conexion con = new Conexion();
         try {
+            con.conectar();
             Object[] datos = new Object[4];
             String sql = "";
-            String sigla = "";
+            int c = 0;
             switch (serie) {
-                case 1:
-                    con.conectar("localhost", "mrjuerga_entradas");
-                    sql = "select prodpromocion.nomProd,count(prodpromocion.nomProd), sum(ventanota.numCovers), sum(ventanota.total)\n"
-                            + "from notapedido\n"
-                            + "inner join ventanota on notapedido.idnotapedido = ventanota.idnotapedido\n"
-                            + "inner join prodpromocion on ventanota.idprodpromocion = prodpromocion.idprodpromocion\n"
-                            + "where month(notapedido.fechasistema) = " + mes + " \n"
-                            + "group by prodpromocion.nomProd\n"
-                            + "order by sum(ventanota.total) desc";
-                    sigla = "1";
+                case 1://jaime serie 002
+                    JOptionPane.showMessageDialog(getRootPane(), "UNSUPPORTED YET");
                     break;
-                case 2:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+                case 2://burro serie 001
+                    sql = "select producto.nombre,count(producto.nombre), sum(ventanota.numCovers), sum(ventanota.total)\n"
+                            + "    from notapedido\n"
+                            + "    inner join ventanota on notapedido.idnotapedido = ventanota.idnotapedido\n"
+                            + "    inner join prodpromocion on ventanota.idprodpromocion = prodpromocion.idprodpromocion\n"
+                            + "    inner join productopresentacion on prodpromocion.idproductopresentacion = productopresentacion.idproductopresentacion\n"
+                            + "    inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "    where month(notapedido.fechasistema) = " + mes + " \n"
+                            + "    group by producto.nombre\n"
+                            + "    order by sum(ventanota.total) desc";
+                    c++;
                     break;
-                case 3:
-                    con.conectar();
+                case 3://caja 01                    
                     sql = "select producto.nombre, npbarra_prod.preciou, sum(npbarra_prod.cantidad), sum(npbarra_prod.subtotal)\n"
                             + "from npbarra\n"
                             + "inner join npbarra_prod on npbarra.idnpbarra = npbarra_prod.idnpbarra\n"
@@ -220,10 +221,9 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
                             + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
                             + "where month(npbarra.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
-                    sigla = "3";
+                    c++;
                     break;
-                case 4:
-                    con.conectar();
+                case 4://caja 02
                     sql = "select producto.nombre, npbarra_prod2.preciou, sum(npbarra_prod2.cantidad), sum(npbarra_prod2.subtotal)\n"
                             + "from npbarra2\n"
                             + "inner join npbarra_prod2 on npbarra2.idnpbarra2 = npbarra_prod2.idnpbarra2\n"
@@ -231,10 +231,9 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
                             + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
                             + "where month(npbarra2.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
-                    sigla = "4";
+                    c++;
                     break;
-                case 5:
-                    con.conectar();
+                case 5://caja vip
                     sql = "select producto.nombre, npbarra_prod3.preciou, sum(npbarra_prod3.cantidad), sum(npbarra_prod3.subtotal)\n"
                             + "from npbarra3\n"
                             + "inner join npbarra_prod3 on npbarra3.idnpbarra3 = npbarra_prod3.idnpbarra3\n"
@@ -242,26 +241,35 @@ public class ReportesNotaPedido extends javax.swing.JInternalFrame {
                             + "inner join producto on productopresentacion.idproducto = producto.idproducto\n"
                             + "where month(npbarra3.fechasistema) = " + mes + " \n"
                             + "group by producto.nombre";
-                    sigla = "5";
+                    c++;
+                    break;
+                case 6://entrada general 2 alejandro
+                    JOptionPane.showMessageDialog(getRootPane(), "UNSUPPORTED YET");
                     break;
             }
-            PreparedStatement pst = con.getConexion().prepareStatement(sql);
-            //pst.setInt(1, mes);
 
-            ResultSet rs = pst.executeQuery();
-            //estructura para contadora
-            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-            while (rs.next()) {
-                datos[0] = rs.getString(1); // producto
-                datos[1] = rs.getDouble(2);//precio unitario
-                datos[2] = rs.getInt(3);//cantidad
-                datos[3] = rs.getDouble(4);// subtotal
-                
-                modeloTablaVentas.addRow(datos);
+            if (c > 0) {
+                PreparedStatement pst = con.getConexion().prepareStatement(sql);
+                //pst.setInt(1, mes);
+
+                ResultSet rs = pst.executeQuery();
+                //estructura para contadora
+                //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
+                while (rs.next()) {
+                    datos[0] = rs.getString(1); // producto
+                    datos[1] = rs.getDouble(2);//precio unitario
+                    datos[2] = rs.getInt(3);//cantidad
+                    datos[3] = rs.getDouble(4);// subtotal
+
+                    modeloTablaVentas.addRow(datos);
+                }
+                tblDatos.setModel(modeloTablaVentas);
+                rs.close();
+                pst.close();
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "NO HAY DATOS QUE RECUPERAR");
             }
-            tblDatos.setModel(modeloTablaVentas);
-            rs.close();
-            pst.close();
+
         } catch (Exception e) {
             throw e;
         } finally {
