@@ -101,6 +101,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem41 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem23 = new javax.swing.JMenuItem();
@@ -578,6 +579,14 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.add(jMenu5);
 
+        jMenuItem9.setText("GESTION DE INVENTARIOS");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
+
         navMenu.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Manager_24px.png"))); // NOI18N
@@ -680,7 +689,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try {
-            ConteoDiario cd = new ConteoDiario(txtUsuario.getText());
+            GestionInventarios cd = new GestionInventarios(txtUsuario.getText());
             escritorio.add(cd);
             cd.setVisible(true);
         } catch (Exception ex) {
@@ -720,7 +729,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnConteoDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConteoDiarioActionPerformed
         try {
-            ConteoDiario cd = new ConteoDiario(txtUsuario.getText());
+            GestionInventarios cd = new GestionInventarios(txtUsuario.getText());
             escritorio.add(cd);
             cd.setVisible(true);
         } catch (Exception ex) {
@@ -1078,6 +1087,16 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem40ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+            GestionInventarios iv = new GestionInventarios(txtUsuario.getText());
+            escritorio.add(iv);
+            iv.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -1189,6 +1208,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

@@ -29,14 +29,14 @@ public class Conexion {
     }
     
     //metodo sobrecargado para pasar el servidor y nombre de base de datos
-    public void conectar(String SERVER , String BD) throws Exception {
-        try {
-            conexion = DriverManager.getConnection("jdbc:mysql://"+SERVER+"/"+BD+"", USER, PASS);
-            Class.forName(JDBC_DRIVER);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    public void conectar(String SERVER , String BD) throws Exception {
+//        try {
+//            conexion = DriverManager.getConnection("jdbc:mysql://"+SERVER+"/"+BD+"", USER, PASS);
+//            Class.forName(JDBC_DRIVER);
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     public Connection getConexion() {
         return conexion;

@@ -6,15 +6,18 @@
 package Vista;
 
 import Controlador.ColumnasTablas;
+import Controlador.StockBebidasPreparadas;
 import Modelo.Almacen;
 import Modelo.Conexion;
 import Modelo.Medida;
 import Modelo.MySQLDAO.AlmacenDAO;
 import Modelo.MySQLDAO.MedidaDAO;
+import Modelo.MySQLDAO.PreparacionDAO;
 import Modelo.MySQLDAO.ProductoPresentacionDAO;
 import Modelo.MySQLDAO.ProductoRequerimientoDAO;
 import Modelo.MySQLDAO.RequerimientoDAO;
 import Modelo.MySQLDAO.UsuarioDAO;
+import Modelo.Preparacion;
 import Modelo.ProductoRequerimiento;
 import Modelo.Requerimiento;
 import java.sql.Connection;
@@ -867,6 +870,10 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
                 int rs = st.executeUpdate(sql);
                 if (rs > 0) {
                     
+                    if (a.getId() != 1) {
+                        actualizarStockProductoPadre(a.getId());
+                    }
+                    
                     System.out.println("Se actualizo en stock del producto :" + id);
                 }
 
@@ -938,6 +945,25 @@ public class ValidarRequerimiento extends javax.swing.JInternalFrame {
         }
         return false;
     }
+    
+    private void actualizarStockProductoPadre(int idAlmacen) {
+        try {
+            //actualizar stock si se compraron productos que sirven de componentes
+            //evaluar si es producto componente
+
+            PreparacionDAO pdao = new PreparacionDAO();
+
+            for (Preparacion p : pdao.Listar()) {
+
+                StockBebidasPreparadas sbp = new StockBebidasPreparadas(p.getIdProducto(), idAlmacen);
+                sbp.updateStock(idAlmacen);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 
     private void cargarCombo() {
         try {

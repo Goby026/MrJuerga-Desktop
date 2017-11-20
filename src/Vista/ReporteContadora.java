@@ -853,114 +853,114 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
     }
 
     //detalle de ventas en entrada
-    public void ventasEntrada(int mes, int serie) throws Exception {
-        LimpiarTabla(tblDatos, modeloTablaVentas);
-        Conexion con = new Conexion();
-        try {
-            Object[] datos = new Object[7];
-            con.conectar("192.168.1.57", "mrjuerga_entradas");
-            String sql = "";
-            switch (serie) {
-                case 1:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 2:
-                    sql = "select venta.fecha, \"TICKET\",\"002\",venta.idventa, round((sum(ventaentrada.total)/1.18),2) as 'BASE-IMP', (round((sum(ventaentrada.total)/1.18),2))*0.18 as 'IGV', ventaentrada.total\n"
-                            + "from venta\n"
-                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
-                            + "where month(venta.fechasistema)= " + mes + " \n"
-                            + "group by venta.idventa";
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 4:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 5:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-            }
-            PreparedStatement pst = con.getConexion().prepareStatement(sql);
-            //pst.setInt(1, mes);
-
-            ResultSet rs = pst.executeQuery();
-            //estructura para contadora
-            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-            while (rs.next()) {
-                datos[0] = rs.getString(1); // fecha de la venta
-                datos[1] = "TICKET";//tipo documento
-                datos[2] = "002";//serie
-                datos[3] = rs.getInt(4);// nro de ticket
-                datos[4] = rs.getDouble(5); // base imponible
-                datos[5] = rs.getDouble(6);//igv
-                datos[6] = rs.getDouble(7); // importe
-                modeloTablaVentas.addRow(datos);
-            }
-            tblDatos.setModel(modeloTablaVentas);
-            columnsSize(1);
-            rs.close();
-            pst.close();
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            con.cerrar();
-        }
-    }
+//    public void ventasEntrada(int mes, int serie) throws Exception {
+//        LimpiarTabla(tblDatos, modeloTablaVentas);
+//        Conexion con = new Conexion();
+//        try {
+//            Object[] datos = new Object[7];
+//            con.conectar("192.168.1.57", "mrjuerga_entradas");
+//            String sql = "";
+//            switch (serie) {
+//                case 1:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 2:
+//                    sql = "select venta.fecha, \"TICKET\",\"002\",venta.idventa, round((sum(ventaentrada.total)/1.18),2) as 'BASE-IMP', (round((sum(ventaentrada.total)/1.18),2))*0.18 as 'IGV', ventaentrada.total\n"
+//                            + "from venta\n"
+//                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
+//                            + "where month(venta.fechasistema)= " + mes + " \n"
+//                            + "group by venta.idventa";
+//                    break;
+//                case 3:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 4:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 5:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//            }
+//            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+//            //pst.setInt(1, mes);
+//
+//            ResultSet rs = pst.executeQuery();
+//            //estructura para contadora
+//            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
+//            while (rs.next()) {
+//                datos[0] = rs.getString(1); // fecha de la venta
+//                datos[1] = "TICKET";//tipo documento
+//                datos[2] = "002";//serie
+//                datos[3] = rs.getInt(4);// nro de ticket
+//                datos[4] = rs.getDouble(5); // base imponible
+//                datos[5] = rs.getDouble(6);//igv
+//                datos[6] = rs.getDouble(7); // importe
+//                modeloTablaVentas.addRow(datos);
+//            }
+//            tblDatos.setModel(modeloTablaVentas);
+//            columnsSize(1);
+//            rs.close();
+//            pst.close();
+//        } catch (Exception e) {
+//            throw e;
+//        } finally {
+//            con.cerrar();
+//        }
+//    }
 
     //ventas por producto
-    public void ventaEntradaPorProducto(int mes, int serie) throws Exception {
-        LimpiarTabla(tblResumenProductos, modeloTablaResumenProductos);
-        Conexion con = new Conexion();
-        try {
-            Object[] datos = new Object[4];
-            con.conectar("192.168.1.57", "mrjuerga_entradas");
-            String sql = "";
-            switch (serie) {
-                case 1:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 2:
-                    sql = "select producto.nombre,count(ventaentrada.idproducto),sum(ventaentrada.numPersonas),sum(ventaentrada.total), ventaentrada.idproducto\n"
-                            + "from venta\n"
-                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
-                            + "inner join producto on ventaentrada.idproducto = producto.idproducto\n"
-                            + "where month(fechasistema) = " + mes + " \n"
-                            + "group by ventaentrada.idproducto";
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 4:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-                case 5:
-                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-                    break;
-            }
-            PreparedStatement pst = con.getConexion().prepareStatement(sql);
-            //pst.setInt(1, mes);
-
-            ResultSet rs = pst.executeQuery();
-            //estructura para contadora
-            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-            while (rs.next()) {
-                datos[0] = rs.getString(1); // producto
-                datos[1] = rs.getDouble(2);//precio u
-                datos[2] = rs.getInt(3);//cantidad
-                datos[3] = rs.getDouble(4);// subtotal
-                modeloTablaResumenProductos.addRow(datos);
-            }
-            tblResumenProductos.setModel(modeloTablaResumenProductos);
-            columnsSize(2);
-            rs.close();
-            pst.close();
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            con.cerrar();
-        }
-    }
+//    public void ventaEntradaPorProducto(int mes, int serie) throws Exception {
+//        LimpiarTabla(tblResumenProductos, modeloTablaResumenProductos);
+//        Conexion con = new Conexion();
+//        try {
+//            Object[] datos = new Object[4];
+//            con.conectar("192.168.1.57", "mrjuerga_entradas");
+//            String sql = "";
+//            switch (serie) {
+//                case 1:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 2:
+//                    sql = "select producto.nombre,count(ventaentrada.idproducto),sum(ventaentrada.numPersonas),sum(ventaentrada.total), ventaentrada.idproducto\n"
+//                            + "from venta\n"
+//                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
+//                            + "inner join producto on ventaentrada.idproducto = producto.idproducto\n"
+//                            + "where month(fechasistema) = " + mes + " \n"
+//                            + "group by ventaentrada.idproducto";
+//                    break;
+//                case 3:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 4:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//                case 5:
+//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
+//                    break;
+//            }
+//            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+//            //pst.setInt(1, mes);
+//
+//            ResultSet rs = pst.executeQuery();
+//            //estructura para contadora
+//            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
+//            while (rs.next()) {
+//                datos[0] = rs.getString(1); // producto
+//                datos[1] = rs.getDouble(2);//precio u
+//                datos[2] = rs.getInt(3);//cantidad
+//                datos[3] = rs.getDouble(4);// subtotal
+//                modeloTablaResumenProductos.addRow(datos);
+//            }
+//            tblResumenProductos.setModel(modeloTablaResumenProductos);
+//            columnsSize(2);
+//            rs.close();
+//            pst.close();
+//        } catch (Exception e) {
+//            throw e;
+//        } finally {
+//            con.cerrar();
+//        }
+//    }
 
     //ventas jornada segun mes y serie
     public void ventaPorJornada(int mes, int serie) throws Exception {
@@ -1052,9 +1052,9 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
                     break;
                 case 2:
-                    con.conectar("192.168.157", "mrjuerga_entradas");
-                    sql = "SELECT sum(total) FROM ventaentrada\n"
-                            + "WHERE month(fecha) = " + mes + " ";
+//                    con.conectar("192.168.157", "mrjuerga_entradas");
+//                    sql = "SELECT sum(total) FROM ventaentrada\n"
+//                            + "WHERE month(fecha) = " + mes + " ";
                     break;
                 case 3:
                     con.conectar();

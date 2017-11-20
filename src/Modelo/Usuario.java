@@ -2,18 +2,18 @@ package Modelo;
 
 public class Usuario {
 
-    int id;
-    String nombre;
-    String apellido;
-    String dni;
-    String ruc;
-    String telefono;
-    String direccion;
-    String imagen;
-    String usuario;
-    String pass;
-    double sueldo;
-    int planilla;
+    private int id;
+    private String nombre;
+    private String apellido;
+    private String dni;
+    private String ruc;
+    private String telefono;
+    private String direccion;
+    private String imagen;
+    private String usuario;
+    private String pass;
+    private double sueldo;
+    private int planilla;
 
     public Usuario() {
     }
@@ -128,7 +128,10 @@ public class Usuario {
     public void setPlanilla(int planilla) {
         this.planilla = planilla;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellido;
+    }
 
 }
