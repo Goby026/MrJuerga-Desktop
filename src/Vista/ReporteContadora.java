@@ -206,7 +206,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         btnVentaJornada = new javax.swing.JButton();
         btnVentaTotal = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        pruebaPOI = new javax.swing.JButton();
+        btnExcelVentaProducto = new javax.swing.JButton();
         pruebaPOIDetalles = new javax.swing.JButton();
 
         formVentaJornada.setTitle("VENTAS POR JORNADA");
@@ -404,14 +404,14 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         getContentPane().add(btnVentaTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 220, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1120, 20));
 
-        pruebaPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
-        pruebaPOI.setText("PRODUCTOS");
-        pruebaPOI.addActionListener(new java.awt.event.ActionListener() {
+        btnExcelVentaProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
+        btnExcelVentaProducto.setText("PRODUCTOS");
+        btnExcelVentaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pruebaPOIActionPerformed(evt);
+                btnExcelVentaProductoActionPerformed(evt);
             }
         });
-        getContentPane().add(pruebaPOI, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 780, -1, -1));
+        getContentPane().add(btnExcelVentaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 780, -1, -1));
 
         pruebaPOIDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
         pruebaPOIDetalles.setText("DETALLES");
@@ -561,7 +561,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnVentaTotalActionPerformed
 
-    private void pruebaPOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaPOIActionPerformed
+    private void btnExcelVentaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelVentaProductoActionPerformed
         try {
             int filas = tblResumenProductos.getRowCount();
             if (filas > 0) {
@@ -580,7 +580,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
 
                 ApachePOIExcelWrite ape = new ApachePOIExcelWrite(titulos, entrada, ruta);
 
-                if (ape.CrearExcel()) {
+                if (ape.CrearExcel(true)) {//true por que genera una fila extra de suma de los subtotales de la tabla
                     JOptionPane.showMessageDialog(null, "REPORTE CREADO CON EXITO EN LA RUTA: " + ruta);
                 } else {
                     JOptionPane.showMessageDialog(null, "EL DOCUMENTO NO TIENE PAGINAS");
@@ -592,7 +592,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(ReporteContadora.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_pruebaPOIActionPerformed
+    }//GEN-LAST:event_btnExcelVentaProductoActionPerformed
 
     private void pruebaPOIDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaPOIDetallesActionPerformed
         try {
@@ -634,6 +634,7 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcelJornadas;
+    private javax.swing.JButton btnExcelVentaProducto;
     private javax.swing.JButton btnRevisar;
     private javax.swing.JButton btnVentaJornada;
     private javax.swing.JButton btnVentaTotal;
@@ -663,7 +664,6 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private com.toedter.calendar.JMonthChooser jmcMeses;
-    private javax.swing.JButton pruebaPOI;
     private javax.swing.JButton pruebaPOIDetalles;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTable tblResumenProductos;
@@ -851,116 +851,6 @@ public class ReporteContadora extends javax.swing.JInternalFrame {
             con.cerrar();
         }
     }
-
-    //detalle de ventas en entrada
-//    public void ventasEntrada(int mes, int serie) throws Exception {
-//        LimpiarTabla(tblDatos, modeloTablaVentas);
-//        Conexion con = new Conexion();
-//        try {
-//            Object[] datos = new Object[7];
-//            con.conectar("192.168.1.57", "mrjuerga_entradas");
-//            String sql = "";
-//            switch (serie) {
-//                case 1:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 2:
-//                    sql = "select venta.fecha, \"TICKET\",\"002\",venta.idventa, round((sum(ventaentrada.total)/1.18),2) as 'BASE-IMP', (round((sum(ventaentrada.total)/1.18),2))*0.18 as 'IGV', ventaentrada.total\n"
-//                            + "from venta\n"
-//                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
-//                            + "where month(venta.fechasistema)= " + mes + " \n"
-//                            + "group by venta.idventa";
-//                    break;
-//                case 3:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 4:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 5:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//            }
-//            PreparedStatement pst = con.getConexion().prepareStatement(sql);
-//            //pst.setInt(1, mes);
-//
-//            ResultSet rs = pst.executeQuery();
-//            //estructura para contadora
-//            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-//            while (rs.next()) {
-//                datos[0] = rs.getString(1); // fecha de la venta
-//                datos[1] = "TICKET";//tipo documento
-//                datos[2] = "002";//serie
-//                datos[3] = rs.getInt(4);// nro de ticket
-//                datos[4] = rs.getDouble(5); // base imponible
-//                datos[5] = rs.getDouble(6);//igv
-//                datos[6] = rs.getDouble(7); // importe
-//                modeloTablaVentas.addRow(datos);
-//            }
-//            tblDatos.setModel(modeloTablaVentas);
-//            columnsSize(1);
-//            rs.close();
-//            pst.close();
-//        } catch (Exception e) {
-//            throw e;
-//        } finally {
-//            con.cerrar();
-//        }
-//    }
-
-    //ventas por producto
-//    public void ventaEntradaPorProducto(int mes, int serie) throws Exception {
-//        LimpiarTabla(tblResumenProductos, modeloTablaResumenProductos);
-//        Conexion con = new Conexion();
-//        try {
-//            Object[] datos = new Object[4];
-//            con.conectar("192.168.1.57", "mrjuerga_entradas");
-//            String sql = "";
-//            switch (serie) {
-//                case 1:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 2:
-//                    sql = "select producto.nombre,count(ventaentrada.idproducto),sum(ventaentrada.numPersonas),sum(ventaentrada.total), ventaentrada.idproducto\n"
-//                            + "from venta\n"
-//                            + "inner join ventaentrada on venta.idventa = ventaentrada.venta_idventa\n"
-//                            + "inner join producto on ventaentrada.idproducto = producto.idproducto\n"
-//                            + "where month(fechasistema) = " + mes + " \n"
-//                            + "group by ventaentrada.idproducto";
-//                    break;
-//                case 3:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 4:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//                case 5:
-//                    JOptionPane.showMessageDialog(null, "UNSUPPORTED YET");
-//                    break;
-//            }
-//            PreparedStatement pst = con.getConexion().prepareStatement(sql);
-//            //pst.setInt(1, mes);
-//
-//            ResultSet rs = pst.executeQuery();
-//            //estructura para contadora
-//            //FECHA-TIPODOCUMENTO-SERIE-NROVENTA-BASEIMPONIBLE(/1.18)-IGV(*0.18)-IMPORTETOTAL
-//            while (rs.next()) {
-//                datos[0] = rs.getString(1); // producto
-//                datos[1] = rs.getDouble(2);//precio u
-//                datos[2] = rs.getInt(3);//cantidad
-//                datos[3] = rs.getDouble(4);// subtotal
-//                modeloTablaResumenProductos.addRow(datos);
-//            }
-//            tblResumenProductos.setModel(modeloTablaResumenProductos);
-//            columnsSize(2);
-//            rs.close();
-//            pst.close();
-//        } catch (Exception e) {
-//            throw e;
-//        } finally {
-//            con.cerrar();
-//        }
-//    }
 
     //ventas jornada segun mes y serie
     public void ventaPorJornada(int mes, int serie) throws Exception {

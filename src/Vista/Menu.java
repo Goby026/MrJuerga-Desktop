@@ -105,7 +105,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem43 = new javax.swing.JMenuItem();
         jMenuItem37 = new javax.swing.JMenuItem();
+        jMenuItem44 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
@@ -594,7 +596,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.setText("DOCUMENTOS");
 
-        jMenuItem23.setText("INFORME VENTAS");
+        jMenuItem23.setText("INFORME VENTAS - MENSUAL");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem23ActionPerformed(evt);
@@ -602,13 +604,24 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem23);
 
-        jMenuItem37.setText("INFORME NOTAS DE PEDIDO");
+        jMenuItem43.setText("INFORME VENTAS - DIARIO");
+        jMenuItem43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem43ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem43);
+
+        jMenuItem37.setText("INFORME NOTAS DE PEDIDO - MENSUAL");
         jMenuItem37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem37ActionPerformed(evt);
             }
         });
         jMenu4.add(jMenuItem37);
+
+        jMenuItem44.setText("INFORME NOTAS DE PEDIDO - DIARIO");
+        jMenu4.add(jMenuItem44);
 
         jMenuItem3.setText("ANULADOS");
         jMenu4.add(jMenuItem3);
@@ -1097,6 +1110,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem43ActionPerformed
+        try {
+            FujosDeCaja iv = new FujosDeCaja(txtUsuario.getText());
+            escritorio.add(iv);
+            iv.setVisible(true);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem43ActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -1144,7 +1167,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem cajas;
     private javax.swing.JMenuItem cerrarSesion;
     private javax.swing.JMenuItem configuracion;
-    private javax.swing.JDesktopPane escritorio;
+    public javax.swing.JDesktopPane escritorio;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1204,6 +1227,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem40;
     private javax.swing.JMenuItem jMenuItem41;
     private javax.swing.JMenuItem jMenuItem42;
+    private javax.swing.JMenuItem jMenuItem43;
+    private javax.swing.JMenuItem jMenuItem44;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

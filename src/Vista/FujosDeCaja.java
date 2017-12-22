@@ -1,12 +1,23 @@
-
 package Vista;
 
+import Controlador.ApachePOIExcelWrite;
+import Controlador.ColumnasTablas;
 import Controlador.Cronometro;
-import Controlador.FlujoDeCajaControl;
+import Controlador.JTableControl;
 import Controlador.ManejadorFechas;
-import com.toedter.calendar.JCalendar;
+import Modelo.Caja;
+import Modelo.Conexion;
+import Modelo.FlujoCaja;
+import Modelo.MySQLDAO.CajaDAO;
+import Modelo.MySQLDAO.FlujoCajaDAO;
 import java.awt.Color;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,13 +25,21 @@ import java.util.Date;
  */
 public class FujosDeCaja extends javax.swing.JInternalFrame {
 
+    JTableControl jcVentaProducto = null;
 
-    public FujosDeCaja(String usuario) {
+    public FujosDeCaja(String usuario) throws Exception {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
-         new Cronometro().iniciarCronometro(txtHora);
+        new Cronometro().iniciarCronometro(txtHora);
         txtFecha.setText(new ManejadorFechas().getFechaActual());
         txtUsuario1.setText(usuario);
+        cargarComboCajas();
+
+        String titulos[] = {"PRODUCTO", "PRESENTACION", "CANTIDAD", "SUBTOTAL"};
+
+        jcVentaProducto = new JTableControl(titulos, tblVentaProducto);
+
+        jcVentaProducto.llenarTitulos();
     }
 
     /**
@@ -41,91 +60,39 @@ public class FujosDeCaja extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jcCalendario = new com.toedter.calendar.JCalendar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDetalleIngresos = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblVentaProducto = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        lblCierre = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        lblInicio = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        btnVerFlujoDelDia = new javax.swing.JButton();
+        btnCrearExcel = new javax.swing.JButton();
+        cmbCaja = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lblSaldoInicial = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        lblTotalIngresos = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        lblTotalEgresos = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        lblTotalEgresos1 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        lblPrueba = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        lblSaldoInicial1 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblDetalleIngresos1 = new javax.swing.JTable();
-        lblTotalIngresos1 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        lblTotalEgresos2 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
-        lblTotalEgresos3 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        lblSaldoInicial2 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblDetalleIngresos2 = new javax.swing.JTable();
-        lblTotalIngresos2 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jLabel33 = new javax.swing.JLabel();
-        lblTotalEgresos4 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        lblTotalEgresos5 = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        lblGastos = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblMaster = new javax.swing.JLabel();
+        lblVisa = new javax.swing.JLabel();
+        lblDescuadre = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtHora = new javax.swing.JTextField();
-        txtUsuario1 = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
+        txtUsuario1 = new javax.swing.JTextField();
+        txtHora = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 102));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,16 +122,20 @@ public class FujosDeCaja extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("FLUJO DE CAJA");
+        setTitle("VENTAS DIARIAS");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jcCalendario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jcCalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, 290));
+        jcCalendario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel1.add(jcCalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 370, 290));
 
-        tblDetalleIngresos.setModel(new javax.swing.table.DefaultTableModel(
+        tblVentaProducto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblVentaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -175,530 +146,444 @@ public class FujosDeCaja extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblDetalleIngresos);
+        jScrollPane1.setViewportView(tblVentaProducto);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 490, 120));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 490, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 530, 400));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("SELECCIONE UNA FECHA");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
+        jLabel8.setText("CAJA");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 360, 18));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 370, 30));
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("FLUJO DE CAJA ECONOMICO");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
+        lblCierre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblCierre.setForeground(new java.awt.Color(255, 255, 255));
+        lblCierre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCierre.setText("...");
+        jPanel5.add(lblCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 150, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 490, 18));
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("FLUJO DE CAJA ECONOMICO");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 170, 30));
 
-        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("CIERRE:");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 60, 30));
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("SALDO INICIAL");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 490, 18));
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setText("S/.");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 30, -1));
-
-        lblSaldoInicial.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSaldoInicial.setText("250.00");
-        jPanel1.add(lblSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 150, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 530, 30));
 
         jPanel8.setBackground(new java.awt.Color(51, 51, 51));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("DETALLE DE INGRESOS");
-        jPanel8.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
+        lblInicio.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblInicio.setForeground(new java.awt.Color(255, 255, 255));
+        lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblInicio.setText("...");
+        jPanel8.add(lblInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 130, 30));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 490, 18));
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("DETALLE DE INGRESOS");
+        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, -1, 30));
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setText("S/.");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 30, -1));
-
-        lblTotalIngresos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalIngresos.setText("250.00");
-        jPanel1.add(lblTotalIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 150, -1));
-
-        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel15.setText("S/.");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 30, -1));
-
-        lblTotalEgresos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalEgresos.setText("250.00");
-        jPanel1.add(lblTotalEgresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 150, -1));
-
-        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("DETALLE DE EGRESOS");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
+        jLabel16.setText("INICIO:");
+        jPanel8.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 490, 18));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 530, 30));
 
-        lblTotalEgresos1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        lblTotalEgresos1.setText("250.00");
-        jPanel1.add(lblTotalEgresos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 230, 100));
+        lblTotal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotal.setText("....");
+        jPanel1.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 600, 130, -1));
 
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel17.setText("S/.");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 30, -1));
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("VER FLUJO DEL DIA");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVerFlujoDelDia.setBackground(new java.awt.Color(0, 153, 0));
+        btnVerFlujoDelDia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnVerFlujoDelDia.setForeground(new java.awt.Color(255, 255, 255));
+        btnVerFlujoDelDia.setText("VER FLUJO");
+        btnVerFlujoDelDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVerFlujoDelDiaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 360, 30));
+        jPanel1.add(btnVerFlujoDelDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 40));
 
-        lblPrueba.setText("jLabel5");
-        jPanel1.add(lblPrueba, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
+        btnCrearExcel.setBackground(new java.awt.Color(204, 204, 204));
+        btnCrearExcel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCrearExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
+        btnCrearExcel.setText("Reporte Excel");
+        btnCrearExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearExcelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCrearExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 40));
+
+        cmbCaja.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel1.add(cmbCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 370, 30));
+
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("FECHA INICIAL");
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 30));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 370, 30));
+
+        lblGastos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblGastos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblGastos.setText("...");
+        jPanel1.add(lblGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 570, 70, -1));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setText("TOTAL S/.:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, -1, -1));
+
+        lblMaster.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblMaster.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblMaster.setText("...");
+        jPanel1.add(lblMaster, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, 70, -1));
+
+        lblVisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblVisa.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVisa.setText("...");
+        jPanel1.add(lblVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 70, -1));
+
+        lblDescuadre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblDescuadre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDescuadre.setText("...");
+        jPanel1.add(lblDescuadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 600, 70, -1));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("VISA:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 100, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("MASTERCARD:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, 100, -1));
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("GASTOS:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 570, 100, -1));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("DESCUADRE:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 600, 100, -1));
 
         jTabbedPane1.addTab("DIARIO", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("SELECCIONE UN MES");
-        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 360, 18));
-
-        jMonthChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMonthChooser1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel2.add(jMonthChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, 30));
-
-        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("SALDO INICIAL");
-        jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel2.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 490, 18));
-
-        lblSaldoInicial1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSaldoInicial1.setText("250.00");
-        jPanel2.add(lblSaldoInicial1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 150, -1));
-
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel20.setText("S/.");
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 30, -1));
-
-        jPanel12.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("DETALLE DE INGRESOS");
-        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel2.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 490, 18));
-
-        tblDetalleIngresos1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(tblDetalleIngresos1);
-
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 490, 120));
-
-        lblTotalIngresos1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalIngresos1.setText("250.00");
-        jPanel2.add(lblTotalIngresos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 150, -1));
-
-        jLabel22.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel22.setText("S/.");
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 30, -1));
-
-        jPanel13.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("DETALLE DE EGRESOS");
-        jPanel13.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel2.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 490, 18));
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable3);
-
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 490, 120));
-
-        lblTotalEgresos2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalEgresos2.setText("250.00");
-        jPanel2.add(lblTotalEgresos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 150, -1));
-
-        jLabel24.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel24.setText("S/.");
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 30, -1));
-
-        jPanel14.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("FLUJO DE CAJA ECONOMICO");
-        jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel2.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 490, 18));
-
-        lblTotalEgresos3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        lblTotalEgresos3.setText("250.00");
-        jPanel2.add(lblTotalEgresos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 230, 100));
-
-        jLabel26.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel26.setText("S/.");
-        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 30, -1));
-
-        jButton2.setBackground(new java.awt.Color(0, 153, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("VER FLUJO MENSUAL");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, -1));
-
-        jTabbedPane1.addTab("MENSUAL", jPanel2);
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel15.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("SELECCIONE UN MES");
-        jPanel15.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 360, 18));
-
-        jPanel16.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("SALDO INICIAL");
-        jPanel16.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel3.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 490, 18));
-
-        lblSaldoInicial2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSaldoInicial2.setText("250.00");
-        jPanel3.add(lblSaldoInicial2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 150, -1));
-
-        jLabel29.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel29.setText("S/.");
-        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 30, -1));
-
-        jPanel17.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel30.setText("DETALLE DE INGRESOS");
-        jPanel17.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel3.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 490, 18));
-
-        tblDetalleIngresos2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(tblDetalleIngresos2);
-
-        jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 490, 120));
-
-        lblTotalIngresos2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalIngresos2.setText("250.00");
-        jPanel3.add(lblTotalIngresos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 150, -1));
-
-        jLabel31.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel31.setText("S/.");
-        jPanel3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 30, -1));
-
-        jPanel18.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setText("DETALLE DE EGRESOS");
-        jPanel18.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 490, 18));
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane6.setViewportView(jTable4);
-
-        jPanel3.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 490, 120));
-
-        jButton3.setBackground(new java.awt.Color(0, 153, 0));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("VER FLUJO ANUAL");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, -1));
-
-        jLabel33.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel33.setText("S/.");
-        jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 30, -1));
-
-        lblTotalEgresos4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTotalEgresos4.setText("250.00");
-        jPanel3.add(lblTotalEgresos4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 150, -1));
-
-        jPanel19.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("FLUJO DE CAJA ECONOMICO");
-        jPanel19.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 15));
-
-        jPanel3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 490, 18));
-
-        jLabel35.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel35.setText("S/.");
-        jPanel3.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 30, -1));
-
-        lblTotalEgresos5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        lblTotalEgresos5.setText("250.00");
-        jPanel3.add(lblTotalEgresos5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 230, 100));
-
-        jYearChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 50, 70, 30));
-
-        jTabbedPane1.addTab("ANUAL", jPanel3);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 910, 640));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 930, 660));
 
         jPanel20.setBackground(new java.awt.Color(0, 153, 204));
         jPanel20.setForeground(new java.awt.Color(255, 255, 255));
         jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel36.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("FLUJO DE CAJA");
+        jLabel36.setText("VENTAS POR DIA");
         jPanel20.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, 30));
 
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/caja-reg.png"))); // NOI18N
         jPanel20.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
 
-        txtFecha.setEditable(false);
-        txtFecha.setBackground(new java.awt.Color(0, 153, 204));
-        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
-        txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel20.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 90, -1));
+        getContentPane().add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 70));
 
-        txtHora.setEditable(false);
-        txtHora.setBackground(new java.awt.Color(0, 153, 204));
-        txtHora.setForeground(new java.awt.Color(255, 255, 255));
-        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel20.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 90, -1));
+        jPanel21.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUsuario1.setEditable(false);
-        txtUsuario1.setBackground(new java.awt.Color(0, 153, 204));
+        txtUsuario1.setBackground(new java.awt.Color(51, 51, 51));
         txtUsuario1.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel20.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 140, -1));
+        jPanel21.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, -1));
 
-        jLabel38.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
-        jLabel38.setText("FLUJO DE CAJA");
-        jPanel20.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, -1, 30));
+        txtHora.setEditable(false);
+        txtHora.setBackground(new java.awt.Color(51, 51, 51));
+        txtHora.setForeground(new java.awt.Color(255, 255, 255));
+        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtHora.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "HORA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel21.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 90, -1));
 
-        getContentPane().add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 70));
+        txtFecha.setEditable(false);
+        txtFecha.setBackground(new java.awt.Color(51, 51, 51));
+        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel21.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, -1));
 
-        jPanel21.setBackground(new java.awt.Color(0, 153, 204));
-        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel42.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel42.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(255, 51, 0));
-        jLabel42.setText("DISCOTECK");
-        jPanel21.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, -1));
-
-        jLabel43.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel43.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
-        jLabel43.setText("DISCOTECK");
-        jPanel21.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 0, -1, -1));
-
-        jLabel44.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel44.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel44.setText("MISTER JUERGA");
-        jPanel21.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, -1, -1));
-
-        jLabel45.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel45.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
-        jLabel45.setText("MISTER JUERGA");
-        jPanel21.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 0, -1, -1));
-
-        getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 740, 930, 40));
+        getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 940, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Date d = jcCalendario.getDate();
-        String fecha = new FlujoDeCajaControl().obtenerFecha(d);
-        lblPrueba.setText(fecha);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnVerFlujoDelDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerFlujoDelDiaActionPerformed
+        try {
+            jcVentaProducto.LimpiarTabla();
+
+            Date d = jcCalendario.getDate();
+            String fecha = obtenerFecha(d);
+
+            Caja caja = (Caja) cmbCaja.getSelectedItem();
+
+            System.out.println("ID caja: " + caja.getIdCaja());
+            System.out.println("Fecha: " + fecha);
+
+            FlujoCajaDAO fdao = new FlujoCajaDAO();
+
+            //obtener el idflujocaja
+            int idFlujoCaja = fdao.getIdFlujo(fecha, caja.getIdCaja());
+
+            FlujoCaja fc = fdao.Obtener(idFlujoCaja);
+
+            ventasDia(fecha, caja.getIdCaja());
+
+            lblCierre.setText(fc.getFechaFinal());
+            lblVisa.setText("" + fc.getVisa());
+            lblMaster.setText("" + fc.getMaster());
+            lblGastos.setText("" + fc.getEgresos());
+            lblDescuadre.setText("" + fc.getDescuadre());
+            lblTotal.setText("" + totalVenta());
+
+            lblInicio.setText(fecha);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnVerFlujoDelDiaActionPerformed
+
+    private void btnCrearExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearExcelActionPerformed
+        try {
+            int filas = tblVentaProducto.getRowCount();
+            if (filas > 0) {
+                int columnas = tblVentaProducto.getColumnCount();
+
+                String[] titulos = {"PRODUCTO", "PRESENTACION", "CANTIDAD", "SUBTOTAL"};
+                Object[][] entrada = new Object[filas][columnas];
+
+                for (int i = 0; i < filas; i++) {
+                    for (int j = 0; j < columnas; j++) {
+                        entrada[i][j] = tblVentaProducto.getValueAt(i, j);
+                    }
+                }
+
+                
+                //matriz de los datos totales
+                Object[][] totales = {
+                    {"VISA", Double.parseDouble(lblVisa.getText())},
+                    {"MASTERCARD", Double.parseDouble(lblMaster.getText())},
+                    {"GASTOS", Double.parseDouble(lblGastos.getText())},
+                    {"DESCUADRE", Double.parseDouble(lblDescuadre.getText())},
+                    {"TOTAL", Double.parseDouble(lblTotal.getText())}
+                };
+
+                String ruta = "D:\\reportes contables\\REPORTE-VENTA DIARIA-PRODUCTOS-" + new ManejadorFechas().getFechaActual() + ".xlsx";
+
+                ApachePOIExcelWrite ape = new ApachePOIExcelWrite(titulos, entrada, ruta);
+
+                if (ape.CrearExcel(totales)) {
+                    JOptionPane.showMessageDialog(null, "REPORTE CREADO CON EXITO EN LA RUTA: " + ruta);
+                } else {
+                    JOptionPane.showMessageDialog(null, "EL DOCUMENTO NO TIENE PAGINAS");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE GENERAR DATOS (BOTON VER FLUJO), PARA CREAR EL REPORTE");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ReporteContadora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCrearExcelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCrearExcel;
+    private javax.swing.JButton btnVerFlujoDelDia;
+    private javax.swing.JComboBox<Caja> cmbCaja;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private com.toedter.calendar.JCalendar jcCalendario;
-    private javax.swing.JLabel lblPrueba;
-    private javax.swing.JLabel lblSaldoInicial;
-    private javax.swing.JLabel lblSaldoInicial1;
-    private javax.swing.JLabel lblSaldoInicial2;
-    private javax.swing.JLabel lblTotalEgresos;
-    private javax.swing.JLabel lblTotalEgresos1;
-    private javax.swing.JLabel lblTotalEgresos2;
-    private javax.swing.JLabel lblTotalEgresos3;
-    private javax.swing.JLabel lblTotalEgresos4;
-    private javax.swing.JLabel lblTotalEgresos5;
-    private javax.swing.JLabel lblTotalIngresos;
-    private javax.swing.JLabel lblTotalIngresos1;
-    private javax.swing.JLabel lblTotalIngresos2;
-    private javax.swing.JTable tblDetalleIngresos;
-    private javax.swing.JTable tblDetalleIngresos1;
-    private javax.swing.JTable tblDetalleIngresos2;
+    private javax.swing.JLabel lblCierre;
+    private javax.swing.JLabel lblDescuadre;
+    private javax.swing.JLabel lblGastos;
+    private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblMaster;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblVisa;
+    private javax.swing.JTable tblVentaProducto;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtUsuario1;
     // End of variables declaration//GEN-END:variables
+
+    public String obtenerFecha(Date fecha) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String f = sdf.format(fecha);
+        return f;
+    }
+
+    public void cargarComboCajas() throws Exception {
+        CajaDAO cdao = new CajaDAO();
+        for (Caja c : cdao.Listar()) {
+            cmbCaja.addItem(c);
+        }
+    }
+
+    //ventas detalladas segun dia y serie
+    public void ventasDia(String fecha_inicial, int idCaja) throws Exception {
+        Conexion con = new Conexion();
+        try {
+            Object[] datos = new Object[4];
+            con.conectar();
+            String sql = "";
+            switch (idCaja) {
+                case 1://jaime
+                    sql = "select producto.nombre,presentacion.descripcion,sum(ventaentrada.numCovers) as cantcover, sum(ventaentrada.total) as total \n"
+                            + "    from entradageneral\n"
+                            + "    inner join ventaentrada on entradageneral.identradageneral = ventaentrada.venta_idventa\n"
+                            + "    inner join productopresentacion on ventaentrada.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "    inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "    inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                            + "    inner join flujocaja on entradageneral.idflujocaja = flujocaja.idflujocaja\n"
+                            + "    where flujocaja.fecha_inicio =  ?  \n"
+                            + "    group by producto.nombre";
+
+                    break;
+                case 2://burro
+                    sql = "select producto.nombre,presentacion.descripcion,if(producto.nombre = 'BOX',sum(ventaentradavip.numPersonas),count(ventaentradavip.numPersonas)) as cantidad,sum(ventaentradavip.total) AS subtotal \n"
+                            + "    from entradavip\n"
+                            + "    inner join ventaentradavip on entradavip.identradavip = ventaentradavip.venta_idventa\n"
+                            + "    inner join productopresentacion on ventaentradavip.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "    inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "    inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                            + "    inner join flujocaja on entradavip.idflujocaja = flujocaja.idflujocaja\n"
+                            + "    where flujocaja.fecha_inicio = ? \n"
+                            + "    group by producto.nombre";
+                    break;
+                case 3://caja 01
+                    sql = "select p.nombre, pre.descripcion, sum(vp.cantidad), sum(vp.subtotal)\n"
+                            + "    from venta v\n"
+                            + "    inner join ventaproducto vp on v.idventa = vp.idventa\n"
+                            + "    inner join productopresentacion pp on vp.idproducto = pp.idproductopresentacion\n"
+                            + "    inner join producto p on pp.idproducto = p.idproducto\n"
+                            + "    inner join presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
+                            + "    inner join flujocaja fc on v.idflujocaja = fc.idflujocaja\n"
+                            + "    where fc.fecha_inicio = ? \n"
+                            + "    group by pp.idproductopresentacion";
+                    break;
+                case 4://caja 02
+                    sql = "select p.nombre, pre.descripcion, sum(vp.cantidad), sum(vp.subtotal)\n"
+                            + "    from venta2 v\n"
+                            + "    inner join ventaproducto2 vp on v.idventa2 = vp.idventa\n"
+                            + "    inner join productopresentacion pp on vp.idproducto = pp.idproductopresentacion\n"
+                            + "    inner join producto p on pp.idproducto = p.idproducto\n"
+                            + "    inner join presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
+                            + "    inner join flujocaja fc on v.idflujocaja = fc.idflujocaja\n"
+                            + "    where fc.fecha_inicio = ? \n"
+                            + "    group by pp.idproductopresentacion";
+                    break;
+                case 5://caja vip
+                    sql = "select p.nombre, pre.descripcion, sum(vp.cantidad), sum(vp.subtotal)\n"
+                            + "    from venta3 v\n"
+                            + "    inner join ventaproducto3 vp on v.idventa3 = vp.idventa\n"
+                            + "    inner join productopresentacion pp on vp.idproducto = pp.idproductopresentacion\n"
+                            + "    inner join producto p on pp.idproducto = p.idproducto\n"
+                            + "    inner join presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
+                            + "    inner join flujocaja fc on v.idflujocaja = fc.idflujocaja\n"
+                            + "    where fc.fecha_inicio = ? \n"
+                            + "    group by pp.idproductopresentacion";
+                    break;
+                case 6://entrada general 2
+                    sql = "select producto.nombre,presentacion.descripcion,sum(ventaentrada2.numCovers) as cantcover, sum(ventaentrada2.total) as total \n"
+                            + "    from entradageneral2\n"
+                            + "    inner join ventaentrada2 on entradageneral2.identradageneral2 = ventaentrada2.venta_idventa\n"
+                            + "    inner join productopresentacion on ventaentrada2.idproducto = productopresentacion.idproductopresentacion\n"
+                            + "    inner join producto on productopresentacion.idproducto = producto.idproducto\n"
+                            + "    inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                            + "    inner join flujocaja on entradageneral2.idflujocaja = flujocaja.idflujocaja\n"
+                            + "    where flujocaja.fecha_inicio = ? \n"
+                            + "    group by producto.nombre";
+                    break;
+            }
+            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+            pst.setString(1, fecha_inicial);
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                datos[0] = rs.getString(1); // producto
+                datos[1] = rs.getString(2);//presentacion
+                datos[2] = rs.getInt(3);//cantidad
+                datos[3] = rs.getDouble(4);// subtotal
+
+                jcVentaProducto.getModelo().addRow(datos);
+            }
+            tblVentaProducto.setModel(jcVentaProducto.getModelo());
+
+            new ColumnasTablas().cuatroColumnas(tblVentaProducto, 200, 100, 50, 50);
+
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            System.out.println("Error mysql: " + e.getMessage());
+        } finally {
+            con.cerrar();
+        }
+    }
+
+    private double totalVenta() {
+        Double visa = Double.parseDouble(lblVisa.getText());
+        Double master = Double.parseDouble(lblMaster.getText());
+        Double egresos = Double.parseDouble(lblGastos.getText());
+        Double descuadre = Double.parseDouble(lblDescuadre.getText());
+
+        Double ventas = 0.0;
+
+        for (int i = 0; i < tblVentaProducto.getRowCount(); i++) {
+            ventas += Double.parseDouble(tblVentaProducto.getValueAt(i, 3).toString());
+        }
+
+        return (ventas - (visa + master + egresos)) + descuadre;
+
+    }
+
 }

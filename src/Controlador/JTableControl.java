@@ -39,5 +39,4 @@ public class JTableControl{
             i -= 1;
         }
     }
-
 }

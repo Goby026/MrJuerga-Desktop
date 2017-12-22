@@ -32,4 +32,9 @@ public class Caja {
     public void setNomCaja(String nomCaja) {
         this.nomCaja = nomCaja;
     }
+
+    @Override
+    public String toString() {
+        return nomCaja;
+    }
 }
