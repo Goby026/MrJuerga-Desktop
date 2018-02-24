@@ -14,10 +14,15 @@ public class Conexion {
     private final String USER = "root";
     private final String PASS = "";
 //    
-//CONEXION SERVIDOR
+//CONEXION SERVIDOR DISCOTECA
 //    private final String DB_URL ="jdbc:mysql://192.168.1.57:3306/mrjuerga";
 //    private final String USER = "mrjuerga";
 //    private final String PASS = "mrjuerga";
+    
+//CONEXION SERVIDOR VPS MRJUERGA - NUBE
+//    private final String DB_URL = "jdbc:mysql://45.33.118.38/mrjuerga";
+//    private final String USER = "root";
+//    private final String PASS = "MR_k9817q3k";
 
     public void conectar() throws Exception {
         try {

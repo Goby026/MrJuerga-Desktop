@@ -1389,7 +1389,7 @@ public class GestionInventarios extends javax.swing.JInternalFrame {
             i.setHora(new ManejadorFechas().getHoraActual());
             i.setIdusuario(idUsuario);
             i.setIdflujoinventario(idFlujoInventario);
-            i.setEstado(1);
+            i.setEstado(0);
 
             InventarioDAO idao = new InventarioDAO();
             InventarioProductoDAO ipdao = new InventarioProductoDAO();
@@ -1422,7 +1422,6 @@ public class GestionInventarios extends javax.swing.JInternalFrame {
                         }
                     }
                 }
-
             }
 
             if (c > 0) {

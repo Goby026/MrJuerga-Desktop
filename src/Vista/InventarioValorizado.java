@@ -86,6 +86,8 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         txtIdCategoria = new javax.swing.JTextField();
         btnModificarProductoPresentacion = new javax.swing.JButton();
         btnCancelarModificarProductoPresentacion = new javax.swing.JButton();
+        txtCodFamilia = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         rbStock = new javax.swing.JRadioButton();
@@ -113,8 +115,8 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         formModificarProducto.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("ESTADO");
-        formModificarProducto.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 160, -1));
+        jLabel2.setText("FAMILIA");
+        formModificarProducto.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 160, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("IDPRODUCTOPRESENTACION");
@@ -159,18 +161,42 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("IDCATEGORIA");
         formModificarProducto.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, -1));
-        formModificarProducto.getContentPane().add(txtIdProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, -1));
-        formModificarProducto.getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 80, -1));
-        formModificarProducto.getContentPane().add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 80, -1));
-        formModificarProducto.getContentPane().add(txtIdPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 80, -1));
-        formModificarProducto.getContentPane().add(txtIdAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 80, -1));
-        formModificarProducto.getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 80, -1));
-        formModificarProducto.getContentPane().add(txtStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 80, -1));
-        formModificarProducto.getContentPane().add(txtStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 80, -1));
-        formModificarProducto.getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 80, -1));
-        formModificarProducto.getContentPane().add(txtPrecio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 80, -1));
-        formModificarProducto.getContentPane().add(txtPrecio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 80, -1));
-        formModificarProducto.getContentPane().add(txtIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 80, -1));
+
+        txtIdProductoPresentacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtIdProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 180, -1));
+
+        txtEstado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 180, -1));
+
+        txtIdProducto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 180, -1));
+
+        txtIdPresentacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtIdPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 180, -1));
+
+        txtIdAlmacen.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtIdAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 180, -1));
+
+        txtStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, -1));
+
+        txtStock2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 180, -1));
+
+        txtStock3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtStock3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, -1));
+
+        txtPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 180, -1));
+
+        txtPrecio2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtPrecio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 180, -1));
+
+        txtPrecio3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtPrecio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 180, -1));
+
+        txtIdCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 180, -1));
 
         btnModificarProductoPresentacion.setBackground(new java.awt.Color(153, 255, 153));
         btnModificarProductoPresentacion.setText("MODIFICAR");
@@ -179,11 +205,18 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 btnModificarProductoPresentacionActionPerformed(evt);
             }
         });
-        formModificarProducto.getContentPane().add(btnModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        formModificarProducto.getContentPane().add(btnModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
 
         btnCancelarModificarProductoPresentacion.setBackground(new java.awt.Color(255, 51, 51));
         btnCancelarModificarProductoPresentacion.setText("CANCELAR");
-        formModificarProducto.getContentPane().add(btnCancelarModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 90, -1));
+        formModificarProducto.getContentPane().add(btnCancelarModificarProductoPresentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 90, -1));
+
+        txtCodFamilia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formModificarProducto.getContentPane().add(txtCodFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 180, -1));
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("ESTADO");
+        formModificarProducto.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 160, -1));
 
         setClosable(true);
         setTitle("INVENTARIO VALORIZADO (SOLES)");
@@ -425,8 +458,9 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
                 txtPrecio3.setText(""+pp.getPrecio3());
                 txtIdCategoria.setText(""+pp.getIdcategoria());
                 txtEstado.setText(""+pp.getEstado());
+                txtCodFamilia.setText(pp.getCodFamilia());
                 formModificarProducto.setVisible(true);
-                formModificarProducto.setBounds(750, 400, 304, 469);
+                formModificarProducto.setBounds(750, 400, 425, 483);
             } catch (Exception ex) {
                 Logger.getLogger(InventarioValorizado.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -447,6 +481,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
         pp.setPrecio3(Double.parseDouble(txtPrecio3.getText()));
         pp.setIdcategoria(Integer.parseInt(txtIdCategoria.getText()));
         pp.setEstado(Integer.parseInt(txtEstado.getText()));
+        pp.setCodFamilia(txtCodFamilia.getText());
         pp.setIdProductoPresentacion(Integer.parseInt(txtIdProductoPresentacion.getText()));
         
         ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
@@ -520,6 +555,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -537,6 +573,7 @@ public class InventarioValorizado extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbStock;
     private javax.swing.JTable tblInventario;
     private javax.swing.JTextField txtBuscarProducto;
+    private javax.swing.JTextField txtCodFamilia;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtIdAlmacen;
     private javax.swing.JTextField txtIdCategoria;
